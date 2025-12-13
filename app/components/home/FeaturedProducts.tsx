@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
 
@@ -24,17 +25,12 @@ const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
           className='relative aspect-square overflow-hidden'
           style={{ backgroundColor: '#f3f6f3' }}
         >
-          {/* Placeholder */}
-          <div className='w-full h-full flex items-center justify-center p-6'>
-            <div className='text-center'>
-              <div className='w-20 h-20 mx-auto bg-white rounded-xl shadow-md flex items-center justify-center mb-3'>
-                <span className='text-4xl'>🌿</span>
-              </div>
-              <p className='text-xs text-neutral-500 font-medium'>
-                [Slika biljke]
-              </p>
-            </div>
-          </div>
+          <Image
+            src='/img/palme.jpeg'
+            alt={plant.name}
+            fill
+            className='object-cover group-hover:scale-105 transition-transform duration-500'
+          />
 
           {/* Badge */}
           {plant.badge && (

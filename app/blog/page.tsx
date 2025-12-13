@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface BlogPost {
   id: string;
@@ -207,26 +208,16 @@ export default function BlogPage() {
                   style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
                 >
                   {/* Image */}
-                  <div
-                    className='aspect-video overflow-hidden relative'
-                    style={{ backgroundColor: '#f3f6f3' }}
-                  >
-                    <div className='w-full h-full flex items-center justify-center'>
-                      <div className='text-center'>
-                        <div
-                          className='w-20 h-20 mx-auto rounded-2xl flex items-center justify-center shadow-xl mb-3'
-                          style={{ backgroundColor: '#274223' }}
-                        >
-                          <Icon className='w-10 h-10 text-white' />
-                        </div>
-                        <p className='text-xs text-neutral-600 font-medium'>
-                          [Hero slika članka]
-                        </p>
-                      </div>
-                    </div>
+                  <div className='aspect-video overflow-hidden relative'>
+                    <Image
+                      src='/img/palme.jpeg'
+                      alt={post.title}
+                      fill
+                      className='object-cover group-hover:scale-105 transition-transform duration-500'
+                    />
 
                     {/* Category Badge */}
-                    <div className='absolute top-4 left-4'>
+                    <div className='absolute top-4 left-4 z-10'>
                       <div
                         className='px-3 py-1.5 rounded-full text-xs font-bold text-white backdrop-blur-sm'
                         style={{ backgroundColor: 'rgba(39, 66, 35, 0.9)' }}

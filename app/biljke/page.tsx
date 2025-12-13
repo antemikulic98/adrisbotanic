@@ -3,6 +3,7 @@
 import { Container } from '../components/ui/Container';
 import { TreePine, Palmtree, Flower2, ArrowRight, Phone } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ContactModal } from '../components/ui/ContactModal';
 import { useState } from 'react';
 
@@ -289,32 +290,24 @@ export default function BiljkePage() {
                         className='relative aspect-square rounded-3xl overflow-hidden shadow-2xl'
                         style={{ border: '4px solid #274223' }}
                       >
-                        <div
-                          className='w-full h-full flex items-center justify-center'
-                          style={{
-                            background:
-                              'linear-gradient(135deg, #f3f6f3 0%, #ffffff 100%)',
-                          }}
-                        >
-                          <div className='text-center space-y-4'>
-                            <div
-                              className='w-32 h-32 mx-auto rounded-3xl flex items-center justify-center shadow-xl'
-                              style={{ backgroundColor: '#274223' }}
-                            >
-                              <Icon className='w-16 h-16 text-white' />
-                            </div>
-                            <div>
-                              <p
-                                className='text-xl font-bold'
-                                style={{ color: '#274223' }}
-                              >
-                                [{category.title}]
-                              </p>
-                              <p className='text-sm text-neutral-600 mt-2'>
-                                Profesionalne fotografije
-                              </p>
-                            </div>
+                        <Image
+                          src='/img/palme.jpeg'
+                          alt={category.title}
+                          fill
+                          className='object-cover'
+                        />
+                        {/* Overlay with category icon */}
+                        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent' />
+                        <div className='absolute bottom-6 left-6 flex items-center gap-3'>
+                          <div
+                            className='w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg'
+                            style={{ backgroundColor: '#274223' }}
+                          >
+                            <Icon className='w-6 h-6' />
                           </div>
+                          <span className='text-white font-bold text-lg drop-shadow-lg'>
+                            {category.title}
+                          </span>
                         </div>
                       </div>
                     </div>

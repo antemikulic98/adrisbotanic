@@ -1,4 +1,5 @@
 import { Container } from '../components/ui/Container';
+import Image from 'next/image';
 import {
   Heart,
   Award,
@@ -149,36 +150,15 @@ export default function ONamaPage() {
               </div>
             </div>
 
-            {/* Image Placeholder */}
+            {/* Image */}
             <div>
-              <div
-                className='aspect-square rounded-3xl overflow-hidden shadow-2xl'
-                style={{
-                  background:
-                    'linear-gradient(135deg, #f3f6f3 0%, #ffffff 100%)',
-                }}
-              >
-                <div className='w-full h-full flex items-center justify-center p-12'>
-                  <div className='text-center space-y-6'>
-                    <div
-                      className='w-40 h-40 mx-auto rounded-3xl flex items-center justify-center shadow-xl'
-                      style={{ backgroundColor: '#274223' }}
-                    >
-                      <Leaf className='w-20 h-20 text-white' />
-                    </div>
-                    <div>
-                      <p
-                        className='text-2xl font-bold'
-                        style={{ color: '#274223' }}
-                      >
-                        [O Nama Slika]
-                      </p>
-                      <p className='text-base text-neutral-600 mt-3'>
-                        Fotografija tima, vrta ili rasadnika
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              <div className='aspect-square rounded-3xl overflow-hidden shadow-2xl relative'>
+                <Image
+                  src='/img/palme.jpeg'
+                  alt='Adrisbotanic rasadnik'
+                  fill
+                  className='object-cover'
+                />
               </div>
             </div>
           </div>
