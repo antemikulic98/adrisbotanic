@@ -25,12 +25,11 @@ export const LocationMap: React.FC = () => {
       try {
         // Dynamic import of Leaflet (client-side only)
         const L = (await import('leaflet')).default;
-        await import('leaflet/dist/leaflet.css');
 
         if (!mapRef.current) return;
 
         // Check if map already exists
-        if ((mapRef.current as any)._leaflet_id) {
+        if ('_leaflet_id' in mapRef.current) {
           return;
         }
 
