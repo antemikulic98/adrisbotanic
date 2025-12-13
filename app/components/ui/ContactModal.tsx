@@ -1,6 +1,6 @@
 'use client';
 
-import { X, Phone, Mail, Send } from 'lucide-react';
+import { X, Phone, Send } from 'lucide-react';
 import { useState } from 'react';
 
 interface ContactModalProps {

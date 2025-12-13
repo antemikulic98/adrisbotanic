@@ -5,11 +5,9 @@ import {
   Package,
   Filter,
   ShoppingCart,
-  ArrowRight,
   Search,
 } from 'lucide-react';
 import { useState } from 'react';
-import Image from 'next/image';
 
 interface Product {
   id: string;

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ShoppingCart, ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
-import { Button } from '../ui/Button';
 
 interface Product {
   id: string;

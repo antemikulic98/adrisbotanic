@@ -4,7 +4,6 @@ import {
   Award,
   Users,
   Leaf,
-  Target,
   Shield,
   Truck,
   Phone,

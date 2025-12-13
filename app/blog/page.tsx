@@ -10,6 +10,7 @@ import {
   Droplets,
   Sun,
   Wind,
+  LucideIcon,
 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -22,7 +23,7 @@ interface BlogPost {
   readTime: string;
   date: string;
   image: string;
-  icon: any;
+  icon: LucideIcon;
 }
 
 export default function BlogPage() {

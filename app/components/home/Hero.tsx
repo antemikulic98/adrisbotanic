@@ -1,4 +1,3 @@
-import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
 import { ArrowRight, Phone, Leaf } from 'lucide-react';
 import Image from 'next/image';

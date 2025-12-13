@@ -42,7 +42,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
         {/* Text */}
         <h3
           className='text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary transition-colors'
-          style={{ '--tw-text-opacity': 1 } as any}
         >
           {title}
         </h3>
