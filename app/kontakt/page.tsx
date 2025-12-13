@@ -1,6 +1,7 @@
 'use client';
 
 import { Container } from '../components/ui/Container';
+import { LocationMap } from '../components/ui/LocationMap';
 import {
   Phone,
   Mail,
@@ -10,6 +11,9 @@ import {
   MessageSquare,
   Facebook,
   Instagram,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -21,27 +25,56 @@ export default function KontaktPage() {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission
-    console.log('Form submitted:', formData);
-    alert('Hvala na poruci! Kontaktirat ćemo te uskoro.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-    });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Greška pri slanju poruke');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Greška pri slanju poruke');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: Phone,
       title: 'Telefon',
-      details: ['+385 XX XXX XXXX', 'Pon-Pet 8:00-20:00, Sub 9:00-14:00'],
-      action: 'tel:+385XXXXXXXXX',
+      details: ['+385 91 921 1069', 'Pon-Pet 8:00-20:00, Sub 9:00-14:00'],
+      action: 'tel:+385919211069',
     },
     {
       icon: Mail,
@@ -52,8 +85,8 @@ export default function KontaktPage() {
     {
       icon: MapPin,
       title: 'Lokacija',
-      details: ['[Adresa Rasadnika]', '[Grad, Poštanski Broj]'],
-      action: '#',
+      details: ['Cesta pape Ivana Pavla II. 380', 'Kaštel Štafilić'],
+      action: 'https://maps.google.com/?q=Cesta+pape+Ivana+Pavla+II.+380,+Kaštel+Štafilić',
     },
     {
       icon: Clock,
@@ -70,16 +103,16 @@ export default function KontaktPage() {
   return (
     <main>
       {/* Hero Section */}
-      <section
-        className='relative py-20 md:py-28'
-        style={{ backgroundColor: '#fafbfa' }}
-      >
+      <section className='relative py-24 md:py-32 overflow-hidden'>
+        {/* Background Image */}
         <div
-          className='absolute top-10 right-10 w-[400px] h-[400px] rounded-full blur-3xl'
-          style={{ backgroundColor: '#274223', opacity: 0.08 }}
+          className='absolute inset-0 bg-cover bg-center'
+          style={{ backgroundImage: 'url(/img/palme.jpeg)' }}
         />
+        {/* Dark Overlay */}
+        <div className='absolute inset-0 bg-black/60' />
 
-        <Container>
+        <Container className='relative z-10'>
           <div className='text-center max-w-4xl mx-auto space-y-6'>
             <div
               className='inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold shadow-lg mb-2'
@@ -90,12 +123,12 @@ export default function KontaktPage() {
             </div>
 
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              <span className='text-neutral-900'>Rado Ćemo Ti</span>
+              <span className='text-white'>Rado Ćemo Ti</span>
               <br />
-              <span style={{ color: '#274223' }}>Pomoći</span>
+              <span style={{ color: '#8fb588' }}>Pomoći</span>
             </h1>
 
-            <p className='text-lg md:text-xl text-neutral-600 leading-relaxed'>
+            <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
               Imaš pitanje o našim biljkama ili trebate savjet? Kontaktiraj nas
               bilo kojim putem - tu smo za tebe!
             </p>
@@ -249,7 +282,7 @@ export default function KontaktPage() {
                       onBlur={(e) => {
                         e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                       }}
-                      placeholder='+385 XX XXX XXXX'
+                      placeholder='+385 91 921 1069'
                     />
                   </div>
                 </div>
@@ -308,13 +341,45 @@ export default function KontaktPage() {
                   />
                 </div>
 
+                {/* Success Message */}
+                {submitStatus === 'success' && (
+                  <div className='flex items-center gap-3 p-4 rounded-xl bg-green-50 border-2 border-green-200'>
+                    <CheckCircle className='w-6 h-6 text-green-600 shrink-0' />
+                    <div>
+                      <p className='font-bold text-green-800'>Poruka uspješno poslana!</p>
+                      <p className='text-sm text-green-700'>Kontaktirat ćemo te uskoro.</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {submitStatus === 'error' && (
+                  <div className='flex items-center gap-3 p-4 rounded-xl bg-red-50 border-2 border-red-200'>
+                    <AlertCircle className='w-6 h-6 text-red-600 shrink-0' />
+                    <div>
+                      <p className='font-bold text-red-800'>Greška pri slanju</p>
+                      <p className='text-sm text-red-700'>{errorMessage}</p>
+                    </div>
+                  </div>
+                )}
+
                 <button
                   type='submit'
-                  className='w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl'
+                  disabled={isSubmitting}
+                  className='w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed'
                   style={{ backgroundColor: '#274223' }}
                 >
-                  <Send className='w-5 h-5' />
-                  Pošalji poruku
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className='w-5 h-5 animate-spin' />
+                      Šaljem...
+                    </>
+                  ) : (
+                    <>
+                      <Send className='w-5 h-5' />
+                      Pošalji poruku
+                    </>
+                  )}
                 </button>
 
                 <p className='text-xs text-neutral-500 text-center'>
@@ -326,33 +391,39 @@ export default function KontaktPage() {
 
             {/* Map & Additional Info */}
             <div className='space-y-6'>
-              {/* Map Placeholder */}
+              {/* Map */}
               <div
                 className='rounded-2xl overflow-hidden shadow-xl'
-                style={{ height: '400px', backgroundColor: '#f3f6f3' }}
+                style={{ height: '400px' }}
               >
-                <div className='w-full h-full flex items-center justify-center p-8'>
-                  <div className='text-center space-y-4'>
-                    <div
-                      className='w-24 h-24 mx-auto rounded-2xl flex items-center justify-center shadow-xl'
-                      style={{ backgroundColor: '#274223' }}
-                    >
-                      <MapPin className='w-12 h-12 text-white' />
-                    </div>
-                    <div>
-                      <p
-                        className='text-xl font-bold mb-2'
-                        style={{ color: '#274223' }}
-                      >
-                        [Google Maps]
-                      </p>
-                      <p className='text-sm text-neutral-600'>
-                        Lokacija rasadnika
-                      </p>
-                    </div>
+                <LocationMap />
+              </div>
+              
+              {/* Address Card */}
+              <a
+                href='https://maps.google.com/?q=Cesta+pape+Ivana+Pavla+II.+380,+Kaštel+Štafilić'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block p-6 rounded-2xl border-2 transition-all hover:shadow-lg group'
+                style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
+              >
+                <div className='flex items-start gap-4'>
+                  <div
+                    className='w-12 h-12 rounded-xl flex items-center justify-center text-white shrink-0 group-hover:scale-110 transition-transform'
+                    style={{ backgroundColor: '#274223' }}
+                  >
+                    <MapPin className='w-6 h-6' />
+                  </div>
+                  <div>
+                    <h4 className='font-bold text-neutral-900 mb-1'>Adresa rasadnika</h4>
+                    <p className='text-neutral-600'>Cesta pape Ivana Pavla II. 380</p>
+                    <p className='text-neutral-600'>Kaštel Štafilić</p>
+                    <p className='text-sm mt-2 font-semibold' style={{ color: '#274223' }}>
+                      Otvori u Google Maps →
+                    </p>
                   </div>
                 </div>
-              </div>
+              </a>
 
               {/* Social Media */}
               <div
@@ -390,12 +461,12 @@ export default function KontaktPage() {
                   Pozovi nas odmah za brzo savjetovanje i odgovore!
                 </p>
                 <a
-                  href='tel:+385XXXXXXXXX'
+                  href='tel:+385919211069'
                   className='inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
                   style={{ color: '#274223' }}
                 >
                   <Phone className='w-5 h-5' />
-                  Pozovi sada
+                  +385 91 921 1069
                 </a>
               </div>
             </div>

@@ -34,14 +34,6 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href='/shop'
-                  className='text-sm hover:text-primary transition-colors'
-                >
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link
                   href='/blog'
                   className='text-sm hover:text-primary transition-colors'
                 >
@@ -114,19 +106,24 @@ export const Footer: React.FC = () => {
             <ul className='space-y-3'>
               <li className='flex items-start gap-2'>
                 <MapPin className='w-5 h-5 text-primary shrink-0 mt-0.5' />
-                <span className='text-sm'>
-                  Ulica i Broj
+                <a
+                  href='https://maps.google.com/?q=Cesta+pape+Ivana+Pavla+II.+380,+Kaštel+Štafilić'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-sm hover:text-primary transition-colors'
+                >
+                  Cesta pape Ivana Pavla II. 380
                   <br />
-                  Grad, 00000
-                </span>
+                  Kaštel Štafilić
+                </a>
               </li>
               <li className='flex items-center gap-2'>
                 <Phone className='w-5 h-5 text-primary shrink-0' />
                 <a
-                  href='tel:+385XXXXXXXXX'
+                  href='tel:+385919211069'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  +385 XX XXX XXXX
+                  +385 91 921 1069
                 </a>
               </li>
               <li className='flex items-center gap-2'>

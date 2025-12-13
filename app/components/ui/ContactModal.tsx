@@ -1,6 +1,6 @@
 'use client';
 
-import { X, Phone, Send } from 'lucide-react';
+import { X, Phone, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 
 interface ContactModalProps {
@@ -20,15 +20,55 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission
-    console.log('Form submitted:', formData);
-    alert('Hvala! Kontaktirat ćemo te uskoro.');
-    onClose();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          subject: category ? `Upit za: ${category}` : 'Upit s weba',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Greška pri slanju poruke');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        message: '',
+      });
+
+      // Close modal after 2 seconds on success
+      setTimeout(() => {
+        onClose();
+        setSubmitStatus('idle');
+      }, 2000);
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Greška pri slanju poruke');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -83,28 +123,50 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 </p>
               </div>
               <a
-                href='tel:+385XXXXXXXXX'
+                href='tel:+385919211069'
                 className='inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl shrink-0'
                 style={{ backgroundColor: '#274223' }}
               >
                 <Phone className='w-5 h-5' />
-                Pozovi
+                +385 91 921 1069
               </a>
             </div>
           </div>
+
+          {/* Success Message */}
+          {submitStatus === 'success' && (
+            <div className='flex items-center gap-3 p-4 rounded-xl bg-green-50 border-2 border-green-200 mb-6'>
+              <CheckCircle className='w-6 h-6 text-green-600 shrink-0' />
+              <div>
+                <p className='font-bold text-green-800'>Poruka uspješno poslana!</p>
+                <p className='text-sm text-green-700'>Kontaktirat ćemo te uskoro.</p>
+              </div>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submitStatus === 'error' && (
+            <div className='flex items-center gap-3 p-4 rounded-xl bg-red-50 border-2 border-red-200 mb-6'>
+              <AlertCircle className='w-6 h-6 text-red-600 shrink-0' />
+              <div>
+                <p className='font-bold text-red-800'>Greška pri slanju</p>
+                <p className='text-sm text-red-700'>{errorMessage}</p>
+              </div>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className='space-y-5'>
             <div>
               <label
-                htmlFor='name'
+                htmlFor='modal-name'
                 className='block text-sm font-bold text-neutral-700 mb-2'
               >
                 Ime i prezime *
               </label>
               <input
                 type='text'
-                id='name'
+                id='modal-name'
                 required
                 value={formData.name}
                 onChange={(e) =>
@@ -127,14 +189,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
               <div>
                 <label
-                  htmlFor='phone'
+                  htmlFor='modal-phone'
                   className='block text-sm font-bold text-neutral-700 mb-2'
                 >
                   Telefon *
                 </label>
                 <input
                   type='tel'
-                  id='phone'
+                  id='modal-phone'
                   required
                   value={formData.phone}
                   onChange={(e) =>
@@ -150,20 +212,20 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                   }}
-                  placeholder='+385 XX XXX XXXX'
+                  placeholder='+385 91 921 1069'
                 />
               </div>
 
               <div>
                 <label
-                  htmlFor='email'
+                  htmlFor='modal-email'
                   className='block text-sm font-bold text-neutral-700 mb-2'
                 >
                   Email
                 </label>
                 <input
                   type='email'
-                  id='email'
+                  id='modal-email'
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
@@ -185,13 +247,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
             <div>
               <label
-                htmlFor='message'
+                htmlFor='modal-message'
                 className='block text-sm font-bold text-neutral-700 mb-2'
               >
                 Poruka *
               </label>
               <textarea
-                id='message'
+                id='modal-message'
                 required
                 rows={4}
                 value={formData.message}
@@ -214,11 +276,21 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
             <button
               type='submit'
-              className='w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl'
+              disabled={isSubmitting || submitStatus === 'success'}
+              className='w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed'
               style={{ backgroundColor: '#274223' }}
             >
-              <Send className='w-5 h-5' />
-              Pošalji upit
+              {isSubmitting ? (
+                <>
+                  <Loader2 className='w-5 h-5 animate-spin' />
+                  Šaljem...
+                </>
+              ) : (
+                <>
+                  <Send className='w-5 h-5' />
+                  Pošalji upit
+                </>
+              )}
             </button>
           </form>
 
@@ -230,4 +302,3 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     </div>
   );
 };
-

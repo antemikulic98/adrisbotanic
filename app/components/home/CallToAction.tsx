@@ -58,10 +58,10 @@ export const CallToAction: React.FC = () => {
 
           {/* Contact info */}
           <div className='pt-6 flex flex-col md:flex-row gap-6 justify-center items-center text-white/90 text-sm'>
-            <div className='flex items-center gap-2'>
+            <a href='tel:+385919211069' className='flex items-center gap-2 hover:opacity-80 transition-opacity'>
               <Phone className='w-4 h-4' />
-              <span>+385 XX XXX XXXX</span>
-            </div>
+              <span>+385 91 921 1069</span>
+            </a>
             <div className='hidden md:block w-px h-4 bg-white/30' />
             <div className='flex items-center gap-2'>
               <Mail className='w-4 h-4' />

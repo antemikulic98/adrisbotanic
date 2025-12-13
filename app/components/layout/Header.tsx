@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ShoppingCart, Heart, User, Phone } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Logo } from './Logo';
 import { NavLink } from './NavLink';
@@ -10,15 +10,31 @@ import { MobileMenu } from './MobileMenu';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Add background when scrolled more than 50px
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    // Check initial scroll position
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <header
-      className='fixed lg:sticky top-0 z-50 bg-transparent lg:bg-white/95 lg:backdrop-blur-md lg:border-b lg:shadow-sm w-full'
-      style={
-        {
-          borderBottomColor: 'rgba(39, 66, 35, 0.1)',
-        } as React.CSSProperties
-      }
+      className={`fixed lg:sticky top-0 z-[100] w-full transition-all duration-300 lg:bg-white/95 lg:backdrop-blur-md lg:border-b lg:shadow-sm ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-md' 
+          : 'bg-transparent'
+      }`}
+      style={{
+        borderBottomColor: 'rgba(39, 66, 35, 0.1)',
+      }}
     >
       {/* Top bar - Kontakt info - samo desktop */}
       <div
@@ -27,10 +43,10 @@ export const Header: React.FC = () => {
       >
         <Container>
           <div className='flex justify-between items-center text-xs'>
-            <div className='flex items-center gap-2'>
+            <a href='tel:+385919211069' className='flex items-center gap-2 hover:opacity-80 transition-opacity'>
               <Phone className='w-3.5 h-3.5' />
-              <span>+385 XX XXX XXXX</span>
-            </div>
+              <span>+385 91 921 1069</span>
+            </a>
             <span>Radimo: Pon-Pet 8:00-20:00, Sub 9:00-14:00</span>
           </div>
         </Container>
@@ -39,53 +55,32 @@ export const Header: React.FC = () => {
       {/* Main navigation */}
       <Container>
         <div className='flex items-center justify-between h-14 sm:h-16'>
-          {/* Logo */}
-          <Logo />
+          {/* Logo - na mobilnoj bijeli kad nije scrollano, tamni kad je scrollano */}
+          {/* Na desktopu uvijek default jer ima bijelu pozadinu */}
+          <div className='lg:hidden'>
+            <Logo variant={isScrolled ? 'default' : 'white'} />
+          </div>
+          <div className='hidden lg:block'>
+            <Logo variant='default' />
+          </div>
 
           {/* Desktop Navigation */}
           <nav className='hidden lg:flex items-center gap-6'>
             <NavLink href='/'>Početna</NavLink>
             <NavLink href='/biljke'>Naše Biljke</NavLink>
-            <NavLink href='/shop'>Shop</NavLink>
             <NavLink href='/blog'>Savjeti</NavLink>
             <NavLink href='/o-nama'>O Nama</NavLink>
             <NavLink href='/kontakt'>Kontakt</NavLink>
           </nav>
 
-          {/* Icons */}
+          {/* Mobile menu toggle */}
           <div className='flex items-center gap-3'>
-            {/* Desktop icons */}
-            <div className='hidden md:flex items-center gap-3'>
-              <Link
-                href='/wishlist'
-                className='text-neutral-600 hover:text-primary transition-colors'
-              >
-                <Heart className='w-5 h-5' />
-              </Link>
-              <Link
-                href='/shop/cart'
-                className='relative text-neutral-600 hover:text-primary transition-colors'
-              >
-                <ShoppingCart className='w-5 h-5' />
-                <span
-                  className='absolute -top-1.5 -right-1.5 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center text-[10px]'
-                  style={{ backgroundColor: '#274223' }}
-                >
-                  0
-                </span>
-              </Link>
-              <Link
-                href='/account'
-                className='text-neutral-600 hover:text-primary transition-colors'
-              >
-                <User className='w-5 h-5' />
-              </Link>
-            </div>
-
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className='lg:hidden text-white lg:text-neutral-800 hover:text-primary transition-colors'
+              className={`lg:hidden hover:opacity-80 transition-colors ${
+                isScrolled ? 'text-neutral-800' : 'text-white'
+              }`}
               aria-label='Toggle menu'
             >
               {mobileMenuOpen ? (

@@ -113,16 +113,16 @@ export default function BlogPage() {
   return (
     <main>
       {/* Hero Section */}
-      <section
-        className='relative py-20 md:py-28'
-        style={{ backgroundColor: '#fafbfa' }}
-      >
+      <section className='relative py-24 md:py-32 overflow-hidden'>
+        {/* Background Image */}
         <div
-          className='absolute top-10 right-10 w-[400px] h-[400px] rounded-full blur-3xl'
-          style={{ backgroundColor: '#274223', opacity: 0.08 }}
+          className='absolute inset-0 bg-cover bg-center'
+          style={{ backgroundImage: 'url(/img/palme.jpeg)' }}
         />
+        {/* Dark Overlay */}
+        <div className='absolute inset-0 bg-black/60' />
 
-        <Container>
+        <Container className='relative z-10'>
           <div className='text-center max-w-4xl mx-auto space-y-6'>
             <div
               className='inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold shadow-lg mb-2'
@@ -133,12 +133,12 @@ export default function BlogPage() {
             </div>
 
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              <span className='text-neutral-900'>Savjeti & Vodići</span>
+              <span className='text-white'>Savjeti & Vodići</span>
               <br />
-              <span style={{ color: '#274223' }}>Za Savršen Vrt</span>
+              <span style={{ color: '#8fb588' }}>Za Savršen Vrt</span>
             </h1>
 
-            <p className='text-lg md:text-xl text-neutral-600 leading-relaxed'>
+            <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
               Stručni savjeti za njegu mediteranskih biljaka. Od sadnje do
               održavanja kroz sve sezone.
             </p>
@@ -148,34 +148,36 @@ export default function BlogPage() {
 
       {/* Categories */}
       <section
-        className='py-12 bg-white border-b-2'
+        className='py-8 md:py-12 bg-white border-b-2'
         style={{ borderColor: 'rgba(39, 66, 35, 0.1)' }}
       >
-        <Container>
-          <div className='flex flex-wrap justify-center gap-4'>
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-                    selectedCategory === cat.id
-                      ? 'text-white shadow-lg'
-                      : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-                  }`}
-                  style={{
-                    backgroundColor:
-                      selectedCategory === cat.id ? '#274223' : undefined,
-                  }}
-                >
-                  <Icon className='w-5 h-5' />
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
-        </Container>
+        <div className='overflow-x-auto scrollbar-hide px-4 md:px-0'>
+          <Container>
+            <div className='flex md:flex-wrap md:justify-center gap-3 md:gap-4 min-w-max md:min-w-0'>
+              {categories.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-xl font-semibold transition-all whitespace-nowrap text-sm md:text-base ${
+                      selectedCategory === cat.id
+                        ? 'text-white shadow-lg'
+                        : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                    }`}
+                    style={{
+                      backgroundColor:
+                        selectedCategory === cat.id ? '#274223' : undefined,
+                    }}
+                  >
+                    <Icon className='w-4 h-4 md:w-5 md:h-5' />
+                    {cat.label}
+                  </button>
+                );
+              })}
+            </div>
+          </Container>
+        </div>
       </section>
 
       {/* Blog Posts */}

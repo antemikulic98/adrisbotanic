@@ -4,8 +4,8 @@ import React from 'react';
 import { MessageCircle } from 'lucide-react';
 
 export const WhatsAppButton: React.FC = () => {
-  // Format: +385 XX XXX XXXX -> 385XXXXXXXXX (bez razmaka i +)
-  const whatsappNumber = '385XXXXXXXXX'; // Zamijeniti sa pravim brojem
+  // Format: +385 91 921 1069 -> 385919211069 (bez razmaka i +)
+  const whatsappNumber = '385919211069';
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
   return (

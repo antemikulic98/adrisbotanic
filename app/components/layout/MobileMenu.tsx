@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { X, ShoppingCart, Heart, User } from 'lucide-react';
+import { X, Phone } from 'lucide-react';
 import { cn } from '@/app/lib/utils';
 
 interface MobileMenuProps {
@@ -14,7 +14,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const menuItems = [
     { label: 'Početna', href: '/' },
     { label: 'Naše Biljke', href: '/biljke' },
-    { label: 'Shop', href: '/shop' },
     { label: 'Savjeti', href: '/blog' },
     { label: 'O Nama', href: '/o-nama' },
     { label: 'Kontakt', href: '/kontakt' },
@@ -43,13 +42,15 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             className='flex items-center justify-between px-4 py-2 border-b-2'
             style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
           >
-            <Image
-              src='/img/logo.svg'
-              alt='Adrisbotanic Logo'
-              width={100}
-              height={100}
-              className='w-24 h-24'
-            />
+            <Link href='/' onClick={onClose}>
+              <Image
+                src='/img/logo.svg'
+                alt='Adrisbotanic Logo'
+                width={100}
+                height={100}
+                className='w-24 h-24'
+              />
+            </Link>
             <button
               onClick={onClose}
               className='text-neutral-600 hover:text-primary w-8 h-8 flex items-center justify-center rounded-full transition-colors'
@@ -89,46 +90,19 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </nav>
 
-          {/* Bottom Icons */}
+          {/* Bottom Contact */}
           <div
             className='border-t-2 p-5'
             style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
           >
-            <div className='flex gap-2'>
-              <Link
-                href='/wishlist'
-                onClick={onClose}
-                className='flex-1 flex flex-col items-center gap-2 text-neutral-600 hover:text-primary p-3 rounded-xl transition-all'
-                style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
-              >
-                <Heart className='w-6 h-6' />
-                <span className='text-xs font-semibold'>Omiljeno</span>
-              </Link>
-              <Link
-                href='/shop/cart'
-                onClick={onClose}
-                className='flex-1 flex flex-col items-center gap-2 text-neutral-600 hover:text-primary relative p-3 rounded-xl transition-all'
-                style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
-              >
-                <ShoppingCart className='w-6 h-6' />
-                <span className='text-xs font-semibold'>Košarica</span>
-                <span
-                  className='absolute top-1 right-1 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center'
-                  style={{ backgroundColor: '#274223' }}
-                >
-                  0
-                </span>
-              </Link>
-              <Link
-                href='/account'
-                onClick={onClose}
-                className='flex-1 flex flex-col items-center gap-2 text-neutral-600 hover:text-primary p-3 rounded-xl transition-all'
-                style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
-              >
-                <User className='w-6 h-6' />
-                <span className='text-xs font-semibold'>Profil</span>
-              </Link>
-            </div>
+            <a
+              href='tel:+385919211069'
+              className='flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white font-bold transition-all'
+              style={{ backgroundColor: '#274223' }}
+            >
+              <Phone className='w-5 h-5' />
+              <span>+385 91 921 1069</span>
+            </a>
           </div>
         </div>
       </div>

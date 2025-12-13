@@ -1,21 +1,20 @@
 import Link from 'next/link';
-import { ShoppingCart, ArrowRight, Sparkles, Phone } from 'lucide-react';
+import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
 
-interface Product {
+interface Plant {
   id: string;
   name: string;
-  price?: number;
   category: string;
   badge?: 'new' | 'popular';
-  type: 'presentation' | 'shop';
   image: string;
   href: string;
+  description: string;
 }
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
   return (
-    <Link href={product.href}>
+    <Link href={plant.href}>
       <div
         className='group relative bg-white rounded-xl border-2 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer'
         style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
@@ -32,23 +31,23 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
                 <span className='text-4xl'>🌿</span>
               </div>
               <p className='text-xs text-neutral-500 font-medium'>
-                [Slika proizvoda]
+                [Slika biljke]
               </p>
             </div>
           </div>
 
           {/* Badge */}
-          {product.badge && (
+          {plant.badge && (
             <div className='absolute top-3 left-3 z-10'>
               <div
                 className='flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold text-white'
                 style={{
                   backgroundColor:
-                    product.badge === 'new' ? '#1890FF' : '#274223',
+                    plant.badge === 'new' ? '#1890FF' : '#274223',
                 }}
               >
                 <Sparkles className='w-3 h-3' />
-                {product.badge === 'new' ? 'Novo' : 'Popularno'}
+                {plant.badge === 'new' ? 'Novo' : 'Popularno'}
               </div>
             </div>
           )}
@@ -64,45 +63,28 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
                 color: '#274223',
               }}
             >
-              {product.category}
+              {plant.category}
             </div>
             <h3 className='text-base font-bold text-neutral-900 group-hover:text-primary transition-colors line-clamp-2'>
-              {product.name}
+              {plant.name}
             </h3>
+            <p className='text-sm text-neutral-600 mt-1 line-clamp-2'>
+              {plant.description}
+            </p>
           </div>
 
-          {/* Price or CTA */}
+          {/* CTA */}
           <div
             className='flex items-center justify-between pt-2'
             style={{ borderTop: '1px solid rgba(39, 66, 35, 0.1)' }}
           >
-            {product.type === 'shop' && product.price ? (
-              <>
-                <div>
-                  <div
-                    className='text-xl font-bold'
-                    style={{ color: '#274223' }}
-                  >
-                    {product.price}€
-                  </div>
-                  <div className='text-[10px] text-neutral-500'>sa PDV-om</div>
-                </div>
-                <button
-                  className='w-9 h-9 rounded-lg text-white flex items-center justify-center transition-all hover:opacity-90'
-                  style={{ backgroundColor: '#274223' }}
-                >
-                  <ShoppingCart className='w-4 h-4' />
-                </button>
-              </>
-            ) : (
-              <div
-                className='flex items-center gap-1.5 text-sm font-semibold w-full'
-                style={{ color: '#274223' }}
-              >
-                <Phone className='w-4 h-4' />
-                <span>Pitaj za cijenu</span>
-              </div>
-            )}
+            <div
+              className='flex items-center gap-1.5 text-sm font-semibold w-full'
+              style={{ color: '#274223' }}
+            >
+              <Phone className='w-4 h-4' />
+              <span>Pitaj za cijenu</span>
+            </div>
           </div>
         </div>
       </div>
@@ -111,60 +93,58 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 };
 
 export const FeaturedProducts: React.FC = () => {
-  const products: Product[] = [
+  const plants: Plant[] = [
     {
       id: '1',
-      name: 'Maslina Oblica 1.5m',
+      name: 'Maslina Oblica',
       category: 'Masline',
       badge: 'popular',
-      type: 'presentation',
       image: '/placeholder.jpg',
-      href: '/biljke/masline/oblica',
+      href: '/biljke',
+      description: 'Autohtona dalmatinska sorta, otporna na sušu i vjetar.',
     },
     {
       id: '2',
-      name: 'Terracotta Pitar 50L',
-      price: 65,
-      category: 'Pitari',
+      name: 'Washingtonia Robusta',
+      category: 'Palme',
       badge: 'new',
-      type: 'shop',
       image: '/placeholder.jpg',
-      href: '/shop/pitari/terracotta-50l',
+      href: '/biljke',
+      description: 'Elegantna palma s vitkim deblom, idealna za mediteranski ugođaj.',
     },
     {
       id: '3',
-      name: 'Washingtonia Robusta',
+      name: 'Phoenix Canariensis',
       category: 'Palme',
-      type: 'presentation',
+      badge: 'popular',
       image: '/placeholder.jpg',
-      href: '/biljke/palme/washingtonia',
+      href: '/biljke',
+      description: 'Kanarska palma s gustom krunom, simbol mediterana.',
     },
     {
       id: '4',
-      name: 'Keramički Pitar 70L',
-      price: 95,
-      category: 'Pitari',
-      badge: 'popular',
-      type: 'shop',
+      name: 'Maslina Leccino',
+      category: 'Masline',
       image: '/placeholder.jpg',
-      href: '/shop/pitari/keramicki-70l',
+      href: '/biljke',
+      description: 'Talijanska sorta poznata po kvalitetnom ulju i otpornosti.',
     },
     {
       id: '5',
-      name: 'Phoenix Canariensis',
+      name: 'Chamaerops Humilis',
       category: 'Palme',
-      type: 'presentation',
       image: '/placeholder.jpg',
-      href: '/biljke/palme/phoenix',
+      href: '/biljke',
+      description: 'Europska patuljasta palma, otporna na hladnoću.',
     },
     {
       id: '6',
-      name: 'Betonski Pitar 100L',
-      price: 120,
-      category: 'Pitari',
-      type: 'shop',
+      name: 'Maslina Pendolino',
+      category: 'Masline',
+      badge: 'new',
       image: '/placeholder.jpg',
-      href: '/shop/pitari/betonski-100l',
+      href: '/biljke',
+      description: 'Oprašivač za druge sorte, prekrasno dekorativno stablo.',
     },
   ];
 
@@ -178,30 +158,30 @@ export const FeaturedProducts: React.FC = () => {
               className='inline-block px-4 py-2 rounded-full text-xs font-bold text-white mb-3'
               style={{ backgroundColor: '#274223' }}
             >
-              ISTAKNUTNO
+              ISTAKNUTO
             </div>
             <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900'>
-              Istaknuti <span style={{ color: '#274223' }}>Proizvodi</span>
+              Naše <span style={{ color: '#274223' }}>Biljke</span>
             </h2>
             <p className='text-lg text-neutral-600 mt-2'>
-              Najpopularniji izbor naših kupaca
+              Mediteranske masline i palme za vaš vrt
             </p>
           </div>
-          <Link href='/shop'>
+          <Link href='/biljke'>
             <button
               className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all hover:opacity-90'
               style={{ border: '2px solid #274223', color: '#274223' }}
             >
-              Vidi Sve
+              Pogledaj Sve Biljke
               <ArrowRight className='w-4 h-4' />
             </button>
           </Link>
         </div>
 
-        {/* Products Grid */}
+        {/* Plants Grid */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {plants.map((plant) => (
+            <PlantCard key={plant.id} plant={plant} />
           ))}
         </div>
       </Container>

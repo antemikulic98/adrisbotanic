@@ -1,21 +1,19 @@
 import Link from 'next/link';
-import { ArrowRight, TreePine, Palmtree, Flower2, Package } from 'lucide-react';
+import { ArrowRight, TreePine, Trees, Cherry, Flower2, Leaf, Sun } from 'lucide-react';
 import { Container } from '../ui/Container';
 
 interface CategoryCardProps {
   title: string;
-  description: string;
+  examples: string;
   icon: React.ReactNode;
   href: string;
-  type: 'presentation' | 'shop';
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
   title,
-  description,
+  examples,
   icon,
   href,
-  type,
 }) => {
   return (
     <Link href={href}>
@@ -31,22 +29,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           {icon}
         </div>
 
-        {/* Type badge */}
-        <div
-          className='inline-block px-3 py-1 rounded-full text-xs font-bold mb-3'
-          style={{ backgroundColor: 'rgba(39, 66, 35, 0.1)', color: '#274223' }}
-        >
-          {type === 'presentation' ? 'PREZENTACIJA' : 'ONLINE PRODAJA'}
-        </div>
-
-        {/* Text */}
-        <h3
-          className='text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary transition-colors'
-        >
+        {/* Title */}
+        <h3 className='text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary transition-colors'>
           {title}
         </h3>
-        <p className='text-neutral-600 text-sm leading-relaxed mb-4'>
-          {description}
+
+        {/* Examples */}
+        <p className='text-sm text-neutral-600 leading-relaxed mb-4'>
+          {examples}
         </p>
 
         {/* CTA */}
@@ -54,7 +44,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           className='flex items-center gap-2 font-semibold text-sm'
           style={{ color: '#274223' }}
         >
-          <span>{type === 'presentation' ? 'Pregledaj' : 'Kupi Online'}</span>
+          <span>Pregledaj</span>
           <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
         </div>
       </div>
@@ -65,36 +55,40 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
 export const Categories: React.FC = () => {
   const categories = [
     {
-      title: 'Masline',
-      description:
-        'Različite sorte mediteranskih maslina. Pitajte za dostupnost i cijenu.',
+      title: 'Masivna i sjenovita stabla',
+      examples: 'Maslina, čempres, pinija, palme',
       icon: <TreePine className='w-7 h-7' />,
-      href: '/biljke/masline',
-      type: 'presentation' as const,
+      href: '/biljke',
     },
     {
-      title: 'Palme',
-      description:
-        'Washingtonia, Phoenix, Chamaerops i druge otporne vrste palmi.',
-      icon: <Palmtree className='w-7 h-7' />,
-      href: '/biljke/palme',
-      type: 'presentation' as const,
+      title: 'Veliki grmovi i manja stabla',
+      examples: 'Oleandar, lovor, šipak, smokva',
+      icon: <Trees className='w-7 h-7' />,
+      href: '/biljke',
     },
     {
-      title: 'Vanjske Biljke',
-      description:
-        'Mediteranske i otporne biljke idealne za vaš vrt ili terasu.',
+      title: 'Agrumi',
+      examples: 'Limun, naranča, limeta, grejp, mandarina',
+      icon: <Cherry className='w-7 h-7' />,
+      href: '/biljke',
+    },
+    {
+      title: 'Aromatični grmovi i trajnice',
+      examples: 'Lavanda, ružmarin, kadulja, smilje',
       icon: <Flower2 className='w-7 h-7' />,
-      href: '/biljke/vanjske',
-      type: 'presentation' as const,
+      href: '/biljke',
     },
     {
-      title: 'Keramički Pitari',
-      description:
-        'Kvalitetni pitari u različitim veličinama. Kupujte direktno online!',
-      icon: <Package className='w-7 h-7' />,
-      href: '/shop/pitari',
-      type: 'shop' as const,
+      title: 'Penjačice',
+      examples: 'Bugenvilija, jasmin, glicinija',
+      icon: <Leaf className='w-7 h-7' />,
+      href: '/biljke',
+    },
+    {
+      title: 'Sukulenti i kaktuslike biljke',
+      examples: 'Agava, kaktus, čuvarkuća',
+      icon: <Sun className='w-7 h-7' />,
+      href: '/biljke',
     },
   ];
 
@@ -113,14 +107,14 @@ export const Categories: React.FC = () => {
             Istražite Naš <span style={{ color: '#274223' }}>Asortiman</span>
           </h2>
           <p className='text-lg text-neutral-600 max-w-2xl mx-auto'>
-            Od mediteranskih maslina do kvalitetnih keramičkih pitara
+            Mediteransko bilje za vaš vrt, terasu i dom
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           {categories.map((category) => (
-            <CategoryCard key={category.href} {...category} />
+            <CategoryCard key={category.title} {...category} />
           ))}
         </div>
       </Container>

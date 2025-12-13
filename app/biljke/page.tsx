@@ -89,16 +89,16 @@ export default function BiljkePage() {
       />
       <main>
         {/* Hero Section */}
-        <section
-          className='relative py-20 md:py-28'
-          style={{ backgroundColor: '#fafbfa' }}
-        >
+        <section className='relative py-24 md:py-32 overflow-hidden'>
+          {/* Background Image */}
           <div
-            className='absolute top-10 right-10 w-[400px] h-[400px] rounded-full blur-3xl'
-            style={{ backgroundColor: '#274223', opacity: 0.08 }}
+            className='absolute inset-0 bg-cover bg-center'
+            style={{ backgroundImage: 'url(/img/palme.jpeg)' }}
           />
+          {/* Dark Overlay */}
+          <div className='absolute inset-0 bg-black/60' />
 
-          <Container>
+          <Container className='relative z-10'>
             <div className='text-center max-w-4xl mx-auto space-y-6'>
               <div
                 className='inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold shadow-lg mb-2'
@@ -109,84 +109,70 @@ export default function BiljkePage() {
               </div>
 
               <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-                <span className='text-neutral-900'>Mediteranske Biljke</span>
+                <span className='text-white'>Mediteranske Biljke</span>
                 <br />
-                <span style={{ color: '#274223' }}>Za Tvoj Savršeni Vrt</span>
+                <span style={{ color: '#8fb588' }}>Za Tvoj Savršeni Vrt</span>
               </h1>
 
-              <p className='text-lg md:text-xl text-neutral-600 leading-relaxed'>
+              <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
                 Pažljivo odabrane i uzgojene biljke prilagođene hrvatskom
                 klimatu. Stručno savjetovanje i podrška u svakom koraku.
               </p>
 
               {/* Category Pills */}
-              <div className='flex flex-wrap justify-center gap-4 pt-8'>
+              <div className='flex flex-wrap justify-center gap-2 md:gap-4 pt-6 md:pt-8'>
                 <div
-                  className='flex items-center gap-3 px-6 py-3 rounded-2xl shadow-lg'
-                  style={{ backgroundColor: '#274223' }}
+                  className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
                 >
-                  <TreePine className='w-5 h-5 text-white' />
-                  <span className='text-white font-bold'>Masline</span>
+                  <TreePine className='w-4 h-4 md:w-5 md:h-5 text-white' />
+                  <span className='text-white font-bold text-sm md:text-base'>Masline</span>
                 </div>
                 <div
-                  className='flex items-center gap-3 px-6 py-3 rounded-2xl shadow-lg'
-                  style={{ backgroundColor: '#274223' }}
+                  className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
                 >
-                  <Palmtree className='w-5 h-5 text-white' />
-                  <span className='text-white font-bold'>Palme</span>
+                  <Palmtree className='w-4 h-4 md:w-5 md:h-5 text-white' />
+                  <span className='text-white font-bold text-sm md:text-base'>Palme</span>
                 </div>
                 <div
-                  className='flex items-center gap-3 px-6 py-3 rounded-2xl shadow-lg'
-                  style={{ backgroundColor: '#274223' }}
+                  className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
                 >
-                  <Flower2 className='w-5 h-5 text-white' />
-                  <span className='text-white font-bold'>
-                    Mediteranske Biljke
+                  <Flower2 className='w-4 h-4 md:w-5 md:h-5 text-white' />
+                  <span className='text-white font-bold text-sm md:text-base'>
+                    Mediteransko
                   </span>
                 </div>
               </div>
 
               {/* Quick Stats */}
-              <div className='flex flex-wrap justify-center gap-8 pt-6 text-center'>
+              <div className='flex justify-center gap-4 md:gap-8 pt-4 md:pt-6 text-center'>
                 <div>
-                  <div
-                    className='text-3xl font-bold'
-                    style={{ color: '#274223' }}
-                  >
+                  <div className='text-2xl md:text-3xl font-bold text-white'>
                     15+
                   </div>
-                  <div className='text-sm text-neutral-600 font-medium'>
+                  <div className='text-xs md:text-sm text-white/80 font-medium'>
                     Vrsta biljaka
                   </div>
                 </div>
                 <div
-                  className='w-px h-12 self-center'
-                  style={{ backgroundColor: 'rgba(39, 66, 35, 0.2)' }}
+                  className='w-px h-10 md:h-12 self-center bg-white/30'
                 />
                 <div>
-                  <div
-                    className='text-3xl font-bold'
-                    style={{ color: '#274223' }}
-                  >
+                  <div className='text-2xl md:text-3xl font-bold text-white'>
                     100%
                   </div>
-                  <div className='text-sm text-neutral-600 font-medium'>
-                    Prilagođeno klimatu
+                  <div className='text-xs md:text-sm text-white/80 font-medium'>
+                    Za klimu
                   </div>
                 </div>
                 <div
-                  className='w-px h-12 self-center'
-                  style={{ backgroundColor: 'rgba(39, 66, 35, 0.2)' }}
+                  className='w-px h-10 md:h-12 self-center bg-white/30'
                 />
                 <div>
-                  <div
-                    className='text-3xl font-bold'
-                    style={{ color: '#274223' }}
-                  >
+                  <div className='text-2xl md:text-3xl font-bold text-white'>
                     5-15
                   </div>
-                  <div className='text-sm text-neutral-600 font-medium'>
-                    Godina starosti
+                  <div className='text-xs md:text-sm text-white/80 font-medium'>
+                    God. starosti
                   </div>
                 </div>
               </div>

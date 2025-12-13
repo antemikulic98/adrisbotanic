@@ -71,16 +71,16 @@ export default function ONamaPage() {
   return (
     <main>
       {/* Hero Section */}
-      <section
-        className='relative py-20 md:py-28'
-        style={{ backgroundColor: '#fafbfa' }}
-      >
+      <section className='relative py-24 md:py-32 overflow-hidden'>
+        {/* Background Image */}
         <div
-          className='absolute top-10 right-10 w-[400px] h-[400px] rounded-full blur-3xl'
-          style={{ backgroundColor: '#274223', opacity: 0.08 }}
+          className='absolute inset-0 bg-cover bg-center'
+          style={{ backgroundImage: 'url(/img/palme.jpeg)' }}
         />
+        {/* Dark Overlay */}
+        <div className='absolute inset-0 bg-black/60' />
 
-        <Container>
+        <Container className='relative z-10'>
           <div className='text-center max-w-4xl mx-auto space-y-6'>
             <div
               className='inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold shadow-lg mb-2'
@@ -91,14 +91,14 @@ export default function ONamaPage() {
             </div>
 
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              <span style={{ color: '#274223' }}>Adrisbotanic</span>
+              <span style={{ color: '#8fb588' }}>Adrisbotanic</span>
               <br />
-              <span className='text-neutral-900'>
+              <span className='text-white'>
                 Tvoj partner za mediteranski vrt
               </span>
             </h1>
 
-            <p className='text-lg md:text-xl text-neutral-600 leading-relaxed'>
+            <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
               Već preko 15 godina ponosno donosimo mediteransko zelenilo u
               hrvatske vrtove. Naša strast su masline, palme i sve što čini vrt
               posebnim.
@@ -327,10 +327,10 @@ export default function ONamaPage() {
 
               {/* Contact Info */}
               <div className='pt-8 flex flex-col md:flex-row gap-6 justify-center items-center text-white/90 text-sm border-t border-white/20 mt-8'>
-                <div className='flex items-center gap-2'>
+                <a href='tel:+385919211069' className='flex items-center gap-2 hover:opacity-80 transition-opacity'>
                   <Phone className='w-4 h-4' />
-                  <span>+385 XX XXX XXXX</span>
-                </div>
+                  <span>+385 91 921 1069</span>
+                </a>
                 <div className='hidden md:block w-px h-4 bg-white/30' />
                 <div>
                   <span>Radno vrijeme: Pon-Pet 8:00-20:00, Sub 9:00-14:00</span>
