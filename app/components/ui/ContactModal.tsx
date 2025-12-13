@@ -230,3 +230,4 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     </div>
   );
 };
+
