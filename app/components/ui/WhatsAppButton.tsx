@@ -1,12 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 
 export const WhatsAppButton: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  
+  // Hide button when body has overflow hidden (mobile menu is open)
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const isMenuOpen = document.body.style.overflow === 'hidden';
+      setIsVisible(!isMenuOpen);
+    });
+    
+    observer.observe(document.body, { 
+      attributes: true, 
+      attributeFilter: ['style'] 
+    });
+    
+    return () => observer.disconnect();
+  }, []);
+
   // Format: +385 91 921 1069 -> 385919211069 (bez razmaka i +)
   const whatsappNumber = '385919211069';
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+
+  if (!isVisible) return null;
 
   return (
     <a

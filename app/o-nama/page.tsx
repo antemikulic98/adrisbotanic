@@ -289,17 +289,17 @@ export default function ONamaPage() {
               </p>
 
               <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
-                <Link href='/kontakt'>
+                <Link href='/kontakt' className='w-full sm:w-auto'>
                   <button
-                    className='inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
+                    className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
                     style={{ color: '#274223' }}
                   >
                     <Phone className='w-5 h-5' />
                     Kontaktiraj nas
                   </button>
                 </Link>
-                <Link href='/biljke'>
-                  <button className='inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
+                <Link href='/biljke' className='w-full sm:w-auto'>
+                  <button className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
                     Pogledaj Biljke
                   </button>
                 </Link>

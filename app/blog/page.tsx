@@ -9,102 +9,26 @@ import {
   Leaf,
   Droplets,
   Sun,
-  Wind,
-  LucideIcon,
 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { posts, categories as dataCategories } from './data';
 
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  readTime: string;
-  date: string;
-  image: string;
-  icon: LucideIcon;
-}
+const categoryIcons = {
+  all: BookOpen,
+  njega: Droplets,
+  sadnja: Leaf,
+  sezona: Sun,
+};
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  const categories = [
-    { id: 'all', label: 'Svi Savjeti', icon: BookOpen },
-    { id: 'njega', label: 'Njega Biljaka', icon: Droplets },
-    { id: 'sadnja', label: 'Sadnja & Presađivanje', icon: Leaf },
-    { id: 'sezona', label: 'Sezonski Savjeti', icon: Sun },
-  ];
-
-  const posts: BlogPost[] = [
-    {
-      id: '1',
-      title: 'Kako pravilno zalijevati masline i palme',
-      excerpt:
-        'Zalijevanje mediteranskih biljaka zahtijeva posebnu pažnju. Saznaj kako pravilno zalijevati masline i palme kroz sve sezone.',
-      category: 'njega',
-      readTime: '5 min',
-      date: '15. Listopad 2024',
-      image: '/img/blog-1.jpg',
-      icon: Droplets,
-    },
-    {
-      id: '2',
-      title: 'Priprema mediteranskih biljaka za zimu',
-      excerpt:
-        'Zima dolazi! Nauči kako zaštititi svoje masline, palme i druge mediteranske biljke od hladnoće i mraza.',
-      category: 'sezona',
-      readTime: '8 min',
-      date: '10. Listopad 2024',
-      image: '/img/blog-2.jpg',
-      icon: Wind,
-    },
-    {
-      id: '3',
-      title: 'Najbolje vrijeme za sadnju maslina',
-      excerpt:
-        'Proljeće ili jesen? Saznaj koje je optimalno vrijeme za sadnju maslinovog stabla i kako osigurati najbolji rezultat.',
-      category: 'sadnja',
-      readTime: '6 min',
-      date: '5. Listopad 2024',
-      image: '/img/blog-3.jpg',
-      icon: Leaf,
-    },
-    {
-      id: '4',
-      title: 'Odabir pravog pitara za tvoje biljke',
-      excerpt:
-        'Veličina, materijal, odvodni otvori - sve što trebaš znati pri odabiru savršenog pitara za mediteranske biljke.',
-      category: 'njega',
-      readTime: '4 min',
-      date: '1. Listopad 2024',
-      image: '/img/blog-4.jpg',
-      icon: Droplets,
-    },
-    {
-      id: '5',
-      title: 'Presađivanje palmi: Korak po korak vodič',
-      excerpt:
-        'Detaljne upute za uspješno presađivanje palmi. Od pripreme tla do završnog zalijevanja.',
-      category: 'sadnja',
-      readTime: '10 min',
-      date: '28. Rujan 2024',
-      image: '/img/blog-5.jpg',
-      icon: Leaf,
-    },
-    {
-      id: '6',
-      title: 'Ljetna njega mediteranskog vrta',
-      excerpt:
-        'Vruća ljeta mogu biti izazov. Saznaj kako održati svoj vrt svježim i zdravim tijekom najtoplijih mjeseci.',
-      category: 'sezona',
-      readTime: '7 min',
-      date: '25. Rujan 2024',
-      image: '/img/blog-6.jpg',
-      icon: Sun,
-    },
-  ];
+  const categories = dataCategories.map((cat) => ({
+    ...cat,
+    icon: categoryIcons[cat.id as keyof typeof categoryIcons] || BookOpen,
+  }));
 
   const filteredPosts =
     selectedCategory === 'all'
@@ -199,70 +123,68 @@ export default function BlogPage() {
 
           {/* Posts Grid */}
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {filteredPosts.map((post) => {
-              const Icon = post.icon;
-              return (
-                <article
-                  key={post.id}
-                  className='group bg-white rounded-2xl border-2 overflow-hidden transition-all hover:shadow-2xl hover:-translate-y-1 cursor-pointer'
-                  style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
-                >
-                  {/* Image */}
-                  <div className='aspect-video overflow-hidden relative'>
-                    <Image
-                      src='/img/palme.jpeg'
-                      alt={post.title}
-                      fill
-                      className='object-cover group-hover:scale-105 transition-transform duration-500'
-                    />
+            {filteredPosts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <article
+                    className='group bg-white rounded-2xl border-2 overflow-hidden transition-all hover:shadow-2xl hover:-translate-y-1 cursor-pointer h-full'
+                    style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
+                  >
+                    {/* Image */}
+                    <div className='aspect-video overflow-hidden relative'>
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className='object-cover group-hover:scale-105 transition-transform duration-500'
+                      />
 
-                    {/* Category Badge */}
-                    <div className='absolute top-4 left-4 z-10'>
+                      {/* Category Badge */}
+                      <div className='absolute top-4 left-4 z-10'>
+                        <div
+                          className='px-3 py-1.5 rounded-full text-xs font-bold text-white backdrop-blur-sm'
+                          style={{ backgroundColor: 'rgba(39, 66, 35, 0.9)' }}
+                        >
+                          {categories.find((c) => c.id === post.category)?.label}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className='p-6 space-y-4'>
+                      {/* Meta */}
+                      <div className='flex items-center gap-4 text-sm text-neutral-500'>
+                        <div className='flex items-center gap-1'>
+                          <Calendar className='w-4 h-4' />
+                          <span>{post.date}</span>
+                        </div>
+                        <div className='flex items-center gap-1'>
+                          <Clock className='w-4 h-4' />
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className='text-xl font-bold text-neutral-900 group-hover:text-[#274223] transition-colors'>
+                        {post.title}
+                      </h3>
+
+                      {/* Excerpt */}
+                      <p className='text-neutral-600 leading-relaxed'>
+                        {post.excerpt}
+                      </p>
+
+                      {/* Read More */}
                       <div
-                        className='px-3 py-1.5 rounded-full text-xs font-bold text-white backdrop-blur-sm'
-                        style={{ backgroundColor: 'rgba(39, 66, 35, 0.9)' }}
+                        className='flex items-center gap-2 font-semibold text-sm pt-2'
+                        style={{ color: '#274223' }}
                       >
-                        {categories.find((c) => c.id === post.category)?.label}
+                        <span>Pročitaj više</span>
+                        <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
                       </div>
                     </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className='p-6 space-y-4'>
-                    {/* Meta */}
-                    <div className='flex items-center gap-4 text-sm text-neutral-500'>
-                      <div className='flex items-center gap-1'>
-                        <Calendar className='w-4 h-4' />
-                        <span>{post.date}</span>
-                      </div>
-                      <div className='flex items-center gap-1'>
-                        <Clock className='w-4 h-4' />
-                        <span>{post.readTime}</span>
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className='text-xl font-bold text-neutral-900 group-hover:text-primary transition-colors'>
-                      {post.title}
-                    </h3>
-
-                    {/* Excerpt */}
-                    <p className='text-neutral-600 leading-relaxed'>
-                      {post.excerpt}
-                    </p>
-
-                    {/* Read More */}
-                    <div
-                      className='flex items-center gap-2 font-semibold text-sm pt-2'
-                      style={{ color: '#274223' }}
-                    >
-                      <span>Pročitaj više</span>
-                      <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+                  </article>
+                </Link>
+              ))}
           </div>
         </Container>
       </section>
@@ -292,17 +214,17 @@ export default function BlogPage() {
               </p>
 
               <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
-                <Link href='/kontakt'>
+                <Link href='/kontakt' className='w-full sm:w-auto'>
                   <button
-                    className='inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
+                    className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
                     style={{ color: '#274223' }}
                   >
                     Kontaktiraj nas
                     <ArrowRight className='w-5 h-5' />
                   </button>
                 </Link>
-                <Link href='/biljke'>
-                  <button className='inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
+                <Link href='/biljke' className='w-full sm:w-auto'>
+                  <button className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
                     Pogledaj Biljke
                   </button>
                 </Link>

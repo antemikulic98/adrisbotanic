@@ -41,14 +41,14 @@ export const CallToAction: React.FC = () => {
 
           <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
             <button
-              className='inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold bg-white transition-all hover:bg-neutral-50'
+              className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold bg-white transition-all hover:bg-neutral-50'
               style={{ color: '#274223' }}
             >
               <Phone className='w-5 h-5' />
               Pozovi Nas
             </button>
             <button
-              className='inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10'
+              className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10'
               style={{ border: '2px solid white' }}
             >
               <Mail className='w-5 h-5' />
