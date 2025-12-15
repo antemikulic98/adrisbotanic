@@ -35,9 +35,44 @@ export async function generateMetadata({ params }: PageProps) {
     };
   }
 
+  const category = categories.find((c) => c.id === post.category);
+
   return {
-    title: `${post.title} | Adris Botanic`,
+    title: `${post.title} - Stručni Savjeti`,
     description: post.excerpt,
+    keywords: [
+      post.title,
+      category?.label || '',
+      'savjeti za biljke',
+      'njega biljaka',
+      'mediteranske biljke',
+      'Adris Botanic',
+    ],
+    alternates: {
+      canonical: `https://adrisbotanic.com/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `https://adrisbotanic.com/blog/${post.slug}`,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Adris Botanic'],
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
   };
 }
 
