@@ -16,6 +16,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function KontaktPage() {
   const [formData, setFormData] = useState({
@@ -514,13 +515,13 @@ export default function KontaktPage() {
               <p className='text-sm text-neutral-600 mb-4'>
                 Savjeti za pravilno održavanje i njegu
               </p>
-              <a
+              <Link
                 href='/blog'
                 className='text-sm font-semibold'
                 style={{ color: '#274223' }}
               >
                 Pogledaj savjete →
-              </a>
+              </Link>
             </div>
 
             <div
