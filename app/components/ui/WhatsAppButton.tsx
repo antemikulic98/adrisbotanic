@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { MessageCircle } from 'lucide-react';
+import { useTranslations } from '@/app/i18n';
 
 export const WhatsAppButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const t = useTranslations();
   
   // Hide button when body has overflow hidden (mobile menu is open)
   useEffect(() => {
@@ -36,10 +38,9 @@ export const WhatsAppButton: React.FC = () => {
       style={{
         backgroundColor: '#25D366', // WhatsApp zelena boja
       }}
-      aria-label='Kontaktiraj nas na WhatsApp'
+      aria-label={t.whatsapp.tooltip}
     >
       <MessageCircle className='w-7 h-7 text-white' fill='white' />
     </a>
   );
 };
-

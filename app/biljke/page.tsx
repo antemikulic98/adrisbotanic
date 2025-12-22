@@ -6,77 +6,47 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ContactModal } from '../components/ui/ContactModal';
 import { useState } from 'react';
+import { useTranslations } from '@/app/i18n';
 
 export default function BiljkePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const t = useTranslations();
 
   const openModal = (category: string) => {
     setSelectedCategory(category);
     setIsModalOpen(true);
   };
+
   const categories = [
     {
       id: 'masline',
-      title: 'Masline',
+      title: t.plantsPage.olives.title,
       icon: TreePine,
-      description: 'Mediteransko blago vašeg vrta',
-      longDescription:
-        'Maslinovo stablo (Olea europaea) je simbol Mediterana i savršen izbor za vaš vrt. Naše masline su uzgojene s pažnjom, otporne na klimatske uvjete i idealne za hrvatski krajolik.',
-      features: [
-        'Starost: 5-15+ godina',
-        'Visina: 1.5m - 4m',
-        'Otpornost: -10°C do +40°C',
-        'Sadnja: Proljeće i jesen',
-      ],
-      varieties: [
-        'Oblica - tradicionalna hrvatska sorta',
-        'Leccino - talijanska, visok prinos',
-        'Pendolino - oprašivač, dekorativna',
-        'Frantoio - kvalitetno ulje',
-      ],
+      description: t.plantsPage.olives.description,
+      longDescription: t.plantsPage.olives.longDescription,
+      features: t.plantsPage.olives.features,
+      varieties: t.plantsPage.olives.varieties,
       image: '/img/masline.jpg',
     },
     {
       id: 'palme',
-      title: 'Palme',
+      title: t.plantsPage.palms.title,
       icon: Palmtree,
-      description: 'Tropski šarm za svaki prostor',
-      longDescription:
-        'Palme donose egzotičan izgled i mediteranski ugođaj. Sve naše palme su prilagođene hrvatskom klimatu i mogu izdržati i blaže zime uz minimalnu njegu.',
-      features: [
-        'Vrste: Phoenix, Washingtonia, Chamaerops',
-        'Visina: 0.8m - 3.5m',
-        'Otpornost: -5°C do +35°C',
-        'Održavanje: Jednostavno',
-      ],
-      varieties: [
-        'Phoenix canariensis - kanarijska palma',
-        'Washingtonia robusta - meksička palma',
-        'Chamaerops humilis - patuljasta palma',
-        'Trachycarpus fortunei - kineska palma',
-      ],
+      description: t.plantsPage.palms.description,
+      longDescription: t.plantsPage.palms.longDescription,
+      features: t.plantsPage.palms.features,
+      varieties: t.plantsPage.palms.varieties,
       image: '/img/palme.jpg',
     },
     {
       id: 'vanjske',
-      title: 'Vanjske Biljke',
+      title: t.plantsPage.outdoor.title,
       icon: Flower2,
-      description: 'Mediteranski vrt pun boja i mirisa',
-      longDescription:
-        'Obogatite svoj vrt mediteranskim biljem koje ne zahtijeva puno održavanja. Od aromatičnih biljaka do cvjetnih grmova, nudimo širok izbor za svaki ukus.',
-      features: [
-        'Lavanda - mirišna i dekorativna',
-        'Ružmarin - aromatična začinska biljka',
-        'Bougainvillea - bujna cvjetna ljepota',
-        'Oleander - cvjetni grm',
-      ],
-      varieties: [
-        'Lavandula angustifolia - prava lavanda',
-        'Rosmarinus officinalis - ružmarin',
-        'Bougainvillea glabra - bugenvilija',
-        'Nerium oleander - oleander',
-      ],
+      description: t.plantsPage.outdoor.description,
+      longDescription: t.plantsPage.outdoor.longDescription,
+      features: t.plantsPage.outdoor.features,
+      varieties: t.plantsPage.outdoor.varieties,
       image: '/img/vanjske.jpg',
     },
   ];
@@ -106,18 +76,22 @@ export default function BiljkePage() {
                 style={{ backgroundColor: '#274223' }}
               >
                 <TreePine className='w-4 h-4' />
-                <span>Naše Biljke</span>
+                <span>{t.plantsPage.badge}</span>
               </div>
 
-              <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-                <span className='text-white'>Mediteranske Biljke</span>
+              <h1 
+                className='font-bold leading-[1.1]'
+                style={{ 
+                  fontSize: 'clamp(2rem, 5vw, 3.75rem)'
+                }}
+              >
+                <span className='text-white'>{t.plantsPage.title}</span>
                 <br />
-                <span style={{ color: '#8fb588' }}>Za Tvoj Savršeni Vrt</span>
+                <span style={{ color: '#8fb588' }}>{t.plantsPage.titleHighlight}</span>
               </h1>
 
               <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
-                Pažljivo odabrane i uzgojene biljke prilagođene hrvatskom
-                klimatu. Stručno savjetovanje i podrška u svakom koraku.
+                {t.plantsPage.subtitle}
               </p>
 
               {/* Category Pills */}
@@ -126,20 +100,20 @@ export default function BiljkePage() {
                   className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
                 >
                   <TreePine className='w-4 h-4 md:w-5 md:h-5 text-white' />
-                  <span className='text-white font-bold text-sm md:text-base'>Masline</span>
+                  <span className='text-white font-bold text-sm md:text-base'>{t.plantsPage.olives.title}</span>
                 </div>
                 <div
                   className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
                 >
                   <Palmtree className='w-4 h-4 md:w-5 md:h-5 text-white' />
-                  <span className='text-white font-bold text-sm md:text-base'>Palme</span>
+                  <span className='text-white font-bold text-sm md:text-base'>{t.plantsPage.palms.title}</span>
                 </div>
                 <div
                   className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
                 >
                   <Flower2 className='w-4 h-4 md:w-5 md:h-5 text-white' />
                   <span className='text-white font-bold text-sm md:text-base'>
-                    Mediteransko
+                    {t.plantsPage.mediterranean}
                   </span>
                 </div>
               </div>
@@ -151,7 +125,7 @@ export default function BiljkePage() {
                     15+
                   </div>
                   <div className='text-xs md:text-sm text-white/80 font-medium'>
-                    Vrsta biljaka
+                    {t.plantsPage.plantTypes}
                   </div>
                 </div>
                 <div
@@ -162,7 +136,7 @@ export default function BiljkePage() {
                     100%
                   </div>
                   <div className='text-xs md:text-sm text-white/80 font-medium'>
-                    Za klimu
+                    {t.plantsPage.forClimate}
                   </div>
                 </div>
                 <div
@@ -173,7 +147,7 @@ export default function BiljkePage() {
                     5-15
                   </div>
                   <div className='text-xs md:text-sm text-white/80 font-medium'>
-                    God. starosti
+                    {t.plantsPage.yearsOld}
                   </div>
                 </div>
               </div>
@@ -227,7 +201,7 @@ export default function BiljkePage() {
                       {/* Features */}
                       <div>
                         <h3 className='text-lg font-bold text-neutral-900 mb-3'>
-                          Karakteristike:
+                          {t.plantsPage.characteristics}
                         </h3>
                         <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                           {category.features.map((feature, idx) => (
@@ -250,7 +224,7 @@ export default function BiljkePage() {
                       {/* Varieties */}
                       <div>
                         <h3 className='text-lg font-bold text-neutral-900 mb-3'>
-                          Dostupne vrste:
+                          {t.plantsPage.availableVarieties}
                         </h3>
                         <div className='space-y-2'>
                           {category.varieties.map((variety, idx) => (
@@ -280,7 +254,7 @@ export default function BiljkePage() {
                         style={{ backgroundColor: '#274223' }}
                       >
                         <Phone className='w-5 h-5' />
-                        Pitaj za dostupnost
+                        {t.plantsPage.askAvailability}
                       </button>
                     </div>
 
@@ -326,24 +300,23 @@ export default function BiljkePage() {
           <Container>
             <div className='text-center max-w-3xl mx-auto space-y-6'>
               <h2 className='text-3xl md:text-4xl font-bold'>
-                Nisi siguran što ti treba?
+                {t.plantsPage.notSure}
               </h2>
               <p className='text-lg text-white/90'>
-                Naši stručnjaci će ti pomoći odabrati savršene biljke za tvoj
-                prostor. Besplatno savjetovanje i procjena!
+                {t.plantsPage.notSureDesc}
               </p>
               <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
                 <button
-                  onClick={() => openModal('Opći upit')}
+                  onClick={() => openModal(t.plantsPage.generalInquiry)}
                   className='w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
                   style={{ color: '#274223' }}
                 >
                   <Phone className='w-5 h-5' />
-                  Kontaktiraj nas
+                  {t.plantsPage.contactUs}
                 </button>
                 <Link href='/' className='w-full sm:w-auto'>
                   <button className='w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
-                    Natrag na početnu
+                    {t.plantsPage.backToHome}
                     <ArrowRight className='w-5 h-5' />
                   </button>
                 </Link>

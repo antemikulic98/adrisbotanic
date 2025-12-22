@@ -1,9 +1,14 @@
+'use client';
+
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Logo } from './Logo';
+import { useTranslations } from '@/app/i18n';
 
 export const Footer: React.FC = () => {
+  const t = useTranslations();
+
   return (
     <footer className='bg-neutral-900 text-neutral-300'>
       {/* Main Footer */}
@@ -15,21 +20,20 @@ export const Footer: React.FC = () => {
               <Logo variant='white' />
             </div>
             <p className='text-sm leading-relaxed'>
-              Vaš partner za masline, palme i hortikulturne proizvode. Kvaliteta
-              i stručnost su naša tradicija.
+              {t.footer.description}
             </p>
           </div>
 
           {/* Kolona 2: Linkovi */}
           <div>
-            <h3 className='text-white font-semibold mb-4'>Brzi Linkovi</h3>
+            <h3 className='text-white font-semibold mb-4'>{t.footer.quickLinks}</h3>
             <ul className='space-y-2'>
               <li>
                 <Link
                   href='/biljke'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Naše Biljke
+                  {t.footer.ourPlants}
                 </Link>
               </li>
               <li>
@@ -37,7 +41,7 @@ export const Footer: React.FC = () => {
                   href='/blog'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Savjeti & Blog
+                  {t.footer.tipsAndBlog}
                 </Link>
               </li>
               <li>
@@ -45,7 +49,7 @@ export const Footer: React.FC = () => {
                   href='/o-nama'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  O Nama
+                  {t.footer.aboutUs}
                 </Link>
               </li>
               <li>
@@ -53,7 +57,7 @@ export const Footer: React.FC = () => {
                   href='/kontakt'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Kontakt
+                  {t.nav.contact}
                 </Link>
               </li>
             </ul>
@@ -62,7 +66,7 @@ export const Footer: React.FC = () => {
           {/* Kolona 3: Pomoć */}
           <div>
             <h3 className='text-white font-semibold mb-4'>
-              Korisnička Podrška
+              {t.footer.customerSupport}
             </h3>
             <ul className='space-y-2'>
               <li>
@@ -70,7 +74,7 @@ export const Footer: React.FC = () => {
                   href='/faq'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Česta Pitanja
+                  {t.footer.faq}
                 </Link>
               </li>
               <li>
@@ -78,7 +82,7 @@ export const Footer: React.FC = () => {
                   href='/dostava'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Dostava i Povrat
+                  {t.footer.deliveryReturn}
                 </Link>
               </li>
               <li>
@@ -86,7 +90,7 @@ export const Footer: React.FC = () => {
                   href='/uvjeti'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Uvjeti Korištenja
+                  {t.footer.termsOfUse}
                 </Link>
               </li>
               <li>
@@ -94,7 +98,7 @@ export const Footer: React.FC = () => {
                   href='/privatnost'
                   className='text-sm hover:text-primary transition-colors'
                 >
-                  Politika Privatnosti
+                  {t.footer.privacyPolicy}
                 </Link>
               </li>
             </ul>
@@ -102,7 +106,7 @@ export const Footer: React.FC = () => {
 
           {/* Kolona 4: Kontakt */}
           <div>
-            <h3 className='text-white font-semibold mb-4'>Kontaktirajte Nas</h3>
+            <h3 className='text-white font-semibold mb-4'>{t.footer.contactUs}</h3>
             <ul className='space-y-3'>
               <li className='flex items-start gap-2'>
                 <MapPin className='w-5 h-5 text-primary shrink-0 mt-0.5' />
@@ -167,21 +171,20 @@ export const Footer: React.FC = () => {
         <Container className='py-6'>
           <div className='flex flex-col md:flex-row justify-between items-center gap-4 text-sm'>
             <p>
-              &copy; {new Date().getFullYear()} Adrisbotanic. Sva prava
-              pridržana.
+              &copy; {new Date().getFullYear()} Adrisbotanic. {t.footer.copyright}
             </p>
             <div className='flex gap-6'>
               <Link
                 href='/privatnost'
                 className='hover:text-primary transition-colors'
               >
-                Privatnost
+                {t.footer.privacy}
               </Link>
               <Link
                 href='/uvjeti'
                 className='hover:text-primary transition-colors'
               >
-                Uvjeti
+                {t.footer.terms}
               </Link>
             </div>
           </div>

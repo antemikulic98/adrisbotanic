@@ -17,8 +17,10 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from '@/app/i18n';
 
 export default function KontaktPage() {
+  const t = useTranslations();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,7 +50,7 @@ export default function KontaktPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Greška pri slanju poruke');
+        throw new Error(data.error || t.contactPage.errorTitle);
       }
 
       setSubmitStatus('success');
@@ -64,7 +66,7 @@ export default function KontaktPage() {
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Greška pri slanju poruke');
+      setErrorMessage(error instanceof Error ? error.message : t.contactPage.errorTitle);
     } finally {
       setIsSubmitting(false);
     }
@@ -73,29 +75,29 @@ export default function KontaktPage() {
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Telefon',
-      details: ['+385 91 921 1069', 'Pon-Pet 8:00-20:00, Sub 9:00-14:00'],
+      title: t.contactPage.phone,
+      details: ['+385 91 921 1069', t.contactPage.phoneHours],
       action: 'tel:+385919211069',
     },
     {
       icon: Mail,
-      title: 'Email',
-      details: ['info@adrisbotanic.com', 'Odgovaramo u roku 24h'],
+      title: t.contactPage.email,
+      details: ['info@adrisbotanic.com', t.contactPage.emailResponse],
       action: 'mailto:info@adrisbotanic.com',
     },
     {
       icon: MapPin,
-      title: 'Lokacija',
+      title: t.contactPage.location,
       details: ['Cesta pape Ivana Pavla II. 380', 'Kaštel Štafilić'],
       action: 'https://maps.google.com/?q=Cesta+pape+Ivana+Pavla+II.+380,+Kaštel+Štafilić',
     },
     {
       icon: Clock,
-      title: 'Radno vrijeme',
+      title: t.contactPage.workHours,
       details: [
-        'Pon-Pet: 8:00 - 20:00',
-        'Subota: 9:00 - 14:00',
-        'Nedjelja: Zatvoreno',
+        t.contactPage.monFri,
+        t.contactPage.sat,
+        t.contactPage.sun,
       ],
       action: null,
     },
@@ -120,18 +122,22 @@ export default function KontaktPage() {
               style={{ backgroundColor: '#274223' }}
             >
               <MessageSquare className='w-4 h-4' />
-              <span>Kontaktiraj Nas</span>
+              <span>{t.contactPage.badge}</span>
             </div>
 
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              <span className='text-white'>Rado Ćemo Ti</span>
+            <h1 
+              className='font-bold leading-[1.1]'
+              style={{ 
+                fontSize: 'clamp(2rem, 5vw, 3.75rem)'
+              }}
+            >
+              <span className='text-white'>{t.contactPage.title}</span>
               <br />
-              <span style={{ color: '#8fb588' }}>Pomoći</span>
+              <span style={{ color: '#8fb588' }}>{t.contactPage.titleHighlight}</span>
             </h1>
 
             <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
-              Imaš pitanje o našim biljkama ili trebate savjet? Kontaktiraj nas
-              bilo kojim putem - tu smo za tebe!
+              {t.contactPage.subtitle}
             </p>
           </div>
         </Container>
@@ -174,10 +180,12 @@ export default function KontaktPage() {
                   {info.action && (
                     <a
                       href={info.action}
+                      target={info.action.startsWith('http') ? '_blank' : undefined}
+                      rel={info.action.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className='inline-flex items-center gap-2 mt-4 text-sm font-semibold transition-colors hover:underline'
                       style={{ color: '#274223' }}
                     >
-                      Kontaktiraj →
+                      {t.contactPage.contactAction}
                     </a>
                   )}
                 </div>
@@ -198,10 +206,10 @@ export default function KontaktPage() {
             <div>
               <div className='mb-8'>
                 <h2 className='text-3xl md:text-4xl font-bold text-neutral-900 mb-4'>
-                  Pošalji nam poruku
+                  {t.contactPage.sendMessage}
                 </h2>
                 <p className='text-lg text-neutral-600'>
-                  Ispuni formu i odgovorit ćemo ti u roku 24 sata.
+                  {t.contactPage.sendMessageDesc}
                 </p>
               </div>
 
@@ -211,7 +219,7 @@ export default function KontaktPage() {
                     htmlFor='name'
                     className='block text-sm font-bold text-neutral-700 mb-2'
                   >
-                    Ime i prezime *
+                    {t.contactPage.nameLabel}
                   </label>
                   <input
                     type='text'
@@ -229,7 +237,7 @@ export default function KontaktPage() {
                     onBlur={(e) => {
                       e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                     }}
-                    placeholder='Tvoje ime'
+                    placeholder={t.contactPage.namePlaceholder}
                   />
                 </div>
 
@@ -239,7 +247,7 @@ export default function KontaktPage() {
                       htmlFor='email'
                       className='block text-sm font-bold text-neutral-700 mb-2'
                     >
-                      Email *
+                      {t.contactPage.emailLabel}
                     </label>
                     <input
                       type='email'
@@ -257,7 +265,7 @@ export default function KontaktPage() {
                       onBlur={(e) => {
                         e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                       }}
-                      placeholder='tvoj@email.com'
+                      placeholder={t.contactPage.emailPlaceholder}
                     />
                   </div>
 
@@ -266,7 +274,7 @@ export default function KontaktPage() {
                       htmlFor='phone'
                       className='block text-sm font-bold text-neutral-700 mb-2'
                     >
-                      Telefon
+                      {t.contactPage.phoneLabel}
                     </label>
                     <input
                       type='tel'
@@ -283,7 +291,7 @@ export default function KontaktPage() {
                       onBlur={(e) => {
                         e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                       }}
-                      placeholder='+385 91 921 1069'
+                      placeholder={t.contactPage.phonePlaceholder}
                     />
                   </div>
                 </div>
@@ -293,7 +301,7 @@ export default function KontaktPage() {
                     htmlFor='subject'
                     className='block text-sm font-bold text-neutral-700 mb-2'
                   >
-                    Predmet *
+                    {t.contactPage.subjectLabel}
                   </label>
                   <input
                     type='text'
@@ -311,7 +319,7 @@ export default function KontaktPage() {
                     onBlur={(e) => {
                       e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                     }}
-                    placeholder='Npr. Upit o maslinama'
+                    placeholder={t.contactPage.subjectPlaceholder}
                   />
                 </div>
 
@@ -320,7 +328,7 @@ export default function KontaktPage() {
                     htmlFor='message'
                     className='block text-sm font-bold text-neutral-700 mb-2'
                   >
-                    Poruka *
+                    {t.contactPage.messageLabel}
                   </label>
                   <textarea
                     id='message'
@@ -338,7 +346,7 @@ export default function KontaktPage() {
                     onBlur={(e) => {
                       e.target.style.borderColor = 'rgba(39, 66, 35, 0.2)';
                     }}
-                    placeholder='Tvoja poruka...'
+                    placeholder={t.contactPage.messagePlaceholder}
                   />
                 </div>
 
@@ -347,8 +355,8 @@ export default function KontaktPage() {
                   <div className='flex items-center gap-3 p-4 rounded-xl bg-green-50 border-2 border-green-200'>
                     <CheckCircle className='w-6 h-6 text-green-600 shrink-0' />
                     <div>
-                      <p className='font-bold text-green-800'>Poruka uspješno poslana!</p>
-                      <p className='text-sm text-green-700'>Kontaktirat ćemo te uskoro.</p>
+                      <p className='font-bold text-green-800'>{t.contactPage.successTitle}</p>
+                      <p className='text-sm text-green-700'>{t.contactPage.successDesc}</p>
                     </div>
                   </div>
                 )}
@@ -358,7 +366,7 @@ export default function KontaktPage() {
                   <div className='flex items-center gap-3 p-4 rounded-xl bg-red-50 border-2 border-red-200'>
                     <AlertCircle className='w-6 h-6 text-red-600 shrink-0' />
                     <div>
-                      <p className='font-bold text-red-800'>Greška pri slanju</p>
+                      <p className='font-bold text-red-800'>{t.contactPage.errorTitle}</p>
                       <p className='text-sm text-red-700'>{errorMessage}</p>
                     </div>
                   </div>
@@ -373,19 +381,18 @@ export default function KontaktPage() {
                   {isSubmitting ? (
                     <>
                       <Loader2 className='w-5 h-5 animate-spin' />
-                      Šaljem...
+                      {t.contactPage.sending}
                     </>
                   ) : (
                     <>
                       <Send className='w-5 h-5' />
-                      Pošalji poruku
+                      {t.contactPage.send}
                     </>
                   )}
                 </button>
 
                 <p className='text-xs text-neutral-500 text-center'>
-                  Tvoji podaci su sigurni i neće biti dijeljeni s trećim
-                  stranama.
+                  {t.contactPage.privacyNote}
                 </p>
               </form>
             </div>
@@ -416,11 +423,11 @@ export default function KontaktPage() {
                     <MapPin className='w-6 h-6' />
                   </div>
                   <div>
-                    <h4 className='font-bold text-neutral-900 mb-1'>Adresa rasadnika</h4>
+                    <h4 className='font-bold text-neutral-900 mb-1'>{t.contactPage.nurseryAddress}</h4>
                     <p className='text-neutral-600'>Cesta pape Ivana Pavla II. 380</p>
                     <p className='text-neutral-600'>Kaštel Štafilić</p>
                     <p className='text-sm mt-2 font-semibold' style={{ color: '#274223' }}>
-                      Otvori u Google Maps →
+                      {t.contactPage.openInMaps}
                     </p>
                   </div>
                 </div>
@@ -432,7 +439,7 @@ export default function KontaktPage() {
                 style={{ backgroundColor: 'rgba(39, 66, 35, 0.08)' }}
               >
                 <h3 className='text-xl font-bold text-neutral-900 mb-4'>
-                  Prati nas na društvenim mrežama
+                  {t.contactPage.followUs}
                 </h3>
                 <div className='flex gap-4'>
                   <a
@@ -457,9 +464,9 @@ export default function KontaktPage() {
                 className='p-8 rounded-2xl text-white'
                 style={{ backgroundColor: '#274223' }}
               >
-                <h3 className='text-xl font-bold mb-4'>Hitno pitanje?</h3>
+                <h3 className='text-xl font-bold mb-4'>{t.contactPage.urgentQuestion}</h3>
                 <p className='mb-6 text-white/90'>
-                  Pozovi nas odmah za brzo savjetovanje i odgovore!
+                  {t.contactPage.urgentDesc}
                 </p>
                 <a
                   href='tel:+385919211069'
@@ -480,10 +487,10 @@ export default function KontaktPage() {
         <Container>
           <div className='text-center mb-12'>
             <h2 className='text-3xl font-bold text-neutral-900 mb-3'>
-              Često postavljena pitanja
+              {t.contactPage.faq}
             </h2>
             <p className='text-neutral-600'>
-              Možda tvoj odgovor već postoji ovdje
+              {t.contactPage.faqDesc}
             </p>
           </div>
 
@@ -493,17 +500,17 @@ export default function KontaktPage() {
               style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
             >
               <h3 className='font-bold text-neutral-900 mb-2'>
-                Dostava i sadnja
+                {t.contactPage.deliveryPlanting}
               </h3>
               <p className='text-sm text-neutral-600 mb-4'>
-                Organiziramo dostavu i profesionalnu sadnju
+                {t.contactPage.deliveryPlantingDesc}
               </p>
               <a
                 href='#'
                 className='text-sm font-semibold'
                 style={{ color: '#274223' }}
               >
-                Saznaj više →
+                {t.contactPage.learnMore}
               </a>
             </div>
 
@@ -511,16 +518,16 @@ export default function KontaktPage() {
               className='p-6 rounded-xl text-center transition-all hover:shadow-lg'
               style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
             >
-              <h3 className='font-bold text-neutral-900 mb-2'>Njega biljaka</h3>
+              <h3 className='font-bold text-neutral-900 mb-2'>{t.contactPage.plantCare}</h3>
               <p className='text-sm text-neutral-600 mb-4'>
-                Savjeti za pravilno održavanje i njegu
+                {t.contactPage.plantCareDesc}
               </p>
               <Link
                 href='/blog'
                 className='text-sm font-semibold'
                 style={{ color: '#274223' }}
               >
-                Pogledaj savjete →
+                {t.contactPage.viewTips}
               </Link>
             </div>
 
@@ -528,16 +535,16 @@ export default function KontaktPage() {
               className='p-6 rounded-xl text-center transition-all hover:shadow-lg'
               style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
             >
-              <h3 className='font-bold text-neutral-900 mb-2'>Garancija</h3>
+              <h3 className='font-bold text-neutral-900 mb-2'>{t.contactPage.warranty}</h3>
               <p className='text-sm text-neutral-600 mb-4'>
-                12 mjeseci garancije na sve proizvode
+                {t.contactPage.warrantyDesc}
               </p>
               <a
                 href='#'
                 className='text-sm font-semibold'
                 style={{ color: '#274223' }}
               >
-                Više informacija →
+                {t.contactPage.moreInfo}
               </a>
             </div>
           </div>
@@ -546,4 +553,3 @@ export default function KontaktPage() {
     </main>
   );
 }
-

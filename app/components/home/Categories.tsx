@@ -1,12 +1,16 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowRight, TreePine, Trees, Cherry, Flower2, Leaf, Sun } from 'lucide-react';
 import { Container } from '../ui/Container';
+import { useTranslations } from '@/app/i18n';
 
 interface CategoryCardProps {
   title: string;
   examples: string;
   icon: React.ReactNode;
   href: string;
+  viewText: string;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
@@ -14,6 +18,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   examples,
   icon,
   href,
+  viewText,
 }) => {
   return (
     <Link href={href}>
@@ -44,7 +49,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           className='flex items-center gap-2 font-semibold text-sm'
           style={{ color: '#274223' }}
         >
-          <span>Pregledaj</span>
+          <span>{viewText}</span>
           <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
         </div>
       </div>
@@ -53,40 +58,42 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
 };
 
 export const Categories: React.FC = () => {
+  const t = useTranslations();
+
   const categories = [
     {
-      title: 'Masivna i sjenovita stabla',
-      examples: 'Maslina, čempres, pinija, palme',
+      title: t.categories.items.trees.title,
+      examples: t.categories.items.trees.examples,
       icon: <TreePine className='w-7 h-7' />,
       href: '/biljke',
     },
     {
-      title: 'Veliki grmovi i manja stabla',
-      examples: 'Oleandar, lovor, šipak, smokva',
+      title: t.categories.items.shrubs.title,
+      examples: t.categories.items.shrubs.examples,
       icon: <Trees className='w-7 h-7' />,
       href: '/biljke',
     },
     {
-      title: 'Agrumi',
-      examples: 'Limun, naranča, limeta, grejp, mandarina',
+      title: t.categories.items.citrus.title,
+      examples: t.categories.items.citrus.examples,
       icon: <Cherry className='w-7 h-7' />,
       href: '/biljke',
     },
     {
-      title: 'Aromatični grmovi i trajnice',
-      examples: 'Lavanda, ružmarin, kadulja, smilje',
+      title: t.categories.items.aromatic.title,
+      examples: t.categories.items.aromatic.examples,
       icon: <Flower2 className='w-7 h-7' />,
       href: '/biljke',
     },
     {
-      title: 'Penjačice',
-      examples: 'Bugenvilija, jasmin, glicinija',
+      title: t.categories.items.climbers.title,
+      examples: t.categories.items.climbers.examples,
       icon: <Leaf className='w-7 h-7' />,
       href: '/biljke',
     },
     {
-      title: 'Sukulenti i kaktuslike biljke',
-      examples: 'Agava, kaktus, čuvarkuća',
+      title: t.categories.items.succulents.title,
+      examples: t.categories.items.succulents.examples,
       icon: <Sun className='w-7 h-7' />,
       href: '/biljke',
     },
@@ -101,20 +108,25 @@ export const Categories: React.FC = () => {
             className='inline-block px-4 py-2 rounded-full text-xs font-bold text-white mb-4'
             style={{ backgroundColor: '#274223' }}
           >
-            ŠTO NUDIMO
+            {t.categories.badge}
           </div>
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-3'>
-            Istražite Naš <span style={{ color: '#274223' }}>Asortiman</span>
+          <h2 
+            className='font-bold text-neutral-900 mb-3'
+            style={{ 
+              fontSize: 'clamp(1.75rem, 4vw, 3rem)'
+            }}
+          >
+            {t.categories.title} <span style={{ color: '#274223' }}>{t.categories.titleHighlight}</span>
           </h2>
           <p className='text-lg text-neutral-600 max-w-2xl mx-auto'>
-            Mediteransko bilje za vaš vrt, terasu i dom
+            {t.categories.subtitle}
           </p>
         </div>
 
         {/* Categories Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           {categories.map((category) => (
-            <CategoryCard key={category.title} {...category} />
+            <CategoryCard key={category.title} {...category} viewText={t.categories.view} />
           ))}
         </div>
       </Container>

@@ -1,15 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Plus, X, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Logo } from './Logo';
 import { NavLink } from './NavLink';
 import { MobileMenu } from './MobileMenu';
+import { LanguageSwitcher } from '../ui/LanguageSwitcher';
+import { useTranslations } from '@/app/i18n';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = useTranslations();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,9 +47,13 @@ export const Header: React.FC = () => {
           <div className='flex justify-between items-center text-xs'>
             <a href='tel:+385919211069' className='flex items-center gap-2 hover:opacity-80 transition-opacity'>
               <Phone className='w-3.5 h-3.5' />
-              <span>+385 91 921 1069</span>
+              <span>{t.header.phone}</span>
             </a>
-            <span>Radimo: Pon-Pet 8:00-20:00, Sub 9:00-14:00</span>
+            <div className='flex items-center gap-4'>
+              <span>{t.header.workHours}</span>
+              <div className='w-px h-4 bg-white/30' />
+              <LanguageSwitcher variant='desktop' />
+            </div>
           </div>
         </Container>
       </div>
@@ -65,27 +72,34 @@ export const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className='hidden lg:flex items-center gap-6'>
-            <NavLink href='/'>Početna</NavLink>
-            <NavLink href='/biljke'>Naše Biljke</NavLink>
-            <NavLink href='/blog'>Savjeti</NavLink>
-            <NavLink href='/o-nama'>O Nama</NavLink>
-            <NavLink href='/kontakt'>Kontakt</NavLink>
+            <NavLink href='/'>{t.nav.home}</NavLink>
+            <NavLink href='/biljke'>{t.nav.plants}</NavLink>
+            <NavLink href='/blog'>{t.nav.blog}</NavLink>
+            <NavLink href='/o-nama'>{t.nav.about}</NavLink>
+            <NavLink href='/kontakt'>{t.nav.contact}</NavLink>
           </nav>
 
-          {/* Mobile menu toggle */}
-          <div className='flex items-center gap-3'>
-            {/* Mobile menu toggle */}
+          {/* Mobile: Language switcher + Menu toggle */}
+          <div className='flex items-center gap-2 lg:hidden'>
+            {/* Language Switcher - mobile header */}
+            <div className={isScrolled ? '' : '[&_button]:bg-white/20'}>
+              <LanguageSwitcher variant='mobile-header' />
+            </div>
+            
+            {/* Mobile menu toggle - Plus icon */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`lg:hidden hover:opacity-80 transition-colors ${
-                isScrolled ? 'text-neutral-800' : 'text-white'
+              className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${
+                isScrolled 
+                  ? 'bg-[#274223]/10 text-neutral-800' 
+                  : 'bg-white/20 text-white'
               }`}
               aria-label='Toggle menu'
             >
               {mobileMenuOpen ? (
-                <X className='w-6 h-6' />
+                <X className='w-5 h-5' />
               ) : (
-                <Menu className='w-6 h-6' />
+                <Plus className='w-6 h-6' />
               )}
             </button>
           </div>

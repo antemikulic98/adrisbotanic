@@ -3,8 +3,12 @@
 import React from 'react';
 import { Container } from '@/app/components/ui/Container';
 import { Phone, Mail, Leaf } from 'lucide-react';
+import Link from 'next/link';
+import { useTranslations } from '@/app/i18n';
 
 export const CallToAction: React.FC = () => {
+  const t = useTranslations();
+
   return (
     <section
       className='py-16 md:py-20 text-white relative overflow-hidden'
@@ -27,33 +31,40 @@ export const CallToAction: React.FC = () => {
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
           >
             <Leaf className='w-4 h-4' />
-            KONTAKT
+            {t.cta.badge}
           </div>
 
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold'>
-            Spremni za početak?
+          <h2 
+            className='font-bold'
+            style={{ 
+              fontSize: 'clamp(1.75rem, 4vw, 3rem)'
+            }}
+          >
+            {t.cta.title}
           </h2>
 
           <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
-            Kontaktirajte nas danas i saznajte više o našim mediteranskim
-            biljkama i kvalitetnim pitarima.
+            {t.cta.subtitle}
           </p>
 
           <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
-            <button
+            <a
+              href='tel:+385919211069'
               className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold bg-white transition-all hover:bg-neutral-50'
               style={{ color: '#274223' }}
             >
               <Phone className='w-5 h-5' />
-              Pozovi Nas
-            </button>
-            <button
-              className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10'
-              style={{ border: '2px solid white' }}
-            >
-              <Mail className='w-5 h-5' />
-              Pošalji Upit
-            </button>
+              {t.cta.callUs}
+            </a>
+            <Link href='/kontakt'>
+              <button
+                className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold text-white transition-all hover:bg-white/10'
+                style={{ border: '2px solid white' }}
+              >
+                <Mail className='w-5 h-5' />
+                {t.cta.sendInquiry}
+              </button>
+            </Link>
           </div>
 
           {/* Contact info */}

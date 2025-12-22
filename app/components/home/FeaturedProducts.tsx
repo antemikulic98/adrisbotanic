@@ -1,19 +1,22 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
+import { useTranslations } from '@/app/i18n';
 
 interface Plant {
   id: string;
-  name: string;
-  category: string;
+  nameKey: 'oblica' | 'washingtonia' | 'phoenix' | 'leccino' | 'chamaerops' | 'pendolino';
   badge?: 'new' | 'popular';
   image: string;
   href: string;
-  description: string;
 }
 
-const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
+const PlantCard: React.FC<{ plant: Plant; t: ReturnType<typeof useTranslations> }> = ({ plant, t }) => {
+  const plantData = t.featured.plants[plant.nameKey];
+  
   return (
     <Link href={plant.href}>
       <div
@@ -27,7 +30,7 @@ const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
         >
           <Image
             src='/img/palme.jpeg'
-            alt={plant.name}
+            alt={plantData.name}
             fill
             className='object-cover group-hover:scale-105 transition-transform duration-500'
           />
@@ -43,7 +46,7 @@ const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
                 }}
               >
                 <Sparkles className='w-3 h-3' />
-                {plant.badge === 'new' ? 'Novo' : 'Popularno'}
+                {plant.badge === 'new' ? t.featured.new : t.featured.popular}
               </div>
             </div>
           )}
@@ -59,13 +62,13 @@ const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
                 color: '#274223',
               }}
             >
-              {plant.category}
+              {plantData.category}
             </div>
             <h3 className='text-base font-bold text-neutral-900 group-hover:text-primary transition-colors line-clamp-2'>
-              {plant.name}
+              {plantData.name}
             </h3>
             <p className='text-sm text-neutral-600 mt-1 line-clamp-2'>
-              {plant.description}
+              {plantData.description}
             </p>
           </div>
 
@@ -79,7 +82,7 @@ const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
               style={{ color: '#274223' }}
             >
               <Phone className='w-4 h-4' />
-              <span>Pitaj za cijenu</span>
+              <span>{t.featured.askPrice}</span>
             </div>
           </div>
         </div>
@@ -89,58 +92,48 @@ const PlantCard: React.FC<{ plant: Plant }> = ({ plant }) => {
 };
 
 export const FeaturedProducts: React.FC = () => {
+  const t = useTranslations();
+
   const plants: Plant[] = [
     {
       id: '1',
-      name: 'Maslina Oblica',
-      category: 'Masline',
+      nameKey: 'oblica',
       badge: 'popular',
       image: '/placeholder.jpg',
       href: '/biljke',
-      description: 'Autohtona dalmatinska sorta, otporna na sušu i vjetar.',
     },
     {
       id: '2',
-      name: 'Washingtonia Robusta',
-      category: 'Palme',
+      nameKey: 'washingtonia',
       badge: 'new',
       image: '/placeholder.jpg',
       href: '/biljke',
-      description: 'Elegantna palma s vitkim deblom, idealna za mediteranski ugođaj.',
     },
     {
       id: '3',
-      name: 'Phoenix Canariensis',
-      category: 'Palme',
+      nameKey: 'phoenix',
       badge: 'popular',
       image: '/placeholder.jpg',
       href: '/biljke',
-      description: 'Kanarska palma s gustom krunom, simbol mediterana.',
     },
     {
       id: '4',
-      name: 'Maslina Leccino',
-      category: 'Masline',
+      nameKey: 'leccino',
       image: '/placeholder.jpg',
       href: '/biljke',
-      description: 'Talijanska sorta poznata po kvalitetnom ulju i otpornosti.',
     },
     {
       id: '5',
-      name: 'Chamaerops Humilis',
-      category: 'Palme',
+      nameKey: 'chamaerops',
       image: '/placeholder.jpg',
       href: '/biljke',
-      description: 'Europska patuljasta palma, otporna na hladnoću.',
     },
     {
       id: '6',
-      name: 'Maslina Pendolino',
-      category: 'Masline',
+      nameKey: 'pendolino',
       badge: 'new',
       image: '/placeholder.jpg',
       href: '/biljke',
-      description: 'Oprašivač za druge sorte, prekrasno dekorativno stablo.',
     },
   ];
 
@@ -154,13 +147,18 @@ export const FeaturedProducts: React.FC = () => {
               className='inline-block px-4 py-2 rounded-full text-xs font-bold text-white mb-3'
               style={{ backgroundColor: '#274223' }}
             >
-              ISTAKNUTO
+              {t.featured.badge}
             </div>
-            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900'>
-              Naše <span style={{ color: '#274223' }}>Biljke</span>
+            <h2 
+              className='font-bold text-neutral-900'
+              style={{ 
+                fontSize: 'clamp(1.75rem, 4vw, 3rem)'
+              }}
+            >
+              {t.featured.title} <span style={{ color: '#274223' }}>{t.featured.titleHighlight}</span>
             </h2>
             <p className='text-lg text-neutral-600 mt-2'>
-              Mediteranske masline i palme za vaš vrt
+              {t.featured.subtitle}
             </p>
           </div>
           <Link href='/biljke'>
@@ -168,7 +166,7 @@ export const FeaturedProducts: React.FC = () => {
               className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all hover:opacity-90'
               style={{ border: '2px solid #274223', color: '#274223' }}
             >
-              Pogledaj Sve Biljke
+              {t.featured.viewAll}
               <ArrowRight className='w-4 h-4' />
             </button>
           </Link>
@@ -177,7 +175,7 @@ export const FeaturedProducts: React.FC = () => {
         {/* Plants Grid */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
           {plants.map((plant) => (
-            <PlantCard key={plant.id} plant={plant} />
+            <PlantCard key={plant.id} plant={plant} t={t} />
           ))}
         </div>
       </Container>

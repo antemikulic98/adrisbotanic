@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { WhatsAppButton } from './components/ui/WhatsAppButton';
+import { LanguageProvider } from './i18n';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -279,10 +280,12 @@ export default function RootLayout({
         <meta name='ICBM' content='43.5503, 16.3367' />
       </head>
       <body className={`flex flex-col min-h-screen ${plusJakarta.className}`}>
-        <Header />
-        <main className='grow'>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <LanguageProvider>
+          <Header />
+          <main className='grow'>{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </LanguageProvider>
       </body>
     </html>
   );

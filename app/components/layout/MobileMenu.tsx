@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { X, Phone, MapPin, Mail, Clock } from 'lucide-react';
 import { cn } from '@/app/lib/utils';
+import { useTranslations } from '@/app/i18n';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -12,6 +13,8 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+  const t = useTranslations();
+
   // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
@@ -26,11 +29,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   const menuItems = [
-    { label: 'Početna', href: '/' },
-    { label: 'Naše Biljke', href: '/biljke' },
-    { label: 'Savjeti', href: '/blog' },
-    { label: 'O Nama', href: '/o-nama' },
-    { label: 'Kontakt', href: '/kontakt' },
+    { label: t.nav.home, href: '/' },
+    { label: t.nav.plants, href: '/biljke' },
+    { label: t.nav.blog, href: '/blog' },
+    { label: t.nav.about, href: '/o-nama' },
+    { label: t.nav.contact, href: '/kontakt' },
   ];
 
   return (
@@ -128,8 +131,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
               <div className='flex items-start gap-3 text-neutral-600'>
                 <Clock className='w-4 h-4 mt-0.5 flex-shrink-0' style={{ color: '#274223' }} />
                 <div>
-                  <p>Pon-Pet: 8:00 - 20:00</p>
-                  <p>Sub: 9:00 - 14:00</p>
+                  <p>{t.mobileMenu.workHours}</p>
+                  <p>{t.mobileMenu.satHours}</p>
                 </div>
               </div>
             </div>

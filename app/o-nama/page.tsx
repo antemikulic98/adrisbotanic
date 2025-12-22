@@ -1,3 +1,5 @@
+'use client';
+
 import { Container } from '../components/ui/Container';
 import Image from 'next/image';
 import {
@@ -10,63 +12,62 @@ import {
   Phone,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from '@/app/i18n';
 
 export default function ONamaPage() {
+  const t = useTranslations();
+
   const values = [
     {
       icon: Heart,
-      title: 'Strast prema prirodi',
-      description:
-        'Ljubav prema mediteranskom bilju i prirodi vodi nas u svakom koraku.',
+      title: t.aboutPage.values.passion.title,
+      description: t.aboutPage.values.passion.description,
     },
     {
       icon: Award,
-      title: 'Vrhunska kvaliteta',
-      description:
-        'Odabiremo samo najbolje biljke i pitare, testirane za hrvatske uvjete.',
+      title: t.aboutPage.values.quality.title,
+      description: t.aboutPage.values.quality.description,
     },
     {
       icon: Users,
-      title: 'Podrška klijentima',
-      description:
-        'Tu smo za tebe od savjeta do sadnje. Tvoj uspjeh je naš uspjeh.',
+      title: t.aboutPage.values.support.title,
+      description: t.aboutPage.values.support.description,
     },
     {
       icon: Shield,
-      title: 'Pouzdanost',
-      description:
-        '15+ godina iskustva i stotine zadovoljnih kupaca govore umjesto nas.',
+      title: t.aboutPage.values.reliability.title,
+      description: t.aboutPage.values.reliability.description,
     },
   ];
 
   const benefits = [
     {
       icon: Leaf,
-      title: 'Stručno savjetovanje',
-      description: 'Besplatna procjena i savjeti za tvoj projekt',
+      title: t.aboutPage.benefits.advice.title,
+      description: t.aboutPage.benefits.advice.description,
     },
     {
       icon: Truck,
-      title: 'Dostava i sadnja',
-      description: 'Organiziramo transport i profesionalnu sadnju',
+      title: t.aboutPage.benefits.delivery.title,
+      description: t.aboutPage.benefits.delivery.description,
     },
     {
       icon: Shield,
-      title: 'Garancija',
-      description: 'Svi proizvodi dolaze s garancijom kvalitete',
+      title: t.aboutPage.benefits.guarantee.title,
+      description: t.aboutPage.benefits.guarantee.description,
     },
     {
       icon: Phone,
-      title: 'Podrška',
-      description: 'Uvijek dostupni za sve tvoje upite i potrebe',
+      title: t.aboutPage.benefits.support.title,
+      description: t.aboutPage.benefits.support.description,
     },
   ];
 
   const stats = [
-    { number: '15+', label: 'Godina iskustva' },
-    { number: '500+', label: 'Zadovoljnih kupaca' },
-    { number: '1000+', label: 'Uspješnih projekata' },
-    { number: '50+', label: 'Vrsta biljaka' },
+    { number: '15+', label: t.aboutPage.yearsExperience },
+    { number: '500+', label: t.aboutPage.satisfiedCustomers },
+    { number: '1000+', label: t.aboutPage.successfulProjects },
+    { number: '50+', label: t.aboutPage.plantTypes },
   ];
 
   return (
@@ -88,21 +89,24 @@ export default function ONamaPage() {
               style={{ backgroundColor: '#274223' }}
             >
               <Leaf className='w-4 h-4' />
-              <span>O Nama</span>
+              <span>{t.aboutPage.badge}</span>
             </div>
 
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              <span style={{ color: '#8fb588' }}>Adrisbotanic</span>
+            <h1 
+              className='font-bold leading-[1.1]'
+              style={{ 
+                fontSize: 'clamp(2rem, 5vw, 3.75rem)'
+              }}
+            >
+              <span style={{ color: '#8fb588' }}>{t.aboutPage.title}</span>
               <br />
               <span className='text-white'>
-                Tvoj partner za mediteranski vrt
+                {t.aboutPage.subtitle}
               </span>
             </h1>
 
             <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
-              Već preko 15 godina ponosno donosimo mediteransko zelenilo u
-              hrvatske vrtove. Naša strast su masline, palme i sve što čini vrt
-              posebnim.
+              {t.aboutPage.description}
             </p>
           </div>
         </Container>
@@ -115,26 +119,12 @@ export default function ONamaPage() {
             {/* Text */}
             <div className='space-y-6'>
               <h2 className='text-3xl md:text-4xl font-bold text-neutral-900'>
-                Naša priča
+                {t.aboutPage.ourStory}
               </h2>
               <div className='space-y-4 text-lg text-neutral-600 leading-relaxed'>
-                <p>
-                  Adrisbotanic je nastao iz ljubavi prema mediteranskom bilju i
-                  želje da tu ljepotu učinimo dostupnom svima. Započeli smo
-                  2010. godine s malom kolekcijom maslina, a danas nudimo široku
-                  paletu biljaka i pitara.
-                </p>
-                <p>
-                  Svaka biljka koju nudimo pažljivo je odabrana i prilagođena
-                  hrvatskom klimatu. Radimo s provjerenim dobavljačima i
-                  proizvodimo vlastite sadnice kako bismo osigurali najvišu
-                  kvalitetu.
-                </p>
-                <p>
-                  Naša misija nije samo prodaja - želimo biti tvoj partner u
-                  stvaranju savršenog vrta. Od prvog savjeta do završne sadnje,
-                  tu smo za tebe.
-                </p>
+                <p>{t.aboutPage.storyP1}</p>
+                <p>{t.aboutPage.storyP2}</p>
+                <p>{t.aboutPage.storyP3}</p>
               </div>
 
               <div className='flex flex-wrap gap-3 pt-4'>
@@ -144,7 +134,7 @@ export default function ONamaPage() {
                     style={{ backgroundColor: '#274223' }}
                   >
                     <Phone className='w-5 h-5' />
-                    Kontaktiraj nas
+                    {t.aboutPage.contactUs}
                   </button>
                 </Link>
               </div>
@@ -192,10 +182,10 @@ export default function ONamaPage() {
         <Container>
           <div className='text-center mb-16'>
             <h2 className='text-3xl md:text-4xl font-bold text-neutral-900 mb-4'>
-              Naše <span style={{ color: '#274223' }}>Vrijednosti</span>
+              {t.aboutPage.ourValues} <span style={{ color: '#274223' }}>{t.aboutPage.valuesHighlight}</span>
             </h2>
             <p className='text-lg text-neutral-600 max-w-2xl mx-auto'>
-              Principi koji nas vode u radu i odnosu prema klijentima
+              {t.aboutPage.valuesDesc}
             </p>
           </div>
 
@@ -235,11 +225,11 @@ export default function ONamaPage() {
         <Container>
           <div className='text-center mb-16'>
             <h2 className='text-3xl md:text-4xl font-bold text-neutral-900 mb-4'>
-              Zašto odabrati{' '}
-              <span style={{ color: '#274223' }}>Adrisbotanic</span>?
+              {t.aboutPage.whyChoose}{' '}
+              <span style={{ color: '#274223' }}>{t.aboutPage.whyChooseHighlight}</span>?
             </h2>
             <p className='text-lg text-neutral-600 max-w-2xl mx-auto'>
-              Što te čeka kada radiš s nama
+              {t.aboutPage.whyChooseDesc}
             </p>
           </div>
 
@@ -280,12 +270,11 @@ export default function ONamaPage() {
           >
             <div className='max-w-3xl mx-auto space-y-6'>
               <h2 className='text-3xl md:text-4xl font-bold text-white'>
-                Spremni smo započeti tvoj projekt!
+                {t.aboutPage.readyToStart}
               </h2>
 
               <p className='text-lg text-white/90'>
-                Posjeti nas ili nas kontaktiraj za besplatno savjetovanje.
-                Radujemo se suradnji s tobom!
+                {t.aboutPage.readyDesc}
               </p>
 
               <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
@@ -295,12 +284,12 @@ export default function ONamaPage() {
                     style={{ color: '#274223' }}
                   >
                     <Phone className='w-5 h-5' />
-                    Kontaktiraj nas
+                    {t.aboutPage.contactUs}
                   </button>
                 </Link>
                 <Link href='/biljke' className='w-full sm:w-auto'>
                   <button className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
-                    Pogledaj Biljke
+                    {t.aboutPage.viewPlants}
                   </button>
                 </Link>
               </div>
@@ -313,7 +302,7 @@ export default function ONamaPage() {
                 </a>
                 <div className='hidden md:block w-px h-4 bg-white/30' />
                 <div>
-                  <span>Radno vrijeme: Pon-Pet 8:00-20:00, Sub 9:00-14:00</span>
+                  <span>{t.aboutPage.workHours}</span>
                 </div>
               </div>
             </div>
@@ -323,4 +312,3 @@ export default function ONamaPage() {
     </main>
   );
 }
-

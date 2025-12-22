@@ -1,4 +1,6 @@
-import { notFound } from 'next/navigation';
+'use client';
+
+import { notFound, useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/app/components/ui/Container';
@@ -12,79 +14,27 @@ import {
 } from 'lucide-react';
 import { getPostBySlug, posts, categories } from '../data';
 import ReactMarkdown from 'react-markdown';
+import { useTranslations } from '@/app/i18n';
 
-interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
-
-export async function generateStaticParams() {
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  if (!post) {
-    return {
-      title: 'Članak nije pronađen | Adris Botanic',
-    };
-  }
-
-  const category = categories.find((c) => c.id === post.category);
-
-  return {
-    title: `${post.title} - Stručni Savjeti`,
-    description: post.excerpt,
-    keywords: [
-      post.title,
-      category?.label || '',
-      'savjeti za biljke',
-      'njega biljaka',
-      'mediteranske biljke',
-      'Adris Botanic',
-    ],
-    alternates: {
-      canonical: `https://adrisbotanic.com/blog/${post.slug}`,
-    },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      url: `https://adrisbotanic.com/blog/${post.slug}`,
-      type: 'article',
-      publishedTime: post.date,
-      authors: ['Adris Botanic'],
-      images: [
-        {
-          url: post.image,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
-    },
-  };
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
+export default function BlogPostPage() {
+  const params = useParams();
+  const slug = params.slug as string;
+  const t = useTranslations();
   const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
+  const categoryLabels: Record<string, string> = {
+    all: t.blogPage.allTips,
+    njega: t.blogPage.plantCare,
+    sadnja: t.blogPage.plantingTransplanting,
+    sezona: t.blogPage.seasonalTips,
+  };
+
   const category = categories.find((c) => c.id === post.category);
+  const categoryLabel = categoryLabels[post.category] || category?.label;
   const Icon = post.icon;
 
   // Get related posts (same category, excluding current)
@@ -111,7 +61,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             className='inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-8'
           >
             <ArrowLeft className='w-4 h-4' />
-            <span>Natrag na savjete</span>
+            <span>{t.blogPage.backToTips}</span>
           </Link>
 
           <div className='max-w-4xl'>
@@ -121,7 +71,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               style={{ backgroundColor: '#274223' }}
             >
               <Icon className='w-4 h-4' />
-              <span>{category?.label}</span>
+              <span>{categoryLabel}</span>
             </div>
 
             {/* Title */}
@@ -137,7 +87,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
               <div className='flex items-center gap-2'>
                 <Clock className='w-5 h-5' />
-                <span>{post.readTime} čitanja</span>
+                <span>{post.readTime} {t.blogPage.reading}</span>
               </div>
             </div>
           </div>
@@ -214,12 +164,12 @@ export default async function BlogPostPage({ params }: PageProps) {
               {/* Share / Tags */}
               <div className='mt-12 pt-8 border-t-2' style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}>
                 <div className='flex flex-wrap items-center gap-3'>
-                  <span className='text-neutral-600 font-medium'>Kategorija:</span>
+                  <span className='text-neutral-600 font-medium'>{t.blogPage.category}</span>
                   <span
                     className='px-4 py-2 rounded-full text-sm font-semibold text-white'
                     style={{ backgroundColor: '#274223' }}
                   >
-                    {category?.label}
+                    {categoryLabel}
                   </span>
                 </div>
               </div>
@@ -236,9 +186,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                   <div className='w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-4'>
                     <Leaf className='w-6 h-6' />
                   </div>
-                  <h3 className='text-xl font-bold mb-2'>Trebaš pomoć?</h3>
+                  <h3 className='text-xl font-bold mb-2'>{t.blogPage.needHelpSidebar}</h3>
                   <p className='text-white/80 mb-4'>
-                    Naši stručnjaci su tu za sve tvoje upite o mediteranskim biljkama.
+                    {t.blogPage.needHelpSidebarDesc}
                   </p>
                   <a
                     href='tel:+385919211069'
@@ -257,7 +207,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     style={{ borderColor: 'rgba(39, 66, 35, 0.15)' }}
                   >
                     <h3 className='text-lg font-bold text-neutral-900 mb-4'>
-                      Slični članci
+                      {t.blogPage.relatedArticles}
                     </h3>
                     <div className='space-y-4'>
                       {relatedPosts.map((relatedPost) => (
@@ -280,7 +230,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 {relatedPost.title}
                               </h4>
                               <p className='text-sm text-neutral-500 mt-1'>
-                                {relatedPost.readTime} čitanja
+                                {relatedPost.readTime} {t.blogPage.reading}
                               </p>
                             </div>
                           </div>
@@ -296,7 +246,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   className='flex items-center justify-center gap-2 w-full py-4 rounded-xl border-2 font-semibold transition-all hover:shadow-lg'
                   style={{ borderColor: '#274223', color: '#274223' }}
                 >
-                  <span>Svi savjeti</span>
+                  <span>{t.blogPage.allTipsButton}</span>
                   <ArrowRight className='w-4 h-4' />
                 </Link>
               </div>
@@ -308,4 +258,3 @@ export default async function BlogPostPage({ params }: PageProps) {
     </main>
   );
 }
-

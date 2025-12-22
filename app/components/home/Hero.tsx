@@ -1,8 +1,14 @@
+'use client';
+
 import { Container } from '../ui/Container';
 import { ArrowRight, Phone, Leaf } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useTranslations } from '@/app/i18n';
 
 export const Hero: React.FC = () => {
+  const t = useTranslations();
+
   return (
     <section className='relative overflow-hidden -mt-[64px] sm:-mt-[80px] lg:mt-0 pt-[64px] sm:pt-[80px] lg:pt-0'>
       {/* Mobile Background Image with wavy bottom - ide od vrha ekrana */}
@@ -64,11 +70,13 @@ export const Hero: React.FC = () => {
               {/* Veliki naslov sa zelenom */}
               <div className='space-y-3 md:space-y-4'>
                 <h1
-                  className='font-extrabold leading-tight tracking-tight'
-                  style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)' }}
+                  className='font-extrabold leading-[1.1] tracking-tight'
+                  style={{ 
+                    fontSize: 'clamp(2.25rem, 5vw, 4.5rem)'
+                  }}
                 >
                   <span className='text-white lg:text-neutral-900'>
-                    Pretvori svoj vrt u
+                    {t.hero.title1}
                   </span>
                   <br />
                   <span
@@ -77,38 +85,41 @@ export const Hero: React.FC = () => {
                       textShadow: 'lg:none 2px 4px 8px rgba(0,0,0,0.3)',
                     }}
                   >
-                    mediteranski raj
+                    {t.hero.title2}
                   </span>
                 </h1>
 
                 {/* Subtitle */}
-                <p className='text-base sm:text-lg md:text-xl text-white/95 lg:text-neutral-600 leading-relaxed max-w-2xl'>
-                  S našom stručnom pomoći odaberi savršene{' '}
+                <p className='text-sm sm:text-base md:text-lg lg:text-xl text-white/95 lg:text-neutral-600 leading-relaxed max-w-2xl'>
+                  {t.hero.subtitle}{' '}
                   <strong className='text-white lg:text-[#274223]'>
-                    masline i palme
+                    {t.hero.subtitleHighlight}
                   </strong>{' '}
-                  za tvoj prostor. Vodimo te kroz svaki korak—od izbora do
-                  sadnje.
+                  {t.hero.subtitleEnd}
                 </p>
               </div>
 
               {/* CTA gumbi */}
               <div className='flex flex-col sm:flex-row flex-wrap gap-3 pt-2'>
-                <button
-                  className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all hover:scale-105'
-                  style={{ backgroundColor: '#274223' }}
-                >
-                  <Leaf className='w-4 sm:w-5 h-4 sm:h-5' />
-                  Istraži Biljke
-                  <ArrowRight className='w-4 sm:w-5 h-4 sm:h-5' />
-                </button>
-                <button
-                  className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-bold bg-white/95 hover:bg-white transition-all shadow-xl backdrop-blur-sm lg:bg-white lg:backdrop-blur-none'
-                  style={{ border: '2px solid #274223', color: '#274223' }}
-                >
-                  <Phone className='w-4 sm:w-5 h-4 sm:h-5' />
-                  Kontakt
-                </button>
+                <Link href='/biljke'>
+                  <button
+                    className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all hover:scale-105'
+                    style={{ backgroundColor: '#274223' }}
+                  >
+                    <Leaf className='w-4 sm:w-5 h-4 sm:h-5' />
+                    {t.hero.explorePlants}
+                    <ArrowRight className='w-4 sm:w-5 h-4 sm:h-5' />
+                  </button>
+                </Link>
+                <Link href='/kontakt'>
+                  <button
+                    className='w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-bold bg-white/95 hover:bg-white transition-all shadow-xl backdrop-blur-sm lg:bg-white lg:backdrop-blur-none'
+                    style={{ border: '2px solid #274223', color: '#274223' }}
+                  >
+                    <Phone className='w-4 sm:w-5 h-4 sm:h-5' />
+                    {t.hero.contact}
+                  </button>
+                </Link>
               </div>
 
               {/* Trust badges - umjesto statistika */}
@@ -118,7 +129,7 @@ export const Hero: React.FC = () => {
                     ✓
                   </span>
                   <span className='text-white lg:text-neutral-800'>
-                    Besplatna dostava HRV
+                    {t.hero.freeDelivery}
                   </span>
                 </div>
                 <div className='flex items-center gap-2 px-0 lg:px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold'>
@@ -126,7 +137,7 @@ export const Hero: React.FC = () => {
                     ✓
                   </span>
                   <span className='text-white lg:text-neutral-800'>
-                    Garancija kvalitete
+                    {t.hero.qualityGuarantee}
                   </span>
                 </div>
                 <div className='flex items-center gap-2 px-0 lg:px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold'>
@@ -134,7 +145,7 @@ export const Hero: React.FC = () => {
                     ✓
                   </span>
                   <span className='text-white lg:text-neutral-800'>
-                    Stručno savjetovanje
+                    {t.hero.expertAdvice}
                   </span>
                 </div>
               </div>

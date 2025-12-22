@@ -1,0 +1,398 @@
+export const en = {
+  // Navigation
+  nav: {
+    home: 'Home',
+    plants: 'Our Plants',
+    blog: 'Tips',
+    about: 'About Us',
+    contact: 'Contact',
+  },
+
+  // Header
+  header: {
+    phone: '+385 91 921 1069',
+    workHours: 'Open: Mon-Fri 8:00-20:00, Sat 9:00-14:00',
+  },
+
+  // Hero
+  hero: {
+    title1: 'Transform your garden into a',
+    title2: 'mediterranean paradise',
+    subtitle: 'With our expert help, choose the perfect',
+    subtitleHighlight: 'olive trees and palms',
+    subtitleEnd: 'for your space. We guide you every step—from selection to planting.',
+    explorePlants: 'Explore Plants',
+    contact: 'Contact',
+    freeDelivery: 'Free delivery Croatia',
+    qualityGuarantee: 'Quality guarantee',
+    expertAdvice: 'Expert advice',
+  },
+
+  // Categories
+  categories: {
+    badge: 'WHAT WE OFFER',
+    title: 'Explore Our',
+    titleHighlight: 'Selection',
+    subtitle: 'Mediterranean plants for your garden, terrace, and home',
+    view: 'View',
+    items: {
+      trees: {
+        title: 'Large shade trees',
+        examples: 'Olive, cypress, pine, palms',
+      },
+      shrubs: {
+        title: 'Large shrubs and small trees',
+        examples: 'Oleander, laurel, pomegranate, fig',
+      },
+      citrus: {
+        title: 'Citrus',
+        examples: 'Lemon, orange, lime, grapefruit, mandarin',
+      },
+      aromatic: {
+        title: 'Aromatic shrubs and perennials',
+        examples: 'Lavender, rosemary, sage, immortelle',
+      },
+      climbers: {
+        title: 'Climbers',
+        examples: 'Bougainvillea, jasmine, wisteria',
+      },
+      succulents: {
+        title: 'Succulents and cactus-like plants',
+        examples: 'Agave, cactus, houseleek',
+      },
+    },
+  },
+
+  // Featured Products
+  featured: {
+    badge: 'FEATURED',
+    title: 'Our',
+    titleHighlight: 'Plants',
+    subtitle: 'Mediterranean olive trees and palms for your garden',
+    viewAll: 'View All Plants',
+    askPrice: 'Ask for price',
+    new: 'New',
+    popular: 'Popular',
+    plants: {
+      oblica: {
+        name: 'Oblica Olive',
+        category: 'Olives',
+        description: 'Native Dalmatian variety, resistant to drought and wind.',
+      },
+      washingtonia: {
+        name: 'Washingtonia Robusta',
+        category: 'Palms',
+        description: 'Elegant palm with slender trunk, ideal for Mediterranean ambiance.',
+      },
+      phoenix: {
+        name: 'Phoenix Canariensis',
+        category: 'Palms',
+        description: 'Canary palm with dense crown, symbol of the Mediterranean.',
+      },
+      leccino: {
+        name: 'Leccino Olive',
+        category: 'Olives',
+        description: 'Italian variety known for quality oil and resistance.',
+      },
+      chamaerops: {
+        name: 'Chamaerops Humilis',
+        category: 'Palms',
+        description: 'European dwarf palm, cold resistant.',
+      },
+      pendolino: {
+        name: 'Pendolino Olive',
+        category: 'Olives',
+        description: 'Pollinator for other varieties, beautiful decorative tree.',
+      },
+    },
+  },
+
+  // Call to Action
+  cta: {
+    badge: 'CONTACT',
+    title: 'Ready to start?',
+    subtitle: 'Contact us today and learn more about our Mediterranean plants and quality pots.',
+    callUs: 'Call Us',
+    sendInquiry: 'Send Inquiry',
+  },
+
+  // Footer
+  footer: {
+    description: 'Your partner for olive trees, palms, and horticultural products. Quality and expertise are our tradition.',
+    quickLinks: 'Quick Links',
+    ourPlants: 'Our Plants',
+    tipsAndBlog: 'Tips & Blog',
+    aboutUs: 'About Us',
+    customerSupport: 'Customer Support',
+    faq: 'FAQ',
+    deliveryReturn: 'Delivery & Returns',
+    termsOfUse: 'Terms of Use',
+    privacyPolicy: 'Privacy Policy',
+    contactUs: 'Contact Us',
+    copyright: 'All rights reserved.',
+    privacy: 'Privacy',
+    terms: 'Terms',
+  },
+
+  // Plants Page
+  plantsPage: {
+    badge: 'Our Plants',
+    title: 'Mediterranean Plants',
+    titleHighlight: 'For Your Perfect Garden',
+    subtitle: 'Carefully selected and cultivated plants adapted to Croatian climate. Expert advice and support at every step.',
+    plantTypes: 'Plant types',
+    forClimate: 'For climate',
+    yearsOld: 'Years old',
+    characteristics: 'Characteristics:',
+    availableVarieties: 'Available varieties:',
+    askAvailability: 'Ask for availability',
+    notSure: 'Not sure what you need?',
+    notSureDesc: 'Our experts will help you choose the perfect plants for your space. Free consultation and assessment!',
+    contactUs: 'Contact us',
+    backToHome: 'Back to home',
+    olives: {
+      title: 'Olives',
+      description: 'Mediterranean treasure for your garden',
+      longDescription: 'The olive tree (Olea europaea) is a symbol of the Mediterranean and a perfect choice for your garden. Our olives are grown with care, resistant to weather conditions, and ideal for the Croatian landscape.',
+      features: [
+        'Age: 5-15+ years',
+        'Height: 1.5m - 4m',
+        'Resistance: -10°C to +40°C',
+        'Planting: Spring and autumn',
+      ],
+      varieties: [
+        'Oblica - traditional Croatian variety',
+        'Leccino - Italian, high yield',
+        'Pendolino - pollinator, decorative',
+        'Frantoio - quality oil',
+      ],
+    },
+    palms: {
+      title: 'Palms',
+      description: 'Tropical charm for any space',
+      longDescription: 'Palms bring an exotic look and Mediterranean atmosphere. All our palms are adapted to the Croatian climate and can withstand mild winters with minimal care.',
+      features: [
+        'Types: Phoenix, Washingtonia, Chamaerops',
+        'Height: 0.8m - 3.5m',
+        'Resistance: -5°C to +35°C',
+        'Maintenance: Easy',
+      ],
+      varieties: [
+        'Phoenix canariensis - Canary palm',
+        'Washingtonia robusta - Mexican palm',
+        'Chamaerops humilis - dwarf palm',
+        'Trachycarpus fortunei - Chinese palm',
+      ],
+    },
+    outdoor: {
+      title: 'Outdoor Plants',
+      description: 'Mediterranean garden full of colors and scents',
+      longDescription: 'Enrich your garden with Mediterranean plants that require little maintenance. From aromatic plants to flowering shrubs, we offer a wide selection for every taste.',
+      features: [
+        'Lavender - fragrant and decorative',
+        'Rosemary - aromatic herb',
+        'Bougainvillea - lush flowering beauty',
+        'Oleander - flowering shrub',
+      ],
+      varieties: [
+        'Lavandula angustifolia - true lavender',
+        'Rosmarinus officinalis - rosemary',
+        'Bougainvillea glabra - bougainvillea',
+        'Nerium oleander - oleander',
+      ],
+    },
+    mediterranean: 'Mediterranean',
+    generalInquiry: 'General inquiry',
+  },
+
+  // Blog Page
+  blogPage: {
+    badge: 'Expert Tips',
+    title: 'Tips & Guides',
+    titleHighlight: 'For a Perfect Garden',
+    subtitle: 'Expert tips for caring for Mediterranean plants. From planting to maintenance through all seasons.',
+    allTips: 'All Tips',
+    plantCare: 'Plant Care',
+    plantingTransplanting: 'Planting & Transplanting',
+    seasonalTips: 'Seasonal Tips',
+    allTipsLabel: 'All tips',
+    articles: 'articles',
+    article: 'article',
+    readMore: 'Read more',
+    needHelp: 'Need help with your garden?',
+    needHelpDesc: 'Our experts are here for all your questions. Free consultation and assessment for your project.',
+    contactUs: 'Contact us',
+    viewPlants: 'View Plants',
+    backToTips: 'Back to tips',
+    reading: 'reading',
+    category: 'Category:',
+    needHelpSidebar: 'Need help?',
+    needHelpSidebarDesc: 'Our experts are here for all your questions about Mediterranean plants.',
+    relatedArticles: 'Related articles',
+    allTipsButton: 'All tips',
+    articleNotFound: 'Article not found',
+  },
+
+  // About Page
+  aboutPage: {
+    badge: 'About Us',
+    title: 'Adrisbotanic',
+    subtitle: 'Your partner for Mediterranean garden',
+    description: 'For over 15 years, we have been proudly bringing Mediterranean greenery to Croatian gardens. Our passion is olive trees, palms, and everything that makes a garden special.',
+    ourStory: 'Our Story',
+    storyP1: 'Adrisbotanic was born from a love for Mediterranean plants and the desire to make that beauty accessible to everyone. We started in 2010 with a small collection of olives, and today we offer a wide range of plants and pots.',
+    storyP2: 'Every plant we offer is carefully selected and adapted to the Croatian climate. We work with trusted suppliers and produce our own seedlings to ensure the highest quality.',
+    storyP3: 'Our mission is not just sales - we want to be your partner in creating the perfect garden. From the first advice to the final planting, we are here for you.',
+    contactUs: 'Contact us',
+    yearsExperience: 'Years of experience',
+    satisfiedCustomers: 'Satisfied customers',
+    successfulProjects: 'Successful projects',
+    plantTypes: 'Plant types',
+    ourValues: 'Our',
+    valuesHighlight: 'Values',
+    valuesDesc: 'Principles that guide us in work and relationship with clients',
+    values: {
+      passion: {
+        title: 'Passion for nature',
+        description: 'Love for Mediterranean plants and nature guides us in every step.',
+      },
+      quality: {
+        title: 'Top quality',
+        description: 'We select only the best plants and pots, tested for Croatian conditions.',
+      },
+      support: {
+        title: 'Customer support',
+        description: 'We are here for you from advice to planting. Your success is our success.',
+      },
+      reliability: {
+        title: 'Reliability',
+        description: '15+ years of experience and hundreds of satisfied customers speak for us.',
+      },
+    },
+    whyChoose: 'Why choose',
+    whyChooseHighlight: 'Adrisbotanic',
+    whyChooseDesc: 'What awaits you when working with us',
+    benefits: {
+      advice: {
+        title: 'Expert advice',
+        description: 'Free assessment and advice for your project',
+      },
+      delivery: {
+        title: 'Delivery and planting',
+        description: 'We organize transport and professional planting',
+      },
+      guarantee: {
+        title: 'Guarantee',
+        description: 'All products come with a quality guarantee',
+      },
+      support: {
+        title: 'Support',
+        description: 'Always available for all your questions and needs',
+      },
+    },
+    readyToStart: 'We are ready to start your project!',
+    readyDesc: 'Visit us or contact us for free consultation. We look forward to working with you!',
+    viewPlants: 'View Plants',
+    workHours: 'Working hours: Mon-Fri 8:00-20:00, Sat 9:00-14:00',
+  },
+
+  // Contact Page
+  contactPage: {
+    badge: 'Contact Us',
+    title: 'We\'ll Be Happy to',
+    titleHighlight: 'Help',
+    subtitle: 'Have a question about our plants or need advice? Contact us any way - we are here for you!',
+    phone: 'Phone',
+    phoneHours: 'Mon-Fri 8:00-20:00, Sat 9:00-14:00',
+    email: 'Email',
+    emailResponse: 'We respond within 24h',
+    location: 'Location',
+    workHours: 'Working hours',
+    monFri: 'Mon-Fri: 8:00 - 20:00',
+    sat: 'Saturday: 9:00 - 14:00',
+    sun: 'Sunday: Closed',
+    contactAction: 'Contact →',
+    sendMessage: 'Send us a message',
+    sendMessageDesc: 'Fill out the form and we\'ll respond within 24 hours.',
+    nameLabel: 'Full name *',
+    namePlaceholder: 'Your name',
+    emailLabel: 'Email *',
+    emailPlaceholder: 'your@email.com',
+    phoneLabel: 'Phone',
+    phonePlaceholder: '+385 91 921 1069',
+    subjectLabel: 'Subject *',
+    subjectPlaceholder: 'E.g. Inquiry about olives',
+    messageLabel: 'Message *',
+    messagePlaceholder: 'Your message...',
+    successTitle: 'Message sent successfully!',
+    successDesc: 'We\'ll contact you soon.',
+    errorTitle: 'Error sending',
+    sending: 'Sending...',
+    send: 'Send message',
+    privacyNote: 'Your data is safe and will not be shared with third parties.',
+    nurseryAddress: 'Nursery address',
+    openInMaps: 'Open in Google Maps →',
+    followUs: 'Follow us on social media',
+    urgentQuestion: 'Urgent question?',
+    urgentDesc: 'Call us now for quick advice and answers!',
+    faq: 'Frequently asked questions',
+    faqDesc: 'Maybe your answer already exists here',
+    deliveryPlanting: 'Delivery and planting',
+    deliveryPlantingDesc: 'We organize delivery and professional planting',
+    learnMore: 'Learn more →',
+    plantCare: 'Plant care',
+    plantCareDesc: 'Tips for proper maintenance and care',
+    viewTips: 'View tips →',
+    warranty: 'Warranty',
+    warrantyDesc: '12 months warranty on all products',
+    moreInfo: 'More info →',
+  },
+
+  // Mobile Menu
+  mobileMenu: {
+    workHours: 'Mon-Fri: 8:00 - 20:00',
+    satHours: 'Sat: 9:00 - 14:00',
+  },
+
+  // Contact Modal
+  contactModal: {
+    title: 'Contact Us',
+    subtitle: 'Send us an inquiry and we\'ll get back to you soon',
+    regarding: 'Inquiry for:',
+    nameLabel: 'Name *',
+    namePlaceholder: 'Your name',
+    phoneLabel: 'Phone *',
+    phonePlaceholder: '+385 91 xxx xxxx',
+    messageLabel: 'Message',
+    messagePlaceholder: 'Additional notes or questions...',
+    send: 'Send Inquiry',
+    or: 'or call us directly:',
+  },
+
+  // WhatsApp Button
+  whatsapp: {
+    tooltip: 'Message us on WhatsApp',
+  },
+
+  // Language
+  language: {
+    select: 'Language',
+    hr: 'Hrvatski',
+    en: 'English',
+    de: 'Deutsch',
+    it: 'Italiano',
+    es: 'Español',
+    fr: 'Français',
+  },
+
+  // Common
+  common: {
+    readMore: 'Read more',
+    viewAll: 'View all',
+    contact: 'Contact',
+    phone: 'Phone',
+    email: 'Email',
+    address: 'Address',
+  },
+};
+

@@ -14,6 +14,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { posts, categories as dataCategories } from './data';
+import { useTranslations } from '@/app/i18n';
 
 const categoryIcons = {
   all: BookOpen,
@@ -24,9 +25,18 @@ const categoryIcons = {
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const t = useTranslations();
+
+  const categoryLabels: Record<string, string> = {
+    all: t.blogPage.allTips,
+    njega: t.blogPage.plantCare,
+    sadnja: t.blogPage.plantingTransplanting,
+    sezona: t.blogPage.seasonalTips,
+  };
 
   const categories = dataCategories.map((cat) => ({
     ...cat,
+    label: categoryLabels[cat.id] || cat.label,
     icon: categoryIcons[cat.id as keyof typeof categoryIcons] || BookOpen,
   }));
 
@@ -54,18 +64,22 @@ export default function BlogPage() {
               style={{ backgroundColor: '#274223' }}
             >
               <BookOpen className='w-4 h-4' />
-              <span>Stručni Savjeti</span>
+              <span>{t.blogPage.badge}</span>
             </div>
 
-            <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
-              <span className='text-white'>Savjeti & Vodići</span>
+            <h1 
+              className='font-bold leading-[1.1]'
+              style={{ 
+                fontSize: 'clamp(2rem, 5vw, 3.75rem)'
+              }}
+            >
+              <span className='text-white'>{t.blogPage.title}</span>
               <br />
-              <span style={{ color: '#8fb588' }}>Za Savršen Vrt</span>
+              <span style={{ color: '#8fb588' }}>{t.blogPage.titleHighlight}</span>
             </h1>
 
             <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
-              Stručni savjeti za njegu mediteranskih biljaka. Od sadnje do
-              održavanja kroz sve sezone.
+              {t.blogPage.subtitle}
             </p>
           </div>
         </Container>
@@ -112,12 +126,12 @@ export default function BlogPage() {
           <div className='mb-12'>
             <h2 className='text-2xl font-bold text-neutral-900'>
               {selectedCategory === 'all'
-                ? 'Svi savjeti'
+                ? t.blogPage.allTipsLabel
                 : categories.find((c) => c.id === selectedCategory)?.label}
             </h2>
             <p className='text-neutral-600 mt-2'>
               {filteredPosts.length}{' '}
-              {filteredPosts.length === 1 ? 'članak' : 'članaka'}
+              {filteredPosts.length === 1 ? t.blogPage.article : t.blogPage.articles}
             </p>
           </div>
 
@@ -178,7 +192,7 @@ export default function BlogPage() {
                         className='flex items-center gap-2 font-semibold text-sm pt-2'
                         style={{ color: '#274223' }}
                       >
-                        <span>Pročitaj više</span>
+                        <span>{t.blogPage.readMore}</span>
                         <ArrowRight className='w-4 h-4 group-hover:translate-x-1 transition-transform' />
                       </div>
                     </div>
@@ -205,12 +219,11 @@ export default function BlogPage() {
               </div>
 
               <h2 className='text-3xl md:text-4xl font-bold text-white'>
-                Trebaš pomoć sa svojim vrtom?
+                {t.blogPage.needHelp}
               </h2>
 
               <p className='text-lg text-white/90'>
-                Naši stručnjaci su tu za sve tvoje upite. Besplatno savjetovanje
-                i procjena za tvoj projekt.
+                {t.blogPage.needHelpDesc}
               </p>
 
               <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
@@ -219,13 +232,13 @@ export default function BlogPage() {
                     className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
                     style={{ color: '#274223' }}
                   >
-                    Kontaktiraj nas
+                    {t.blogPage.contactUs}
                     <ArrowRight className='w-5 h-5' />
                   </button>
                 </Link>
                 <Link href='/biljke' className='w-full sm:w-auto'>
                   <button className='w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
-                    Pogledaj Biljke
+                    {t.blogPage.viewPlants}
                   </button>
                 </Link>
               </div>
@@ -236,4 +249,3 @@ export default function BlogPage() {
     </main>
   );
 }
-
