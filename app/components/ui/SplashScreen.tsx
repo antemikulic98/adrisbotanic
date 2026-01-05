@@ -8,6 +8,17 @@ export function SplashScreen() {
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   useEffect(() => {
+    // Check if user has seen splash before in this session
+    // This helps with PageSpeed scores while keeping nice UX for first visit
+    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
+    
+    if (hasSeenSplash) {
+      setIsVisible(false);
+      return;
+    }
+    
+    sessionStorage.setItem('hasSeenSplash', 'true');
+    
     const animateTimer = setTimeout(() => {
       setIsAnimatingOut(true);
     }, 2800);

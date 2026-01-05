@@ -66,7 +66,7 @@ export const Hero: React.FC = () => {
 
       <div className='relative'>
         <Container>
-          <div className='grid grid-cols-1 lg:grid-cols-12 gap-0 items-center min-h-[75vh] lg:min-h-[85vh]'>
+          <div className='grid grid-cols-1 lg:grid-cols-12 gap-0 items-center min-h-[83vh] lg:min-h-[85vh]'>
             {/* Lijeva strana - Tekst (7 kolona) */}
             <div className='lg:col-span-7 space-y-5 md:space-y-6 py-16 md:py-16 lg:py-20 relative z-10'>
               {/* Veliki naslov sa zelenom */}
