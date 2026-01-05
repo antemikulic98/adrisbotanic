@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { WhatsAppButton } from './components/ui/WhatsAppButton';
 import { SplashScreen } from './components/ui/SplashScreen';
 import { LanguageProvider } from './i18n';
+
+const GTM_ID = 'GTM-TWJHWD5G';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -17,55 +20,83 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL('https://adrisbotanic.com'),
   title: {
-    default: 'Adris Botanic | Rasadnik Mediteranskih Biljaka - Masline, Palme, Agrumi | Kaštel Štafilić',
-    template: '%s | Adris Botanic - Rasadnik Mediteranskih Biljaka',
+    default: 'Prodaja Palmi i Maslina Split | Adris Botanic - Rasadnik Mediteranskih Biljaka Hrvatska',
+    template: '%s | Adris Botanic - Prodaja Palmi i Maslina Split',
   },
   description:
-    'Adris Botanic - Vodeći rasadnik mediteranskih biljaka u Hrvatskoj. Prodaja maslina, palmi, agruma, lavande i egzotičnog bilja. Stručno savjetovanje, dostava i sadnja. Posjetite nas u Kaštel Štafiliću!',
+    'Prodaja palmi, maslina i mediteranskih biljaka u Splitu i cijeloj Hrvatskoj. Washingtonia, Trachycarpus, stare masline 500+ godina, agrumi, yucca. Dostava i sadnja. Posjetite rasadnik u Kaštel Štafiliću kod Splita!',
   keywords: [
-    // Glavni pojmovi
-    'rasadnik',
-    'rasadnik biljaka',
-    'vrtni centar',
-    'mediteranske biljke',
-    'mediteransko bilje',
-    // Masline
-    'masline',
-    'maslina prodaja',
+    // PRODAJA PALMI - Prioritetne ključne riječi
+    'prodaja palmi',
+    'prodaja palmi split',
+    'prodaja palmi hrvatska',
+    'palme split',
+    'palme hrvatska',
+    'kupiti palmu',
+    'kupiti palmu split',
+    'kupiti palmu hrvatska',
+    'palma cijena',
+    'palme cijena',
+    'palme za vrt',
+    'mediteranske palme',
+    'egzotične palme',
+    'trachycarpus prodaja',
+    'washingtonia prodaja',
+    'phoenix palma',
+    'palma vrtni centar',
+    // PRODAJA MASLINA - Prioritetne ključne riječi
+    'prodaja maslina',
+    'prodaja maslina split',
+    'prodaja maslina hrvatska',
+    'masline split',
+    'masline hrvatska',
+    'kupiti maslinu',
+    'kupiti maslinu split',
+    'stare masline prodaja',
+    'masline 500 godina',
     'maslina cijena',
     'maslina stablo',
     'sadnica masline',
     'masline za vrt',
-    'kupnja maslina',
-    // Palme
-    'palme',
-    'palma prodaja',
-    'palma cijena',
-    'palme za vrt',
-    'mediteranske palme',
-    'trachycarpus',
-    'phoenix palma',
-    // Agrumi
-    'agrumi',
-    'limun',
-    'naranča',
-    'mandarina',
+    'maslina bonsai',
+    // RASADNIK I VRTNI CENTAR
+    'rasadnik',
+    'rasadnik split',
+    'rasadnik hrvatska',
+    'rasadnik dalmacija',
+    'rasadnik mediteranskih biljaka',
+    'vrtni centar split',
+    'vrtni centar hrvatska',
+    'vrtni centar dalmacija',
+    'mediteranske biljke split',
+    'mediteranske biljke hrvatska',
+    'egzotične biljke split',
+    'egzotične biljke hrvatska',
+    // AGRUMI
     'agrumi prodaja',
-    // Ostale biljke
+    'agrumi split',
+    'limun prodaja',
+    'naranča prodaja',
+    'agrumi hrvatska',
+    // OSTALE BILJKE
+    'yucca prodaja',
+    'yucca split',
+    'oleander prodaja',
+    'oleander split',
+    'strelitzia prodaja',
+    'cycas prodaja',
     'lavanda',
     'ružmarin',
-    'oleander',
     'bugenvilija',
-    'čempres',
-    'lovor',
-    // Lokacija
+    // LOKACIJA
     'Kaštel Štafilić',
     'Split',
+    'Kaštela',
+    'Trogir',
     'Dalmacija',
     'Hrvatska',
-    'vrtni centar Split',
-    'rasadnik Dalmacija',
-    'rasadnik Split',
+    'biljke split',
+    'biljke dalmacija',
   ],
   authors: [{ name: 'Adris Botanic' }],
   creator: 'Adris Botanic',
@@ -83,23 +114,23 @@ export const metadata: Metadata = {
     locale: 'hr_HR',
     url: 'https://adrisbotanic.com',
     siteName: 'Adris Botanic',
-    title: 'Adris Botanic | Rasadnik Mediteranskih Biljaka - Masline, Palme, Agrumi',
+    title: 'Prodaja Palmi i Maslina Split Hrvatska | Adris Botanic Rasadnik',
     description:
-      'Vodeći rasadnik mediteranskih biljaka u Hrvatskoj. Masline, palme, agrumi, lavanda i egzotično bilje. Stručno savjetovanje i dostava. Kaštel Štafilić.',
+      'Prodaja palmi, maslina i mediteranskih biljaka u Splitu. Washingtonia, Trachycarpus, stare masline, agrumi, yucca. Rasadnik Kaštel Štafilić. Dostava Hrvatska.',
     images: [
       {
         url: '/img/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Adris Botanic - Rasadnik mediteranskih biljaka',
+        alt: 'Adris Botanic - Prodaja palmi i maslina Split Hrvatska',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Adris Botanic | Rasadnik Mediteranskih Biljaka',
+    title: 'Prodaja Palmi i Maslina Split | Adris Botanic',
     description:
-      'Vodeći rasadnik mediteranskih biljaka u Hrvatskoj. Masline, palme, agrumi i više.',
+      'Prodaja palmi, maslina i mediteranskih biljaka u Splitu i Hrvatskoj. Rasadnik s dostavom.',
     images: ['/img/og-image.jpg'],
   },
   robots: {
@@ -159,10 +190,11 @@ const jsonLd = {
     {
       '@type': 'LocalBusiness',
       '@id': 'https://adrisbotanic.com/#localbusiness',
-      name: 'Adris Botanic - Rasadnik Mediteranskih Biljaka',
+      name: 'Adris Botanic - Prodaja Palmi i Maslina Split',
+      alternateName: ['Rasadnik Adris Botanic', 'Adris Botanic Split', 'Vrtni centar Split'],
       image: 'https://adrisbotanic.com/img/hero.jpeg',
       description:
-        'Rasadnik mediteranskih biljaka u Kaštel Štafiliću. Prodaja maslina, palmi, agruma, lavande i egzotičnog bilja. Stručno savjetovanje, dostava i profesionalna sadnja.',
+        'Prodaja palmi i maslina u Splitu i Hrvatskoj. Washingtonia, Trachycarpus, stare masline 500+ godina, agrumi, yucca, oleander. Rasadnik mediteranskih biljaka u Kaštel Štafiliću kod Splita. Dostava i sadnja.',
       url: 'https://adrisbotanic.com',
       telephone: '+385919211069',
       email: 'info@adrisbotanic.com',
@@ -180,6 +212,16 @@ const jsonLd = {
         latitude: 43.5503,
         longitude: 16.3367,
       },
+      areaServed: [
+        { '@type': 'City', name: 'Split' },
+        { '@type': 'City', name: 'Kaštela' },
+        { '@type': 'City', name: 'Trogir' },
+        { '@type': 'City', name: 'Solin' },
+        { '@type': 'City', name: 'Omiš' },
+        { '@type': 'AdministrativeArea', name: 'Splitsko-dalmatinska županija' },
+        { '@type': 'AdministrativeArea', name: 'Dalmacija' },
+        { '@type': 'Country', name: 'Hrvatska' },
+      ],
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -196,38 +238,46 @@ const jsonLd = {
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Mediteranske biljke',
+        name: 'Prodaja palmi, maslina i mediteranskih biljaka',
         itemListElement: [
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Product',
-              name: 'Masline',
-              description: 'Kvalitetne sadnice maslina različitih sorti i veličina',
+              name: 'Palme - Prodaja palmi Split',
+              description: 'Washingtonia Robusta, Trachycarpus Fortunei, Phoenix i druge mediteranske palme. Prodaja palmi u Splitu i cijeloj Hrvatskoj.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Product',
-              name: 'Palme',
-              description: 'Mediteranske i egzotične palme za vrt i terasu',
+              name: 'Masline - Prodaja maslina Split',
+              description: 'Stare masline 500+ godina, bonsai masline, mini masline. Prodaja maslina u Splitu i Hrvatskoj.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Product',
-              name: 'Agrumi',
-              description: 'Limuni, naranče, mandarine i ostali agrumi',
+              name: 'Agrumi - Limun, naranča',
+              description: 'Limuni, naranče i drugi agrumi za vrt i terasu. Prodaja agruma Split.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Product',
-              name: 'Aromatično bilje',
-              description: 'Lavanda, ružmarin, kadulja i mediteransko začinsko bilje',
+              name: 'Yucca i sukulenti',
+              description: 'Yucca Elephantipes, Yucca Rostrata i druge egzotične biljke. Prodaja Split.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Product',
+              name: 'Oleander i mediteransko bilje',
+              description: 'Oleander, Strelitzia, lavanda, ružmarin i mediteransko bilje.',
             },
           },
         ],
@@ -268,6 +318,20 @@ export default function RootLayout({
   return (
     <html lang='hr' className={plusJakarta.variable}>
       <head>
+        {/* Google Tag Manager */}
+        <Script
+          id='gtm-script'
+          strategy='afterInteractive'
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `,
+          }}
+        />
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -281,6 +345,15 @@ export default function RootLayout({
         <meta name='ICBM' content='43.5503, 16.3367' />
       </head>
       <body className={`flex flex-col min-h-screen ${plusJakarta.className}`}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height='0'
+            width='0'
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <SplashScreen />
         <LanguageProvider>
           <Header />

@@ -1,24 +1,26 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'O Nama - Adris Botanic | Obiteljski Rasadnik s Tradicijom',
+  title: 'O Nama | Rasadnik Palmi i Maslina Split - Adris Botanic',
   description:
-    'Upoznajte Adris Botanic - obiteljski rasadnik mediteranskih biljaka s dugogodišnjom tradicijom. Specijalizirani za uzgoj maslina, palmi i egzotičnog bilja. Stručnost i kvaliteta koju možete osjetiti.',
+    'Adris Botanic - obiteljski rasadnik palmi i maslina u Splitu s dugogodišnjom tradicijom. Specijalizirani za uzgoj i prodaju palmi, maslina, agruma i mediteranskih biljaka. Dostava po cijeloj Hrvatskoj.',
   keywords: [
-    'rasadnik Adris Botanic',
-    'obiteljski rasadnik',
-    'uzgoj maslina',
-    'uzgoj palmi',
-    'rasadnik Kaštel Štafilić',
-    'mediteranske biljke Split',
+    'rasadnik palmi split',
+    'rasadnik maslina split',
+    'uzgoj palmi hrvatska',
+    'uzgoj maslina hrvatska',
+    'obiteljski rasadnik split',
+    'mediteranske biljke uzgoj',
+    'prodaja palmi dalmacija',
+    'prodaja maslina dalmacija',
   ],
   alternates: {
     canonical: 'https://adrisbotanic.com/o-nama',
   },
   openGraph: {
-    title: 'O Nama | Adris Botanic - Obiteljski Rasadnik',
+    title: 'O Nama | Rasadnik Palmi i Maslina Split - Adris Botanic',
     description:
-      'Obiteljski rasadnik mediteranskih biljaka s dugogodišnjom tradicijom. Stručnost i kvaliteta.',
+      'Obiteljski rasadnik palmi i maslina u Splitu. Stručnost i kvaliteta u uzgoju mediteranskih biljaka.',
     url: 'https://adrisbotanic.com/o-nama',
   },
 };
@@ -30,6 +32,7 @@ export default function ONamaLayout({
 }) {
   return <>{children}</>;
 }
+
 
 
 

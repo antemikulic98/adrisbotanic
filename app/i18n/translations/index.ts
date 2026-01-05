@@ -29,3 +29,4 @@ export const languages: { code: Language; name: string; flag: string }[] = [
 export const defaultLanguage: Language = 'hr';
 
 
+

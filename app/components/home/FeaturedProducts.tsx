@@ -8,15 +8,24 @@ import { useTranslations } from '@/app/i18n';
 
 interface Plant {
   id: string;
-  nameKey: 'oblica' | 'washingtonia' | 'phoenix' | 'leccino' | 'chamaerops' | 'pendolino';
+  nameKey:
+    | 'washingtonia'
+    | 'cycas'
+    | 'oleaMiniCalabria'
+    | 'oleaPataBonsai'
+    | 'yuccaElephantipes'
+    | 'ficusAustralis';
   badge?: 'new' | 'popular';
   image: string;
   href: string;
 }
 
-const PlantCard: React.FC<{ plant: Plant; t: ReturnType<typeof useTranslations> }> = ({ plant, t }) => {
+const PlantCard: React.FC<{
+  plant: Plant;
+  t: ReturnType<typeof useTranslations>;
+}> = ({ plant, t }) => {
   const plantData = t.featured.plants[plant.nameKey];
-  
+
   return (
     <Link href={plant.href}>
       <div
@@ -25,11 +34,11 @@ const PlantCard: React.FC<{ plant: Plant; t: ReturnType<typeof useTranslations> 
       >
         {/* Image */}
         <div
-          className='relative aspect-square overflow-hidden'
+          className='relative aspect-[4/5] overflow-hidden'
           style={{ backgroundColor: '#f3f6f3' }}
         >
           <Image
-            src='/img/palme.jpeg'
+            src={plant.image}
             alt={plantData.name}
             fill
             className='object-cover group-hover:scale-105 transition-transform duration-500'
@@ -97,42 +106,42 @@ export const FeaturedProducts: React.FC = () => {
   const plants: Plant[] = [
     {
       id: '1',
-      nameKey: 'oblica',
+      nameKey: 'washingtonia',
       badge: 'popular',
-      image: '/placeholder.jpg',
+      image: '/img/palme/washingtonia-robusta.jpg',
       href: '/biljke',
     },
     {
       id: '2',
-      nameKey: 'washingtonia',
-      badge: 'new',
-      image: '/placeholder.jpg',
+      nameKey: 'cycas',
+      image: '/img/palme/cycas-revoluta.jpg',
       href: '/biljke',
     },
     {
       id: '3',
-      nameKey: 'phoenix',
-      badge: 'popular',
-      image: '/placeholder.jpg',
+      nameKey: 'oleaMiniCalabria',
+      badge: 'new',
+      image: '/img/palme/olea-mini-calabria.jpg',
       href: '/biljke',
     },
     {
       id: '4',
-      nameKey: 'leccino',
-      image: '/placeholder.jpg',
+      nameKey: 'oleaPataBonsai',
+      badge: 'popular',
+      image: '/img/palme/olea-pata-bonsai.jpg',
       href: '/biljke',
     },
     {
       id: '5',
-      nameKey: 'chamaerops',
-      image: '/placeholder.jpg',
+      nameKey: 'yuccaElephantipes',
+      badge: 'new',
+      image: '/img/palme/yucca-elephantipes.jpg',
       href: '/biljke',
     },
     {
       id: '6',
-      nameKey: 'pendolino',
-      badge: 'new',
-      image: '/placeholder.jpg',
+      nameKey: 'ficusAustralis',
+      image: '/img/palme/ficcus-australis.jpg',
       href: '/biljke',
     },
   ];
@@ -149,13 +158,16 @@ export const FeaturedProducts: React.FC = () => {
             >
               {t.featured.badge}
             </div>
-            <h2 
+            <h2
               className='font-bold text-neutral-900'
-              style={{ 
-                fontSize: 'clamp(1.75rem, 4vw, 3rem)'
+              style={{
+                fontSize: 'clamp(1.75rem, 4vw, 3rem)',
               }}
             >
-              {t.featured.title} <span style={{ color: '#274223' }}>{t.featured.titleHighlight}</span>
+              {t.featured.title}{' '}
+              <span style={{ color: '#274223' }}>
+                {t.featured.titleHighlight}
+              </span>
             </h2>
             <p className='text-lg text-neutral-600 mt-2'>
               {t.featured.subtitle}

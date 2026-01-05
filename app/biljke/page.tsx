@@ -1,323 +1,665 @@
 'use client';
 
 import { Container } from '../components/ui/Container';
-import { TreePine, Palmtree, Flower2, ArrowRight, Phone } from 'lucide-react';
+import {
+  TreePine,
+  Trees,
+  Cherry,
+  Flower2,
+  Leaf,
+  Sun,
+  Phone,
+  Check,
+  X,
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ContactModal } from '../components/ui/ContactModal';
 import { useState } from 'react';
 import { useTranslations } from '@/app/i18n';
 
+type CategoryId = 'trees' | 'shrubs' | 'citrus' | 'aromatic' | 'climbers' | 'succulents';
+type ProductId = 
+  | 'washingtonia' 
+  | 'cycas' 
+  | 'oleaMiniCalabria' 
+  | 'oleaPataBonsai' 
+  | 'yuccaElephantipes' 
+  | 'ficusAustralis'
+  | 'trachycarpus'
+  | 'limun'
+  | 'naranca'
+  | 'sipak'
+  | 'yuccaRostrata'
+  | 'neriumOleander'
+  | 'strelitziaRegina'
+  | 'oleaSpecimen'
+  | 'oleaMiniPataBonsai'
+  | 'dasylirion'
+  | 'oleaBall'
+  | 'oleaSmallMushroom'
+  | 'oleaArbequino'
+  | 'oleaBonsai'
+  | 'oleaFrantoio'
+  | 'oleaOlivarum'
+  | 'oleaEtruscoHighTrunk'
+  | 'oleaEstaguilaIntensivo';
+
+interface Product {
+  id: ProductId;
+  image: string;
+  category: CategoryId;
+}
+
+const products: Product[] = [
+  // Masivna i sjenovita stabla
+  {
+    id: 'washingtonia',
+    image: '/img/palme/washingtonia-robusta.jpg',
+    category: 'trees',
+  },
+  {
+    id: 'trachycarpus',
+    image: '/img/palme/trachycarpus.jpg',
+    category: 'trees',
+  },
+  {
+    id: 'oleaMiniCalabria',
+    image: '/img/palme/olea-mini-calabria.jpg',
+    category: 'trees',
+  },
+  {
+    id: 'oleaPataBonsai',
+    image: '/img/palme/olea-pata-bonsai.jpg',
+    category: 'trees',
+  },
+  {
+    id: 'oleaMiniPataBonsai',
+    image: '/img/palme/olea-mini-pata-bonsai.jpg',
+    category: 'trees',
+  },
+  {
+    id: 'oleaSpecimen',
+    image: '/img/palme/olea-specimen.jpg',
+    category: 'trees',
+  },
+  // Veliki grmovi i manja stabla
+  {
+    id: 'cycas',
+    image: '/img/palme/cycas-revoluta.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'ficusAustralis',
+    image: '/img/palme/ficcus-australis.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'sipak',
+    image: '/img/palme/sipak.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'neriumOleander',
+    image: '/img/palme/nerium-oleander.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaBall',
+    image: '/img/palme/olea-ball.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaSmallMushroom',
+    image: '/img/palme/olea-small-mushroom.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaArbequino',
+    image: '/img/palme/olea-arabequino.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaBonsai',
+    image: '/img/palme/olea-bonsai.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaFrantoio',
+    image: '/img/palme/olea-frantoio.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaOlivarum',
+    image: '/img/palme/olea-olivarum.jpg',
+    category: 'shrubs',
+  },
+  {
+    id: 'oleaEtruscoHighTrunk',
+    image: '/img/palme/olea-etrusco-high-trunk.jpg',
+    category: 'trees',
+  },
+  {
+    id: 'oleaEstaguilaIntensivo',
+    image: '/img/palme/olea-estaguila-intesivo.jpg',
+    category: 'shrubs',
+  },
+  // Agrumi
+  {
+    id: 'limun',
+    image: '/img/palme/limun.jpg',
+    category: 'citrus',
+  },
+  {
+    id: 'naranca',
+    image: '/img/palme/naranca.jpg',
+    category: 'citrus',
+  },
+  // Sukulenti i kaktuslike biljke
+  {
+    id: 'yuccaElephantipes',
+    image: '/img/palme/yucca-elephantipes.jpg',
+    category: 'succulents',
+  },
+  {
+    id: 'yuccaRostrata',
+    image: '/img/palme/yucca-rostrata.jpg',
+    category: 'succulents',
+  },
+  {
+    id: 'strelitziaRegina',
+    image: '/img/palme/strellitzia-regina.jpg',
+    category: 'succulents',
+  },
+  {
+    id: 'dasylirion',
+    image: '/img/palme/dasyliriona.jpg',
+    category: 'succulents',
+  },
+];
+
+// Product Detail Modal
+const ProductModal: React.FC<{
+  product: Product | null;
+  isOpen: boolean;
+  onClose: () => void;
+  onContact: (name: string) => void;
+  t: ReturnType<typeof useTranslations>;
+}> = ({ product, isOpen, onClose, onContact, t }) => {
+  if (!isOpen || !product) return null;
+
+  const plantData = t.featured.plants[product.id];
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Modal - Even Bigger */}
+      <div className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden">
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-colors"
+        >
+          <X className="w-5 h-5 text-neutral-700" />
+        </button>
+
+        <div className="flex flex-col md:flex-row md:min-h-[600px]">
+          {/* Image */}
+          <div className="relative w-full md:w-[45%] aspect-[4/3] md:aspect-auto">
+            <Image
+              src={product.image}
+              alt={plantData.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Content - More space */}
+          <div className="p-6 md:p-12 md:w-[55%] overflow-y-auto max-h-[50vh] md:max-h-none flex flex-col justify-center">
+            <span
+              className="self-start text-xs font-bold uppercase tracking-wide mb-3 px-3 py-1 rounded-full"
+              style={{
+                backgroundColor: 'rgba(39, 66, 35, 0.1)',
+                color: '#274223',
+              }}
+            >
+              {plantData.category}
+            </span>
+            
+            <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-4">
+              {plantData.name}
+            </h2>
+
+            <p className="text-neutral-600 leading-relaxed mb-8 text-base">
+              {plantData.description}
+            </p>
+
+            {/* Features */}
+            <div
+              className="p-5 rounded-xl mb-8"
+              style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
+            >
+              <h3 className="font-bold text-neutral-900 mb-4">
+                {t.featured.characteristics}
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                {plantData.features.map((feature: string, idx: number) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <div
+                      className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: '#274223' }}
+                    >
+                      <Check className="w-3 h-3 text-white" />
+                    </div>
+                    <span className="text-sm text-neutral-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <button
+              onClick={() => onContact(plantData.name)}
+              className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl hover:opacity-90"
+              style={{ backgroundColor: '#274223' }}
+            >
+              <Phone className="w-5 h-5" />
+              {t.featured.askAvailability}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Small product card with image and overlay
+const ProductCard: React.FC<{
+  product: Product;
+  onClick: () => void;
+  t: ReturnType<typeof useTranslations>;
+}> = ({ product, onClick, t }) => {
+  const plantData = t.featured.plants[product.id];
+
+  return (
+    <button
+      onClick={onClick}
+      className="group relative aspect-[4/5] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full"
+    >
+      <Image
+        src={product.image}
+        alt={plantData.name}
+        fill
+        className="object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      {/* Name */}
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <h4 className="text-white font-bold text-sm md:text-base drop-shadow-lg">
+          {plantData.name}
+        </h4>
+      </div>
+    </button>
+  );
+};
+
 export default function BiljkePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<CategoryId>('trees');
   const t = useTranslations();
 
-  const openModal = (category: string) => {
+  const openContactModal = (category: string) => {
     setSelectedCategory(category);
-    setIsModalOpen(true);
+    setIsContactModalOpen(true);
   };
 
-  const categories = [
+  const openProductModal = (product: Product) => {
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
+  };
+
+  const handleProductContact = (productName: string) => {
+    setIsProductModalOpen(false);
+    setSelectedCategory(productName);
+    setIsContactModalOpen(true);
+  };
+
+  const categories: {
+    id: CategoryId;
+    title: string;
+    examples: string;
+    icon: React.ElementType;
+    description: string;
+    features: string[];
+  }[] = [
     {
-      id: 'masline',
-      title: t.plantsPage.olives.title,
+      id: 'trees',
+      title: t.categories.items.trees.title,
+      examples: t.categories.items.trees.examples,
       icon: TreePine,
-      description: t.plantsPage.olives.description,
-      longDescription: t.plantsPage.olives.longDescription,
-      features: t.plantsPage.olives.features,
-      varieties: t.plantsPage.olives.varieties,
-      image: '/img/masline.jpg',
+      description:
+        'Masivna stabla koja donose sjenu i veličanstven izgled vašem vrtu. Maslina, palme i čempresi su temelj svakog mediteranskog vrta - otporni, dugovječni i impresivni.',
+      features: [
+        'Visina: 1m - 5m+',
+        'Otpornost: -10°C do +40°C',
+        'Sadnja: Proljeće i jesen',
+        'Idealni za velike vrtove',
+        'Dugogodišnje biljke',
+        'Donose sjenu i privatnost',
+      ],
     },
     {
-      id: 'palme',
-      title: t.plantsPage.palms.title,
-      icon: Palmtree,
-      description: t.plantsPage.palms.description,
-      longDescription: t.plantsPage.palms.longDescription,
-      features: t.plantsPage.palms.features,
-      varieties: t.plantsPage.palms.varieties,
-      image: '/img/palme.jpg',
+      id: 'shrubs',
+      title: t.categories.items.shrubs.title,
+      examples: t.categories.items.shrubs.examples,
+      icon: Trees,
+      description:
+        'Grmovi i manja stabla koja obogaćuju vrt teksturom i bojom. Oleandri, lovor i šipak savršeni su za živice, ukrasne grupacije ili samostalne akcente.',
+      features: [
+        'Visina: 0.5m - 3m',
+        'Cvjetanje: Proljeće-ljeto',
+        'Održavanje: Umjereno',
+        'Idealni za živice',
+        'Bogato lišće i cvijeće',
+        'Privlače pčele i leptire',
+      ],
     },
     {
-      id: 'vanjske',
-      title: t.plantsPage.outdoor.title,
+      id: 'citrus',
+      title: t.categories.items.citrus.title,
+      examples: t.categories.items.citrus.examples,
+      icon: Cherry,
+      description:
+        'Aromatični agrumi donose svježinu i miris Mediterana. Limuni, naranče i mandarine savršeni su za terasu ili vrt - dekorativni i daju plodove.',
+      features: [
+        'Visina: 0.5m - 2.5m',
+        'Plodovi: Cijele godine',
+        'Potrebna zaštita od mraza',
+        'Idealni za terase',
+        'Aromatični cvjetovi',
+        'Jestivi plodovi',
+      ],
+    },
+    {
+      id: 'aromatic',
+      title: t.categories.items.aromatic.title,
+      examples: t.categories.items.aromatic.examples,
       icon: Flower2,
-      description: t.plantsPage.outdoor.description,
-      longDescription: t.plantsPage.outdoor.longDescription,
-      features: t.plantsPage.outdoor.features,
-      varieties: t.plantsPage.outdoor.varieties,
-      image: '/img/vanjske.jpg',
+      description:
+        'Mirisne biljke koje oplemenjuju svaki prostor. Lavanda, ružmarin i kadulja savršeni su za kuhanje, aromaterapiju i privlačenje pčela.',
+      features: [
+        'Visina: 0.3m - 1m',
+        'Cvjetanje: Proljeće-ljeto',
+        'Održavanje: Minimalno',
+        'Otporni na sušu',
+        'Aromatični listovi',
+        'Koriste se u kuhinji',
+      ],
+    },
+    {
+      id: 'climbers',
+      title: t.categories.items.climbers.title,
+      examples: t.categories.items.climbers.examples,
+      icon: Leaf,
+      description:
+        'Penjačice koje transformiraju zidove, ograde i pergole u zelene oaze. Bugenvilija, jasmin i glicinija donose dramatičnu ljepotu i miris.',
+      features: [
+        'Visina: 3m - 10m+',
+        'Cvjetanje: Proljeće-jesen',
+        'Brzi rast',
+        'Idealne za pergole',
+        'Spektakularno cvjetanje',
+        'Privlače pčele',
+      ],
+    },
+    {
+      id: 'succulents',
+      title: t.categories.items.succulents.title,
+      examples: t.categories.items.succulents.examples,
+      icon: Sun,
+      description:
+        'Robusne biljke koje zahtijevaju minimalnu njegu. Agave, kaktusi i yucce savršeni su za sušne uvjete i moderne vrtove.',
+      features: [
+        'Visina: 0.2m - 3m',
+        'Održavanje: Minimalno',
+        'Otpornost na sušu: Visoka',
+        'Idealni za kamenjare',
+        'Dekorativni oblici',
+        'Dugovječne biljke',
+      ],
     },
   ];
+
+  const activeCategory = categories.find((c) => c.id === activeTab)!;
+  const filteredProducts = products.filter((p) => p.category === activeTab);
+  const ActiveIcon = activeCategory.icon;
 
   return (
     <>
       <ContactModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
         category={selectedCategory}
+      />
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isProductModalOpen}
+        onClose={() => setIsProductModalOpen(false)}
+        onContact={handleProductContact}
+        t={t}
       />
       <main>
         {/* Hero Section */}
-        <section className='relative py-24 md:py-32 overflow-hidden'>
+        <section className="relative py-20 md:py-28 overflow-hidden">
           {/* Background Image */}
           <div
-            className='absolute inset-0 bg-cover bg-center'
+            className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: 'url(/img/palme.jpeg)' }}
           />
           {/* Dark Overlay */}
-          <div className='absolute inset-0 bg-black/60' />
+          <div className="absolute inset-0 bg-black/60" />
 
-          <Container className='relative z-10'>
-            <div className='text-center max-w-4xl mx-auto space-y-6'>
+          <Container className="relative z-10">
+            <div className="text-center max-w-4xl mx-auto space-y-6">
               <div
-                className='inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold shadow-lg mb-2'
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold shadow-lg mb-2"
                 style={{ backgroundColor: '#274223' }}
               >
-                <TreePine className='w-4 h-4' />
+                <TreePine className="w-4 h-4" />
                 <span>{t.plantsPage.badge}</span>
               </div>
 
-              <h1 
-                className='font-bold leading-[1.1]'
-                style={{ 
-                  fontSize: 'clamp(2rem, 5vw, 3.75rem)'
+              <h1
+                className="font-bold leading-[1.1]"
+                style={{
+                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 }}
               >
-                <span className='text-white'>{t.plantsPage.title}</span>
+                <span className="text-white">{t.plantsPage.title}</span>
                 <br />
-                <span style={{ color: '#8fb588' }}>{t.plantsPage.titleHighlight}</span>
+                <span style={{ color: '#8fb588' }}>
+                  {t.plantsPage.titleHighlight}
+                </span>
               </h1>
 
-              <p className='text-lg md:text-xl text-white/90 leading-relaxed'>
+              <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
                 {t.plantsPage.subtitle}
               </p>
-
-              {/* Category Pills */}
-              <div className='flex flex-wrap justify-center gap-2 md:gap-4 pt-6 md:pt-8'>
-                <div
-                  className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
-                >
-                  <TreePine className='w-4 h-4 md:w-5 md:h-5 text-white' />
-                  <span className='text-white font-bold text-sm md:text-base'>{t.plantsPage.olives.title}</span>
-                </div>
-                <div
-                  className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
-                >
-                  <Palmtree className='w-4 h-4 md:w-5 md:h-5 text-white' />
-                  <span className='text-white font-bold text-sm md:text-base'>{t.plantsPage.palms.title}</span>
-                </div>
-                <div
-                  className='flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-lg bg-white/20 backdrop-blur-sm'
-                >
-                  <Flower2 className='w-4 h-4 md:w-5 md:h-5 text-white' />
-                  <span className='text-white font-bold text-sm md:text-base'>
-                    {t.plantsPage.mediterranean}
-                  </span>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className='flex justify-center gap-4 md:gap-8 pt-4 md:pt-6 text-center'>
-                <div>
-                  <div className='text-2xl md:text-3xl font-bold text-white'>
-                    15+
-                  </div>
-                  <div className='text-xs md:text-sm text-white/80 font-medium'>
-                    {t.plantsPage.plantTypes}
-                  </div>
-                </div>
-                <div
-                  className='w-px h-10 md:h-12 self-center bg-white/30'
-                />
-                <div>
-                  <div className='text-2xl md:text-3xl font-bold text-white'>
-                    100%
-                  </div>
-                  <div className='text-xs md:text-sm text-white/80 font-medium'>
-                    {t.plantsPage.forClimate}
-                  </div>
-                </div>
-                <div
-                  className='w-px h-10 md:h-12 self-center bg-white/30'
-                />
-                <div>
-                  <div className='text-2xl md:text-3xl font-bold text-white'>
-                    5-15
-                  </div>
-                  <div className='text-xs md:text-sm text-white/80 font-medium'>
-                    {t.plantsPage.yearsOld}
-                  </div>
-                </div>
-              </div>
             </div>
           </Container>
         </section>
 
-        {/* Categories */}
-        <section className='py-16 md:py-24 bg-white'>
+        {/* Tabs & Content Section */}
+        <section className="py-12 md:py-16 bg-white">
           <Container>
-            <div className='space-y-24'>
-              {categories.map((category, index) => {
+            {/* Category Tabs - Scrollable on mobile */}
+            <div className="flex overflow-x-auto pb-4 mb-8 gap-2 md:gap-3 md:flex-wrap md:justify-center scrollbar-hide">
+              {categories.map((category) => {
                 const Icon = category.icon;
-                const isEven = index % 2 === 0;
-
+                const isActive = activeTab === category.id;
                 return (
-                  <div
+                  <button
                     key={category.id}
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                      !isEven ? 'lg:flex-row-reverse' : ''
+                    onClick={() => setActiveTab(category.id)}
+                    className={`flex items-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm whitespace-nowrap transition-all duration-300 shrink-0 ${
+                      isActive
+                        ? 'text-white shadow-lg'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
+                    style={isActive ? { backgroundColor: '#274223' } : {}}
                   >
-                    {/* Text Content */}
-                    <div className={`space-y-6 ${!isEven ? 'lg:order-2' : ''}`}>
-                      {/* Icon & Title */}
-                      <div className='flex items-center gap-4'>
-                        <div
-                          className='w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg'
-                          style={{ backgroundColor: '#274223' }}
-                        >
-                          <Icon className='w-8 h-8' />
-                        </div>
-                        <div>
-                          <h2 className='text-3xl md:text-4xl font-bold text-neutral-900'>
-                            {category.title}
-                          </h2>
-                          <p
-                            className='text-sm font-semibold'
-                            style={{ color: '#274223' }}
-                          >
-                            {category.description}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Long Description */}
-                      <p className='text-lg text-neutral-600 leading-relaxed'>
-                        {category.longDescription}
-                      </p>
-
-                      {/* Features */}
-                      <div>
-                        <h3 className='text-lg font-bold text-neutral-900 mb-3'>
-                          {t.plantsPage.characteristics}
-                        </h3>
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
-                          {category.features.map((feature, idx) => (
-                            <div
-                              key={idx}
-                              className='flex items-start gap-2 text-sm'
-                            >
-                              <div
-                                className='w-1.5 h-1.5 rounded-full mt-1.5 shrink-0'
-                                style={{ backgroundColor: '#274223' }}
-                              />
-                              <span className='text-neutral-700'>
-                                {feature}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Varieties */}
-                      <div>
-                        <h3 className='text-lg font-bold text-neutral-900 mb-3'>
-                          {t.plantsPage.availableVarieties}
-                        </h3>
-                        <div className='space-y-2'>
-                          {category.varieties.map((variety, idx) => (
-                            <div
-                              key={idx}
-                              className='flex items-center gap-3 px-4 py-2 rounded-lg'
-                              style={{
-                                backgroundColor: 'rgba(39, 66, 35, 0.05)',
-                              }}
-                            >
-                              <ArrowRight
-                                className='w-4 h-4 shrink-0'
-                                style={{ color: '#274223' }}
-                              />
-                              <span className='text-sm text-neutral-700 font-medium'>
-                                {variety}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* CTA */}
-                      <button
-                        onClick={() => openModal(category.title)}
-                        className='inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl'
-                        style={{ backgroundColor: '#274223' }}
-                      >
-                        <Phone className='w-5 h-5' />
-                        {t.plantsPage.askAvailability}
-                      </button>
-                    </div>
-
-                    {/* Image */}
-                    <div className={`${!isEven ? 'lg:order-1' : ''}`}>
-                      <div
-                        className='relative aspect-square rounded-3xl overflow-hidden shadow-2xl'
-                        style={{ border: '4px solid #274223' }}
-                      >
-                        <Image
-                          src='/img/palme.jpeg'
-                          alt={category.title}
-                          fill
-                          className='object-cover'
-                        />
-                        {/* Overlay with category icon */}
-                        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent' />
-                        <div className='absolute bottom-6 left-6 flex items-center gap-3'>
-                          <div
-                            className='w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg'
-                            style={{ backgroundColor: '#274223' }}
-                          >
-                            <Icon className='w-6 h-6' />
-                          </div>
-                          <span className='text-white font-bold text-lg drop-shadow-lg'>
-                            {category.title}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <Icon className="w-4 h-4" />
+                    <span>{category.title}</span>
+                  </button>
                 );
               })}
+            </div>
+
+            {/* Category Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-12">
+              {/* Left: Description & Features */}
+              <div className="lg:col-span-1 space-y-6">
+                {/* Title & Description */}
+                <div className="flex items-start gap-4">
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center text-white shadow-lg shrink-0"
+                    style={{ backgroundColor: '#274223' }}
+                  >
+                    <ActiveIcon className="w-7 h-7" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl md:text-2xl font-bold text-neutral-900">
+                      {activeCategory.title}
+                    </h2>
+                    <p
+                      className="text-sm font-medium mt-1"
+                      style={{ color: '#274223' }}
+                    >
+                      {activeCategory.examples}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-neutral-600 leading-relaxed">
+                  {activeCategory.description}
+                </p>
+
+                {/* Features */}
+                <div
+                  className="p-5 rounded-xl"
+                  style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
+                >
+                  <h3 className="font-bold text-neutral-900 mb-4">
+                    {t.featured.characteristics}
+                  </h3>
+                  <div className="space-y-3">
+                    {activeCategory.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <div
+                          className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                          style={{ backgroundColor: '#274223' }}
+                        >
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                        <span className="text-sm text-neutral-700">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <button
+                  onClick={() => openContactModal(activeCategory.title)}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-white shadow-lg transition-all hover:shadow-xl hover:opacity-90"
+                  style={{ backgroundColor: '#274223' }}
+                >
+                  <Phone className="w-5 h-5" />
+                  {t.featured.askAvailability}
+                </button>
+              </div>
+
+              {/* Right: Products Grid */}
+              <div className="lg:col-span-2">
+                <h3 className="text-lg font-bold text-neutral-900 mb-6">
+                  Dostupni proizvodi
+                </h3>
+                {filteredProducts.length > 0 ? (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {filteredProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        onClick={() => openProductModal(product)}
+                        t={t}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div
+                    className="text-center py-16 rounded-xl"
+                    style={{ backgroundColor: 'rgba(39, 66, 35, 0.05)' }}
+                  >
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                      style={{ backgroundColor: 'rgba(39, 66, 35, 0.1)' }}
+                    >
+                      <ActiveIcon className="w-8 h-8" style={{ color: '#274223' }} />
+                    </div>
+                    <p className="text-neutral-600 font-medium">
+                      Uskoro dodajemo proizvode u ovu kategoriju
+                    </p>
+                    <p className="text-neutral-500 text-sm mt-2">
+                      Kontaktirajte nas za dostupnost
+                    </p>
+                    <button
+                      onClick={() => openContactModal(activeCategory.title)}
+                      className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90"
+                      style={{ backgroundColor: '#274223' }}
+                    >
+                      <Phone className="w-4 h-4" />
+                      Kontaktiraj nas
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </Container>
         </section>
 
         {/* CTA Section */}
         <section
-          className='py-16 md:py-20 text-white'
+          className="py-16 md:py-20 text-white"
           style={{ backgroundColor: '#274223' }}
         >
           <Container>
-            <div className='text-center max-w-3xl mx-auto space-y-6'>
-              <h2 className='text-3xl md:text-4xl font-bold'>
+            <div className="text-center max-w-3xl mx-auto space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold">
                 {t.plantsPage.notSure}
               </h2>
-              <p className='text-lg text-white/90'>
-                {t.plantsPage.notSureDesc}
-              </p>
-              <div className='flex flex-col sm:flex-row gap-4 justify-center pt-4'>
+              <p className="text-lg text-white/90">{t.plantsPage.notSureDesc}</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <button
-                  onClick={() => openModal(t.plantsPage.generalInquiry)}
-                  className='w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50'
+                  onClick={() => openContactModal(t.plantsPage.generalInquiry)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold bg-white transition-all hover:bg-neutral-50"
                   style={{ color: '#274223' }}
                 >
-                  <Phone className='w-5 h-5' />
+                  <Phone className="w-5 h-5" />
                   {t.plantsPage.contactUs}
                 </button>
-                <Link href='/' className='w-full sm:w-auto'>
-                  <button className='w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white'>
+                <Link href="/" className="w-full sm:w-auto">
+                  <button className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-base font-bold text-white transition-all hover:bg-white/10 border-2 border-white">
                     {t.plantsPage.backToHome}
-                    <ArrowRight className='w-5 h-5' />
                   </button>
                 </Link>
               </div>

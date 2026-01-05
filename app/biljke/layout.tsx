@@ -1,29 +1,60 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Naše Biljke - Masline, Palme, Agrumi i Mediteransko Bilje',
+  title: 'Prodaja Palmi i Maslina Split | Washingtonia, Trachycarpus, Stare Masline',
   description:
-    'Pogledajte našu ponudu mediteranskih biljaka: masline svih veličina, palme (Trachycarpus, Phoenix, Chamaerops), agrumi, lavanda, ružmarin, oleander i više. Kvalitetne sadnice s garancijom. Dostava po cijeloj Hrvatskoj.',
+    'Prodaja palmi Split - Washingtonia, Trachycarpus, Phoenix. Prodaja maslina - stare masline 500+ godina, bonsai masline. Agrumi, yucca, oleander. Rasadnik Kaštel Štafilić. Dostava po Hrvatskoj.',
   keywords: [
-    'masline prodaja',
-    'palme prodaja',
-    'agrumi prodaja',
-    'mediteranske biljke',
-    'sadnice maslina',
-    'sadnice palmi',
-    'lavanda',
-    'oleander',
-    'bugenvilija',
-    'rasadnik Split',
+    // Palme - prioritetno
+    'prodaja palmi split',
+    'prodaja palmi hrvatska',
+    'palme split',
+    'kupiti palmu split',
+    'washingtonia prodaja',
+    'trachycarpus prodaja',
+    'trachycarpus split',
+    'palme cijena',
+    'mediteranske palme',
+    // Masline - prioritetno
+    'prodaja maslina split',
+    'prodaja maslina hrvatska',
+    'masline split',
+    'kupiti maslinu split',
+    'stare masline prodaja',
+    'masline 500 godina',
+    'bonsai maslina',
+    'maslina cijena',
+    // Ostale biljke
+    'yucca prodaja split',
+    'oleander prodaja',
+    'strelitzia prodaja',
+    'cycas prodaja',
+    'agrumi split',
+    'limun prodaja',
+    'naranča prodaja',
+    // Lokacija
+    'rasadnik split',
+    'vrtni centar split',
+    'mediteranske biljke split',
+    'egzotične biljke split',
+    'biljke split',
   ],
   alternates: {
     canonical: 'https://adrisbotanic.com/biljke',
   },
   openGraph: {
-    title: 'Naše Biljke | Adris Botanic - Masline, Palme, Agrumi',
+    title: 'Prodaja Palmi i Maslina Split | Adris Botanic',
     description:
-      'Široka ponuda mediteranskih biljaka: masline, palme, agrumi, lavanda i više. Kvalitetne sadnice s garancijom.',
+      'Prodaja palmi i maslina u Splitu. Washingtonia, Trachycarpus, stare masline 500+ godina, agrumi, yucca. Dostava po Hrvatskoj.',
     url: 'https://adrisbotanic.com/biljke',
+    images: [
+      {
+        url: '/img/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Prodaja palmi i maslina Split - Adris Botanic',
+      },
+    ],
   },
 };
 
@@ -34,6 +65,7 @@ export default function BiljkeLayout({
 }) {
   return <>{children}</>;
 }
+
 
 
 
