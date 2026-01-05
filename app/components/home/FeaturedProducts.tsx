@@ -5,6 +5,10 @@ import Image from 'next/image';
 import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useTranslations } from '@/app/i18n';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 interface Plant {
   id: string;
@@ -34,7 +38,7 @@ const PlantCard: React.FC<{
       >
         {/* Image */}
         <div
-          className='relative aspect-[4/5] overflow-hidden'
+          className='relative aspect-4/5 overflow-hidden'
           style={{ backgroundColor: '#f3f6f3' }}
         >
           <Image
@@ -42,6 +46,9 @@ const PlantCard: React.FC<{
             alt={plantData.name}
             fill
             className='object-cover group-hover:scale-105 transition-transform duration-500'
+            sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+            loading='lazy'
+            quality={75}
           />
 
           {/* Badge */}
@@ -184,8 +191,27 @@ export const FeaturedProducts: React.FC = () => {
           </Link>
         </div>
 
-        {/* Plants Grid */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {/* Mobile Swiper */}
+        <div className='sm:hidden'>
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={16}
+            slidesPerView={1}
+            pagination={{
+              clickable: true,
+            }}
+            className='featured-swiper'
+          >
+            {plants.map((plant) => (
+              <SwiperSlide key={plant.id} className='h-auto'>
+                <PlantCard plant={plant} t={t} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className='hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
           {plants.map((plant) => (
             <PlantCard key={plant.id} plant={plant} t={t} />
           ))}

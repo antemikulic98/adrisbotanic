@@ -4,6 +4,10 @@ import Link from 'next/link';
 import { ArrowRight, TreePine, Trees, Cherry, Flower2, Leaf, Sun } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useTranslations } from '@/app/i18n';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 interface CategoryCardProps {
   title: string;
@@ -123,8 +127,27 @@ export const Categories: React.FC = () => {
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {/* Mobile Swiper */}
+        <div className='md:hidden'>
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={16}
+            slidesPerView={1}
+            pagination={{
+              clickable: true,
+            }}
+            className='categories-swiper'
+          >
+            {categories.map((category) => (
+              <SwiperSlide key={category.title} className='h-auto'>
+                <CategoryCard {...category} viewText={t.categories.view} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className='hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
           {categories.map((category) => (
             <CategoryCard key={category.title} {...category} viewText={t.categories.view} />
           ))}

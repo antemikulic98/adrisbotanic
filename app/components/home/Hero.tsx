@@ -36,6 +36,8 @@ export const Hero: React.FC = () => {
             fill
             className='object-cover'
             priority
+            sizes='100vw'
+            quality={75}
           />
           {/* Darker overlay za bolji kontrast */}
           <div
@@ -189,6 +191,8 @@ export const Hero: React.FC = () => {
               fill
               className='object-cover'
               priority
+              sizes='45vw'
+              quality={80}
             />
             {/* Tamni overlay preko slike */}
             <div
