@@ -47,10 +47,17 @@ export default function BlogPostPage() {
       {/* Hero Section */}
       <section className='relative py-20 md:py-28 overflow-hidden'>
         {/* Background Image */}
-        <div
-          className='absolute inset-0 bg-cover bg-center'
-          style={{ backgroundImage: `url(${post.image})` }}
-        />
+        <div className='absolute inset-0'>
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className='object-cover'
+            sizes='100vw'
+            quality={70}
+            priority
+          />
+        </div>
         {/* Dark Overlay */}
         <div className='absolute inset-0 bg-black/65' />
 
