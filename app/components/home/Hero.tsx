@@ -3,6 +3,7 @@
 import { Container } from '../ui/Container';
 import { ArrowRight, Phone, Leaf } from 'lucide-react';
 import Image from 'next/image';
+import { heroImg } from '@/app/lib/images';
 import Link from 'next/link';
 import { useTranslations } from '@/app/i18n';
 
@@ -31,13 +32,14 @@ export const Hero: React.FC = () => {
           style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' }}
         >
           <Image
-            src='/img/hero.jpeg'
+            src={heroImg}
             alt='Adrisbotanic Background'
             fill
             className='object-cover'
             priority
             sizes='100vw'
             quality={75}
+            placeholder='blur'
           />
           {/* Darker overlay za bolji kontrast */}
           <div
@@ -186,13 +188,14 @@ export const Hero: React.FC = () => {
             }}
           >
             <Image
-              src='/img/hero.jpeg'
+              src={heroImg}
               alt='Adrisbotanic - Mediteranske biljke i pitari'
               fill
               className='object-cover'
               priority
               sizes='45vw'
               quality={80}
+              placeholder='blur'
             />
             {/* Tamni overlay preko slike */}
             <div

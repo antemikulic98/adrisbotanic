@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
+import { plantImages } from '@/app/lib/images';
 import { ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useTranslations } from '@/app/i18n';
@@ -20,7 +21,7 @@ interface Plant {
     | 'yuccaElephantipes'
     | 'ficusAustralis';
   badge?: 'new' | 'popular';
-  image: string;
+  image: StaticImageData;
   href: string;
 }
 
@@ -49,6 +50,7 @@ const PlantCard: React.FC<{
             sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
             loading='lazy'
             quality={75}
+            placeholder='blur'
           />
 
           {/* Badge */}
@@ -115,40 +117,40 @@ export const FeaturedProducts: React.FC = () => {
       id: '1',
       nameKey: 'washingtonia',
       badge: 'popular',
-      image: '/img/palme/washingtonia-robusta.jpg',
+      image: plantImages.washingtoniaRobusta,
       href: '/biljke',
     },
     {
       id: '2',
       nameKey: 'cycas',
-      image: '/img/palme/cycas-revoluta.jpg',
+      image: plantImages.cycasRevoluta,
       href: '/biljke',
     },
     {
       id: '3',
       nameKey: 'oleaMiniCalabria',
       badge: 'new',
-      image: '/img/palme/olea-mini-calabria.jpg',
+      image: plantImages.oleaMiniCalabria,
       href: '/biljke',
     },
     {
       id: '4',
       nameKey: 'oleaPataBonsai',
       badge: 'popular',
-      image: '/img/palme/olea-pata-bonsai.jpg',
+      image: plantImages.oleaPataBonsai,
       href: '/biljke',
     },
     {
       id: '5',
       nameKey: 'yuccaElephantipes',
       badge: 'new',
-      image: '/img/palme/yucca-elephantipes.jpg',
+      image: plantImages.yuccaElephantipes,
       href: '/biljke',
     },
     {
       id: '6',
       nameKey: 'ficusAustralis',
-      image: '/img/palme/ficcus-australis.jpg',
+      image: plantImages.ficcusAustralis,
       href: '/biljke',
     },
   ];

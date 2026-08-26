@@ -56,6 +56,7 @@ export default function BlogPostPage() {
             sizes='100vw'
             quality={70}
             priority
+            placeholder='blur'
           />
         </div>
         {/* Dark Overlay */}
@@ -230,6 +231,8 @@ export default function BlogPostPage() {
                                 alt={relatedPost.title}
                                 fill
                                 className='object-cover group-hover:scale-105 transition-transform'
+                                sizes='80px'
+                                placeholder='blur'
                               />
                             </div>
                             <div className='flex-1 min-w-0'>

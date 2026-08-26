@@ -13,6 +13,7 @@ import {
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { palmeHero } from '@/app/lib/images';
 import { posts, categories as dataCategories } from './data';
 import { useTranslations } from '@/app/i18n';
 
@@ -52,13 +53,14 @@ export default function BlogPage() {
         {/* Background Image */}
         <div className='absolute inset-0'>
           <Image
-            src='/img/palme.jpeg'
+            src={palmeHero}
             alt=''
             fill
             className='object-cover'
             sizes='100vw'
             quality={70}
             priority
+            placeholder='blur'
           />
         </div>
         {/* Dark Overlay */}
@@ -157,6 +159,8 @@ export default function BlogPage() {
                         alt={post.title}
                         fill
                         className='object-cover group-hover:scale-105 transition-transform duration-500'
+                        sizes='(max-width: 768px) 100vw, 33vw'
+                        placeholder='blur'
                       />
 
                       {/* Category Badge */}

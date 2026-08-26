@@ -1,4 +1,6 @@
 import { Droplets, Wind, Leaf, Sun, LucideIcon } from 'lucide-react';
+import { StaticImageData } from 'next/image';
+import { palmeHero } from '@/app/lib/images';
 
 export interface BlogPost {
   id: string;
@@ -8,7 +10,7 @@ export interface BlogPost {
   category: string;
   readTime: string;
   date: string;
-  image: string;
+  image: StaticImageData;
   icon: LucideIcon;
   content: string;
 }
@@ -30,7 +32,7 @@ export const posts: BlogPost[] = [
     category: 'njega',
     readTime: '5 min',
     date: '15. Listopad 2024',
-    image: '/img/palme.jpeg',
+    image: palmeHero,
     icon: Droplets,
     content: `
 ## Uvod
@@ -99,7 +101,7 @@ Pravilno zalijevanje mediteranskih biljaka nije komplicirano, ali zahtijeva razu
     category: 'sezona',
     readTime: '8 min',
     date: '10. Listopad 2024',
-    image: '/img/palme.jpeg',
+    image: palmeHero,
     icon: Wind,
     content: `
 ## Zašto je priprema za zimu važna?
@@ -178,7 +180,7 @@ Pravilna priprema za zimu može značiti razliku između zdrave biljke i one koj
     category: 'sadnja',
     readTime: '6 min',
     date: '5. Listopad 2024',
-    image: '/img/palme.jpeg',
+    image: palmeHero,
     icon: Leaf,
     content: `
 ## Proljeće ili jesen?
@@ -274,7 +276,7 @@ Ako kupujete maslinu u rasadniku Adris Botanic, rado ćemo vam pomoći s odabiro
     category: 'njega',
     readTime: '4 min',
     date: '1. Listopad 2024',
-    image: '/img/palme.jpeg',
+    image: palmeHero,
     icon: Droplets,
     content: `
 ## Zašto je odabir posude važan?
@@ -382,7 +384,7 @@ Posjetite nas u rasadniku - imamo veliki izbor posuda svih veličina i materijal
     category: 'sadnja',
     readTime: '10 min',
     date: '28. Rujan 2024',
-    image: '/img/palme.jpeg',
+    image: palmeHero,
     icon: Leaf,
     content: `
 ## Kada presađivati palme?
@@ -509,7 +511,7 @@ Presađivanje palmi nije komplicirano, ali zahtijeva pažnju i strpljenje. Slije
     category: 'sezona',
     readTime: '7 min',
     date: '25. Rujan 2024',
-    image: '/img/palme.jpeg',
+    image: palmeHero,
     icon: Sun,
     content: `
 ## Ljeto i mediteranske biljke

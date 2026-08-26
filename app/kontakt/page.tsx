@@ -18,6 +18,7 @@ import {
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { palmeHero } from '@/app/lib/images';
 import { useTranslations } from '@/app/i18n';
 
 export default function KontaktPage() {
@@ -111,13 +112,14 @@ export default function KontaktPage() {
         {/* Background Image */}
         <div className='absolute inset-0'>
           <Image
-            src='/img/palme.jpeg'
+            src={palmeHero}
             alt=''
             fill
             className='object-cover'
             sizes='100vw'
             quality={70}
             priority
+            placeholder='blur'
           />
         </div>
         {/* Dark Overlay */}

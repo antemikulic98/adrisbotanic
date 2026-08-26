@@ -2,6 +2,7 @@
 
 import { Container } from '../components/ui/Container';
 import Image from 'next/image';
+import { palmeHero } from '@/app/lib/images';
 import {
   Heart,
   Award,
@@ -77,13 +78,14 @@ export default function ONamaPage() {
         {/* Background Image */}
         <div className='absolute inset-0'>
           <Image
-            src='/img/palme.jpeg'
+            src={palmeHero}
             alt=''
             fill
             className='object-cover'
             sizes='100vw'
             quality={70}
             priority
+            placeholder='blur'
           />
         </div>
         {/* Dark Overlay */}
@@ -151,10 +153,12 @@ export default function ONamaPage() {
             <div>
               <div className='aspect-square rounded-3xl overflow-hidden shadow-2xl relative'>
                 <Image
-                  src='/img/palme.jpeg'
+                  src={palmeHero}
                   alt='Adrisbotanic rasadnik'
                   fill
                   className='object-cover'
+                  sizes='(max-width: 1024px) 100vw, 50vw'
+                  placeholder='blur'
                 />
               </div>
             </div>

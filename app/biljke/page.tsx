@@ -13,7 +13,8 @@ import {
   X,
 } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
+import { plantImages, palmeHero } from '../lib/images';
 import { ContactModal } from '../components/ui/ContactModal';
 import { useState } from 'react';
 import { useTranslations } from '@/app/i18n';
@@ -47,7 +48,7 @@ type ProductId =
 
 interface Product {
   id: ProductId;
-  image: string;
+  image: StaticImageData;
   category: CategoryId;
 }
 
@@ -55,125 +56,125 @@ const products: Product[] = [
   // Masivna i sjenovita stabla
   {
     id: 'washingtonia',
-    image: '/img/palme/washingtonia-robusta.jpg',
+    image: plantImages.washingtoniaRobusta,
     category: 'trees',
   },
   {
     id: 'trachycarpus',
-    image: '/img/palme/trachycarpus.jpg',
+    image: plantImages.trachycarpus,
     category: 'trees',
   },
   {
     id: 'oleaMiniCalabria',
-    image: '/img/palme/olea-mini-calabria.jpg',
+    image: plantImages.oleaMiniCalabria,
     category: 'trees',
   },
   {
     id: 'oleaPataBonsai',
-    image: '/img/palme/olea-pata-bonsai.jpg',
+    image: plantImages.oleaPataBonsai,
     category: 'trees',
   },
   {
     id: 'oleaMiniPataBonsai',
-    image: '/img/palme/olea-mini-pata-bonsai.jpg',
+    image: plantImages.oleaMiniPataBonsai,
     category: 'trees',
   },
   {
     id: 'oleaSpecimen',
-    image: '/img/palme/olea-specimen.jpg',
+    image: plantImages.oleaSpecimen,
     category: 'trees',
   },
   // Veliki grmovi i manja stabla
   {
     id: 'cycas',
-    image: '/img/palme/cycas-revoluta.jpg',
+    image: plantImages.cycasRevoluta,
     category: 'shrubs',
   },
   {
     id: 'ficusAustralis',
-    image: '/img/palme/ficcus-australis.jpg',
+    image: plantImages.ficcusAustralis,
     category: 'shrubs',
   },
   {
     id: 'sipak',
-    image: '/img/palme/sipak.jpg',
+    image: plantImages.sipak,
     category: 'shrubs',
   },
   {
     id: 'neriumOleander',
-    image: '/img/palme/nerium-oleander.jpg',
+    image: plantImages.neriumOleander,
     category: 'shrubs',
   },
   {
     id: 'oleaBall',
-    image: '/img/palme/olea-ball.jpg',
+    image: plantImages.oleaBall,
     category: 'shrubs',
   },
   {
     id: 'oleaSmallMushroom',
-    image: '/img/palme/olea-small-mushroom.jpg',
+    image: plantImages.oleaSmallMushroom,
     category: 'shrubs',
   },
   {
     id: 'oleaArbequino',
-    image: '/img/palme/olea-arabequino.jpg',
+    image: plantImages.oleaArabequino,
     category: 'shrubs',
   },
   {
     id: 'oleaBonsai',
-    image: '/img/palme/olea-bonsai.jpg',
+    image: plantImages.oleaBonsai,
     category: 'shrubs',
   },
   {
     id: 'oleaFrantoio',
-    image: '/img/palme/olea-frantoio.jpg',
+    image: plantImages.oleaFrantoio,
     category: 'shrubs',
   },
   {
     id: 'oleaOlivarum',
-    image: '/img/palme/olea-olivarum.jpg',
+    image: plantImages.oleaOlivarum,
     category: 'shrubs',
   },
   {
     id: 'oleaEtruscoHighTrunk',
-    image: '/img/palme/olea-etrusco-high-trunk.jpg',
+    image: plantImages.oleaEtruscoHighTrunk,
     category: 'trees',
   },
   {
     id: 'oleaEstaguilaIntensivo',
-    image: '/img/palme/olea-estaguila-intesivo.jpg',
+    image: plantImages.oleaEstaguilaIntesivo,
     category: 'shrubs',
   },
   // Agrumi
   {
     id: 'limun',
-    image: '/img/palme/limun.jpg',
+    image: plantImages.limun,
     category: 'citrus',
   },
   {
     id: 'naranca',
-    image: '/img/palme/naranca.jpg',
+    image: plantImages.naranca,
     category: 'citrus',
   },
   // Sukulenti i kaktuslike biljke
   {
     id: 'yuccaElephantipes',
-    image: '/img/palme/yucca-elephantipes.jpg',
+    image: plantImages.yuccaElephantipes,
     category: 'succulents',
   },
   {
     id: 'yuccaRostrata',
-    image: '/img/palme/yucca-rostrata.jpg',
+    image: plantImages.yuccaRostrata,
     category: 'succulents',
   },
   {
     id: 'strelitziaRegina',
-    image: '/img/palme/strellitzia-regina.jpg',
+    image: plantImages.strellitziaRegina,
     category: 'succulents',
   },
   {
     id: 'dasylirion',
-    image: '/img/palme/dasyliriona.jpg',
+    image: plantImages.dasyliriona,
     category: 'succulents',
   },
 ];
@@ -218,6 +219,7 @@ const ProductModal: React.FC<{
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 45vw"
               quality={80}
+              placeholder="blur"
             />
           </div>
 
@@ -301,6 +303,7 @@ const ProductCard: React.FC<{
         sizes="(max-width: 768px) 50vw, 25vw"
         loading="lazy"
         quality={75}
+        placeholder="blur"
       />
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -468,13 +471,14 @@ export default function BiljkePage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/img/palme.jpeg"
+              src={palmeHero}
               alt=""
               fill
               className="object-cover"
               sizes="100vw"
               quality={70}
               priority
+              placeholder="blur"
             />
           </div>
           {/* Dark Overlay */}
