@@ -12,7 +12,7 @@ START=$(date +%s)
 
 {
   for img in $(ls "$DIR"/public/img/palme/*.jpg | sed "s|$DIR/public||"); do
-    for q in 75 80; do
+    for q in 70 80; do
       for w in 640 750 828 1080 1200 1920; do
         echo "$BASE_URL/_next/image?url=$(echo "$img" | sed 's|/|%2F|g')&w=$w&q=$q"
       done
