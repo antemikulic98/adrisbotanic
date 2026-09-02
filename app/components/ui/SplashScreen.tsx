@@ -28,11 +28,11 @@ export function SplashScreen() {
     
     const animateTimer = setTimeout(() => {
       setIsAnimatingOut(true);
-    }, 2800);
+    }, 1100);
 
     const removeTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 3500);
+    }, 1500);
 
     return () => {
       clearTimeout(animateTimer);

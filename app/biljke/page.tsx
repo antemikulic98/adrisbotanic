@@ -18,6 +18,7 @@ import { plantImages, palmeHero } from '../lib/images';
 import { ContactModal } from '../components/ui/ContactModal';
 import { useState } from 'react';
 import { useTranslations } from '@/app/i18n';
+import { useModalBehavior } from '@/app/lib/useModalBehavior';
 
 type CategoryId = 'trees' | 'shrubs' | 'citrus' | 'aromatic' | 'climbers' | 'succulents';
 type ProductId = 
@@ -187,12 +188,18 @@ const ProductModal: React.FC<{
   onContact: (name: string) => void;
   t: ReturnType<typeof useTranslations>;
 }> = ({ product, isOpen, onClose, onContact, t }) => {
+  useModalBehavior(isOpen, onClose);
+
   if (!isOpen || !product) return null;
 
   const plantData = t.featured.plants[product.id];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -608,7 +615,7 @@ export default function BiljkePage() {
               {/* Right: Products Grid */}
               <div className="lg:col-span-2">
                 <h3 className="text-lg font-bold text-neutral-900 mb-6">
-                  Dostupni proizvodi
+                  {t.plantsPage.availableProducts}
                 </h3>
                 {filteredProducts.length > 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -633,10 +640,10 @@ export default function BiljkePage() {
                       <ActiveIcon className="w-8 h-8" style={{ color: '#274223' }} />
                     </div>
                     <p className="text-neutral-600 font-medium">
-                      Uskoro dodajemo proizvode u ovu kategoriju
+                      {t.plantsPage.comingSoon}
                     </p>
                     <p className="text-neutral-500 text-sm mt-2">
-                      Kontaktirajte nas za dostupnost
+                      {t.plantsPage.contactForAvailability}
                     </p>
                     <button
                       onClick={() => openContactModal(activeCategory.title)}
@@ -644,7 +651,7 @@ export default function BiljkePage() {
                       style={{ backgroundColor: '#274223' }}
                     >
                       <Phone className="w-4 h-4" />
-                      Kontaktiraj nas
+                      {t.plantsPage.contactUsShort}
                     </button>
                   </div>
                 )}

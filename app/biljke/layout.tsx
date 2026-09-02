@@ -58,12 +58,40 @@ export const metadata: Metadata = {
   },
 };
 
+import { translations } from '@/app/i18n/translations';
+
+// ItemList schema — pomaže Googleu razumjeti ponudu biljaka
+const plantNames = Object.values(translations.hr.featured.plants).map(
+  (p) => p.name
+);
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Mediteranske biljke - Adris Botanic',
+  url: 'https://adrisbotanic.com/biljke',
+  numberOfItems: plantNames.length,
+  itemListElement: plantNames.map((name, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name,
+  })),
+};
+
 export default function BiljkeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      {children}
+    </>
+  );
 }
 
 

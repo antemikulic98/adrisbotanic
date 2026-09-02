@@ -71,22 +71,6 @@ export const Footer: React.FC = () => {
             <ul className='space-y-2'>
               <li>
                 <Link
-                  href='/faq'
-                  className='text-sm hover:text-primary transition-colors'
-                >
-                  {t.footer.faq}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/dostava'
-                  className='text-sm hover:text-primary transition-colors'
-                >
-                  {t.footer.deliveryReturn}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href='/uvjeti'
                   className='text-sm hover:text-primary transition-colors'
                 >

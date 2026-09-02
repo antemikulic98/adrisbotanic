@@ -276,6 +276,10 @@ export const it = {
 
   // Plants Page
   plantsPage: {
+    availableProducts: 'Prodotti disponibili',
+    comingSoon: 'Presto aggiungeremo prodotti a questa categoria',
+    contactForAvailability: 'Contattaci per la disponibilità',
+    contactUsShort: 'Contattaci',
     badge: 'Le Nostre Piante',
     title: 'Piante Mediterranee',
     titleHighlight: 'Per il Tuo Giardino Perfetto',
@@ -467,6 +471,7 @@ export const it = {
     successTitle: 'Messaggio inviato con successo!',
     successDesc: 'Ti contatteremo presto.',
     errorTitle: 'Errore nell\'invio',
+    errorText: 'Messaggio non inviato. Riprova o chiamaci.',
     sending: 'Invio in corso...',
     send: 'Invia messaggio',
     privacyNote: 'I tuoi dati sono al sicuro e non saranno condivisi con terze parti.',

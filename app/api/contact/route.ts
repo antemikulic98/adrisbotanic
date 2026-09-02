@@ -1,18 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+// Escape korisničkog unosa prije umetanja u HTML maila (sprječava HTML injection)
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, subject, message } = body;
 
     // Validate required fields
-    if (!name || !email || !subject || !message) {
+    if (!body.name || !body.email || !body.subject || !body.message) {
       return NextResponse.json(
         { error: 'Molimo ispunite sva obavezna polja.' },
         { status: 400 }
       );
     }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
+      return NextResponse.json(
+        { error: 'Unesite ispravnu email adresu.' },
+        { status: 400 }
+      );
+    }
+
+    const name = escapeHtml(String(body.name));
+    const email = escapeHtml(String(body.email));
+    const phone = body.phone ? escapeHtml(String(body.phone)) : '';
+    const subject = escapeHtml(String(body.subject));
+    const message = escapeHtml(String(body.message));
 
     // Create transporter with Gmail
     const transporter = nodemailer.createTransport({
@@ -27,8 +49,8 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: `"Adrisbotanic Web" <${process.env.GMAIL_USER}>`,
       to: 'info@adrisbotanic.com',
-      replyTo: email,
-      subject: `[Web Upit] ${subject}`,
+      replyTo: String(body.email),
+      subject: `[Web Upit] ${String(body.subject)}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background-color: #274223; padding: 20px; text-align: center;">

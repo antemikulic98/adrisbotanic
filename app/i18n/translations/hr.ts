@@ -279,6 +279,10 @@ export const hr = {
 
   // Plants Page
   plantsPage: {
+    availableProducts: 'Dostupni proizvodi',
+    comingSoon: 'Uskoro dodajemo proizvode u ovu kategoriju',
+    contactForAvailability: 'Kontaktirajte nas za dostupnost',
+    contactUsShort: 'Kontaktiraj nas',
     badge: 'Naše Biljke',
     title: 'Mediteranske Biljke',
     titleHighlight: 'Za Tvoj Savršeni Vrt',
@@ -488,6 +492,7 @@ export const hr = {
     successTitle: 'Poruka uspješno poslana!',
     successDesc: 'Kontaktirat ćemo te uskoro.',
     errorTitle: 'Greška pri slanju',
+    errorText: 'Poruka nije poslana. Pokušajte ponovno ili nas nazovite.',
     sending: 'Šaljem...',
     send: 'Pošalji poruku',
     privacyNote:

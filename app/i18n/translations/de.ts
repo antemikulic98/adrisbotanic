@@ -276,6 +276,10 @@ export const de = {
 
   // Plants Page
   plantsPage: {
+    availableProducts: 'Verfügbare Produkte',
+    comingSoon: 'Wir fügen dieser Kategorie bald Produkte hinzu',
+    contactForAvailability: 'Kontaktieren Sie uns für Verfügbarkeit',
+    contactUsShort: 'Kontaktieren Sie uns',
     badge: 'Unsere Pflanzen',
     title: 'Mediterrane Pflanzen',
     titleHighlight: 'Für Ihren Perfekten Garten',
@@ -467,6 +471,7 @@ export const de = {
     successTitle: 'Nachricht erfolgreich gesendet!',
     successDesc: 'Wir werden Sie bald kontaktieren.',
     errorTitle: 'Fehler beim Senden',
+    errorText: 'Nachricht wurde nicht gesendet. Bitte versuchen Sie es erneut oder rufen Sie uns an.',
     sending: 'Senden...',
     send: 'Nachricht senden',
     privacyNote: 'Ihre Daten sind sicher und werden nicht an Dritte weitergegeben.',

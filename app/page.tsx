@@ -1,8 +1,17 @@
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Hero } from './components/home/Hero';
-import { Categories } from './components/home/Categories';
-import { FeaturedProducts } from './components/home/FeaturedProducts';
-import { CallToAction } from './components/home/CallToAction';
+
+// Sekcije ispod folda (koriste Swiper) — lazy load da hero krene što prije
+const Categories = dynamic(() =>
+  import('./components/home/Categories').then((m) => m.Categories)
+);
+const FeaturedProducts = dynamic(() =>
+  import('./components/home/FeaturedProducts').then((m) => m.FeaturedProducts)
+);
+const CallToAction = dynamic(() =>
+  import('./components/home/CallToAction').then((m) => m.CallToAction)
+);
 
 export const metadata: Metadata = {
   title: 'Adris Botanic | Rasadnik Mediteranskih Biljaka - Masline, Palme, Agrumi | Kaštel Štafilić',

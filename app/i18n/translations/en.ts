@@ -276,6 +276,10 @@ export const en = {
 
   // Plants Page
   plantsPage: {
+    availableProducts: 'Available products',
+    comingSoon: 'We are adding products to this category soon',
+    contactForAvailability: 'Contact us for availability',
+    contactUsShort: 'Contact us',
     badge: 'Our Plants',
     title: 'Mediterranean Plants',
     titleHighlight: 'For Your Perfect Garden',
@@ -467,6 +471,7 @@ export const en = {
     successTitle: 'Message sent successfully!',
     successDesc: 'We\'ll contact you soon.',
     errorTitle: 'Error sending',
+    errorText: 'Message was not sent. Please try again or call us.',
     sending: 'Sending...',
     send: 'Send message',
     privacyNote: 'Your data is safe and will not be shared with third parties.',

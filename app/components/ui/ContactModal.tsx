@@ -3,6 +3,7 @@
 import { X, Phone, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslations } from '@/app/i18n';
+import { useModalBehavior } from '@/app/lib/useModalBehavior';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -25,6 +26,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useModalBehavior(isOpen, onClose);
 
   if (!isOpen) return null;
 
@@ -74,7 +77,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   };
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
+    <div
+      className='fixed inset-0 z-50 flex items-center justify-center p-4'
+      role='dialog'
+      aria-modal='true'
+    >
       {/* Overlay */}
       <div
         className='absolute inset-0 bg-black/50 backdrop-blur-sm'
