@@ -259,6 +259,15 @@ export const hr = {
   },
 
   // Footer
+  // Cjenik robe (tablica iz podnožja)
+  priceList: {
+    title: 'CSV Cjenik robe',
+    download: 'Preuzmi CSV',
+    close: 'Zatvori',
+    items: 'artikala',
+    unavailable: 'Cjenik trenutno nije dostupan. Pokušajte ponovno kasnije.',
+  },
+
   footer: {
     description:
       'Vaš partner za masline, palme i hortikulturne proizvode. Kvaliteta i stručnost su naša tradicija.',
@@ -271,6 +280,7 @@ export const hr = {
     deliveryReturn: 'Dostava i Povrat',
     termsOfUse: 'Uvjeti Korištenja',
     privacyPolicy: 'Politika Privatnosti',
+    priceList: 'Cjenik (CSV)',
     contactUs: 'Kontaktirajte Nas',
     copyright: 'Sva prava pridržana.',
     privacy: 'Privatnost',

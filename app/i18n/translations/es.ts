@@ -257,6 +257,15 @@ export const es = {
   },
 
   // Footer
+  // Cjenik robe (tablica iz podnožja)
+  priceList: {
+    title: 'Lista de precios CSV',
+    download: 'Descargar CSV',
+    close: 'Cerrar',
+    items: 'artículos',
+    unavailable: 'La lista de precios no está disponible en este momento. Inténtelo de nuevo más tarde.',
+  },
+
   footer: {
     description: 'Tu socio para olivos, palmeras y productos de jardinería. Calidad y experiencia son nuestra tradición.',
     quickLinks: 'Enlaces Rápidos',
@@ -268,6 +277,7 @@ export const es = {
     deliveryReturn: 'Envío & Devoluciones',
     termsOfUse: 'Términos de Uso',
     privacyPolicy: 'Política de Privacidad',
+    priceList: 'Lista de Precios (CSV)',
     contactUs: 'Contáctenos',
     copyright: 'Todos los derechos reservados.',
     privacy: 'Privacidad',

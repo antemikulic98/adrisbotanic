@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Logo } from './Logo';
+import { useState } from 'react';
 import { useTranslations } from '@/app/i18n';
+import { CjenikModal } from '../ui/CjenikModal';
 
 export const Footer: React.FC = () => {
   const t = useTranslations();
+  const [cjenikOtvoren, setCjenikOtvoren] = useState(false);
 
   return (
     <footer className='bg-neutral-900 text-neutral-300'>
@@ -84,6 +87,16 @@ export const Footer: React.FC = () => {
                 >
                   {t.footer.privacyPolicy}
                 </Link>
+              </li>
+              <li>
+                {/* Cjenik robe iz Briksyja: tablica + preuzimanje CSV-a (app/cjenik.csv/route.ts) */}
+                <button
+                  type='button'
+                  onClick={() => setCjenikOtvoren(true)}
+                  className='text-sm hover:text-primary transition-colors cursor-pointer'
+                >
+                  {t.footer.priceList}
+                </button>
               </li>
             </ul>
           </div>
@@ -174,6 +187,7 @@ export const Footer: React.FC = () => {
           </div>
         </Container>
       </div>
+      <CjenikModal isOpen={cjenikOtvoren} onClose={() => setCjenikOtvoren(false)} />
     </footer>
   );
 };

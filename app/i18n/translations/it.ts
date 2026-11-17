@@ -257,6 +257,15 @@ export const it = {
   },
 
   // Footer
+  // Cjenik robe (tablica iz podnožja)
+  priceList: {
+    title: 'Listino prezzi CSV',
+    download: 'Scarica CSV',
+    close: 'Chiudi',
+    items: 'articoli',
+    unavailable: 'Il listino prezzi non è al momento disponibile. Riprova più tardi.',
+  },
+
   footer: {
     description: 'Il tuo partner per ulivi, palme e prodotti per il giardinaggio. Qualità ed esperienza sono la nostra tradizione.',
     quickLinks: 'Link Rapidi',
@@ -268,6 +277,7 @@ export const it = {
     deliveryReturn: 'Consegna & Resi',
     termsOfUse: 'Termini di Utilizzo',
     privacyPolicy: 'Privacy Policy',
+    priceList: 'Listino Prezzi (CSV)',
     contactUs: 'Contattaci',
     copyright: 'Tutti i diritti riservati.',
     privacy: 'Privacy',

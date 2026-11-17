@@ -257,6 +257,15 @@ export const de = {
   },
 
   // Footer
+  // Cjenik robe (tablica iz podnožja)
+  priceList: {
+    title: 'CSV Preisliste',
+    download: 'CSV herunterladen',
+    close: 'Schließen',
+    items: 'Artikel',
+    unavailable: 'Die Preisliste ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.',
+  },
+
   footer: {
     description: 'Ihr Partner für Olivenbäume, Palmen und Gartenprodukte. Qualität und Expertise sind unsere Tradition.',
     quickLinks: 'Schnelllinks',
@@ -268,6 +277,7 @@ export const de = {
     deliveryReturn: 'Lieferung & Rückgabe',
     termsOfUse: 'Nutzungsbedingungen',
     privacyPolicy: 'Datenschutz',
+    priceList: 'Preisliste (CSV)',
     contactUs: 'Kontaktieren Sie uns',
     copyright: 'Alle Rechte vorbehalten.',
     privacy: 'Datenschutz',
