@@ -264,6 +264,9 @@ export const it = {
     close: 'Chiudi',
     items: 'articoli',
     unavailable: 'Il listino prezzi non è al momento disponibile. Riprova più tardi.',
+    date: 'Data',
+    forDate: 'listino del',
+    daily: 'Listino giornaliero con prezzi al dettaglio e prezzi di riferimento. Aggiornato ogni giorno.',
   },
 
   // Kolačići (banner + postavke privole)

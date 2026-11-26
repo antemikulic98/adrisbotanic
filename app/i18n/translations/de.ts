@@ -264,6 +264,9 @@ export const de = {
     close: 'Schließen',
     items: 'Artikel',
     unavailable: 'Die Preisliste ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.',
+    date: 'Datum',
+    forDate: 'Preisliste für',
+    daily: 'Tagespreisliste mit Einzelhandels- und Ankerpreisen. Wird täglich aktualisiert.',
   },
 
   // Kolačići (banner + postavke privole)

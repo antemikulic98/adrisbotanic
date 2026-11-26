@@ -107,3 +107,20 @@ const polje = (v: string) => {
 export function cjenikRobeCsv(redci: string[][]): string {
   return [CJENIK_STUPCI.join(';'), ...redci.map((r) => r.map(polje).join(';'))].join('\r\n') + '\r\n';
 }
+
+/** Današnji dan u Hrvatskoj, 'YYYY-MM-DD' — dan na koji se odnosi cjenik bez zadanog datuma. */
+export const danasCjenika = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Zagreb' });
+
+/** Strogo 'YYYY-MM-DD' i stvaran kalendarski dan. */
+export function ispravanDatumCjenika(v: string | null | undefined): v is string {
+  if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
+  const d = new Date(`${v}T00:00:00Z`);
+  return !isNaN(d.getTime()) && d.toISOString().slice(0, 10) === v;
+}
+
+/** Tajni Briksy link + upit (`datum=…` ili `popis=datumi`). Link nikad ne ide u preglednik ni u log. */
+export function briksyCjenikUrl(izvor: string, upit?: Record<string, string>): string {
+  const u = new URL(izvor);
+  for (const [k, v] of Object.entries(upit ?? {})) u.searchParams.set(k, v);
+  return u.toString();
+}

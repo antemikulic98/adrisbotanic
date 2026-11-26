@@ -266,6 +266,9 @@ export const hr = {
     close: 'Zatvori',
     items: 'artikala',
     unavailable: 'Cjenik trenutno nije dostupan. Pokušajte ponovno kasnije.',
+    date: 'Datum',
+    forDate: 'cjenik za',
+    daily: 'Dnevni cjenik s maloprodajnim i sidrenim cijenama. Ažurira se svaki dan.',
   },
 
   // Kolačići (banner + postavke privole)

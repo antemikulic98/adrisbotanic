@@ -264,6 +264,9 @@ export const en = {
     close: 'Close',
     items: 'items',
     unavailable: 'The price list is currently unavailable. Please try again later.',
+    date: 'Date',
+    forDate: 'price list for',
+    daily: 'Daily price list with retail and anchor prices. Updated every day.',
   },
 
   // Kolačići (banner + postavke privole)

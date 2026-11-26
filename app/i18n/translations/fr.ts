@@ -264,6 +264,9 @@ export const fr = {
     close: 'Fermer',
     items: 'articles',
     unavailable: 'La liste de prix est momentanément indisponible. Veuillez réessayer plus tard.',
+    date: 'Date',
+    forDate: 'liste de prix du',
+    daily: 'Liste de prix quotidienne avec prix de détail et prix d’ancrage. Mise à jour chaque jour.',
   },
 
   // Kolačići (banner + postavke privole)

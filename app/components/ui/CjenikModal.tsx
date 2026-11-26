@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Download, Loader2, X } from 'lucide-react';
 import { useTranslations } from '@/app/i18n';
 import { useModalBehavior } from '@/app/lib/useModalBehavior';
-import { parsirajCsv } from '@/app/lib/cjenik';
+import { danasCjenika, ispravanDatumCjenika, parsirajCsv } from '@/app/lib/cjenik';
 
 interface CjenikModalProps {
   isOpen: boolean;
@@ -14,20 +14,54 @@ interface CjenikModalProps {
 // Brojčani stupci (cijene) — poravnati desno, tabularne znamenke
 const BROJCANI = new Set(['CijenaZaOsnovnuJedinicuMjere', 'ProdajnaCijena', 'SidrenaCijena']);
 
+/** Cjenik za dan: današnji bez parametra (isti URL kao poveznica u podnožju), prošli uz ?datum=. */
+const putanja = (datum: string) =>
+  datum === danasCjenika() ? '/cjenik.csv' : `/cjenik.csv?datum=${datum}`;
+
+/** YYYY-MM-DD → 26.11.2026. */
+const hrDatum = (iso: string) => {
+  const [g, m, d] = iso.split('-');
+  return `${d}.${m}.${g}.`;
+};
+
 /** Tablica „CSV Cjenik robe” iz podnožja — čita istu datoteku koju nudi za preuzimanje (/cjenik.csv). */
 export const CjenikModal: React.FC<CjenikModalProps> = ({ isOpen, onClose }) => {
   const t = useTranslations();
   const [redci, setRedci] = useState<string[][] | null>(null);
   const [greska, setGreska] = useState(false);
+  // dani za koje postoji cjenik (najnoviji prvi) i odabrani dan; '' = još nije učitano
+  const [datumi, setDatumi] = useState<string[]>([]);
+  const [datum, setDatum] = useState('');
 
   useModalBehavior(isOpen, onClose);
 
+  // otvaranje: popis dana, odabran današnji
   useEffect(() => {
     if (!isOpen) return;
     let aktivno = true;
+    const danas = danasCjenika();
+    setDatumi([danas]);
+    setDatum(danas);
+    fetch('/api/cjenik-datumi')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j: { datumi?: unknown } | null) => {
+        if (!aktivno || !Array.isArray(j?.datumi)) return;
+        const popis = j.datumi.filter((d): d is string => ispravanDatumCjenika(d));
+        if (popis.length) setDatumi(popis.includes(danas) ? popis : [danas, ...popis]);
+      })
+      .catch(() => {});
+    return () => {
+      aktivno = false;
+    };
+  }, [isOpen]);
+
+  // cjenik odabranog dana
+  useEffect(() => {
+    if (!isOpen || !datum) return;
+    let aktivno = true;
     setGreska(false);
     setRedci(null);
-    fetch('/cjenik.csv')
+    fetch(putanja(datum))
       .then((r) => {
         if (!r.ok) throw new Error(String(r.status));
         return r.text();
@@ -42,12 +76,13 @@ export const CjenikModal: React.FC<CjenikModalProps> = ({ isOpen, onClose }) => 
     return () => {
       aktivno = false;
     };
-  }, [isOpen]);
+  }, [isOpen, datum]);
 
   if (!isOpen) return null;
 
   const zaglavlje = redci?.[0] ?? [];
   const podaci = redci?.slice(1) ?? [];
+  const datoteka = `cjenik-adrisbotanic-${datum}.csv`;
 
   return (
     <div
@@ -62,15 +97,11 @@ export const CjenikModal: React.FC<CjenikModalProps> = ({ isOpen, onClose }) => 
         <div className='flex items-center justify-between gap-3 px-4 sm:px-6 py-4 border-b border-neutral-200'>
           <div className='min-w-0'>
             <h2 className='text-lg sm:text-xl font-semibold truncate'>{t.priceList.title}</h2>
-            {redci && (
-              <p className='text-xs text-neutral-500 mt-0.5'>
-                {podaci.length} {t.priceList.items}
-              </p>
-            )}
+            <p className='text-xs text-neutral-500 mt-0.5'>{t.priceList.daily}</p>
           </div>
           <div className='flex items-center gap-2 shrink-0'>
             <a
-              href='/cjenik.csv'
+              href={datum ? putanja(datum) : '/cjenik.csv'}
               download
               className='inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-[#274223] text-white text-sm font-medium hover:opacity-90 transition-opacity'
             >
@@ -86,6 +117,31 @@ export const CjenikModal: React.FC<CjenikModalProps> = ({ isOpen, onClose }) => 
             </button>
           </div>
         </div>
+
+        {/* Dnevni cjenik: datum na koji se cjenik odnosi + naziv datoteke za taj dan */}
+        {datum && (
+          <div className='px-4 sm:px-6 py-3 border-b border-neutral-200 bg-neutral-50 flex flex-wrap items-end gap-x-6 gap-y-2'>
+            <label className='flex flex-col gap-1 text-xs text-neutral-600'>
+              {t.priceList.date}
+              <select
+                value={datum}
+                onChange={(e) => setDatum(e.target.value)}
+                className='rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 tabular-nums'
+              >
+                {datumi.map((d) => (
+                  <option key={d} value={d}>
+                    {hrDatum(d)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <p className='text-xs sm:text-sm text-neutral-600 pb-2 min-w-0 break-all'>
+              {datoteka} · {t.priceList.forDate}{' '}
+              <span className='font-semibold text-neutral-900'>{hrDatum(datum)}</span>
+              {redci && ` · ${podaci.length} ${t.priceList.items}`}
+            </p>
+          </div>
+        )}
 
         <div className='flex-1 min-h-0 overflow-auto'>
           {greska ? (
