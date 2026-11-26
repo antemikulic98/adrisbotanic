@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Download, Loader2, X } from 'lucide-react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { Check, ChevronDown, Download, Loader2, X } from 'lucide-react';
 import { useTranslations } from '@/app/i18n';
 import { useModalBehavior } from '@/app/lib/useModalBehavior';
 import { danasCjenika, ispravanDatumCjenika, parsirajCsv } from '@/app/lib/cjenik';
@@ -22,6 +22,120 @@ const putanja = (datum: string) =>
 const hrDatum = (iso: string) => {
   const [g, m, d] = iso.split('-');
   return `${d}.${m}.${g}.`;
+};
+
+interface DatumIzbornikProps {
+  oznaka: string;
+  datumi: string[];
+  datum: string;
+  onOdabir: (datum: string) => void;
+}
+
+/** Izbornik dana cjenika (vlastiti popis umjesto sistemskog <select>): miš, strelice, Enter, Escape. */
+const DatumIzbornik: React.FC<DatumIzbornikProps> = ({ oznaka, datumi, datum, onOdabir }) => {
+  const [otvoren, setOtvoren] = useState(false);
+  const [aktivan, setAktivan] = useState(0);
+  const okvir = useRef<HTMLDivElement>(null);
+  const popis = useRef<HTMLUListElement>(null);
+  const id = useId();
+
+  const otvori = () => {
+    setAktivan(Math.max(0, datumi.indexOf(datum)));
+    setOtvoren(true);
+  };
+  const odaberi = (d: string) => {
+    onOdabir(d);
+    setOtvoren(false);
+  };
+
+  // klik izvan izbornika ga zatvara
+  useEffect(() => {
+    if (!otvoren) return;
+    const izvan = (e: MouseEvent) => {
+      if (!okvir.current?.contains(e.target as Node)) setOtvoren(false);
+    };
+    document.addEventListener('mousedown', izvan);
+    return () => document.removeEventListener('mousedown', izvan);
+  }, [otvoren]);
+
+  // aktivna stavka ostaje vidljiva dok se lista strelicama
+  useEffect(() => {
+    if (otvoren) popis.current?.children[aktivan]?.scrollIntoView({ block: 'nearest' });
+  }, [otvoren, aktivan]);
+
+  const tipka = (e: React.KeyboardEvent) => {
+    if (!otvoren) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        otvori();
+      }
+      return;
+    }
+    if (e.key === 'Escape') {
+      // Escape zatvara samo izbornik, ne i cijeli prozor cjenika
+      e.stopPropagation();
+      setOtvoren(false);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const pomak = e.key === 'ArrowDown' ? 1 : -1;
+      setAktivan((i) => Math.min(datumi.length - 1, Math.max(0, i + pomak)));
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (datumi[aktivan]) odaberi(datumi[aktivan]);
+    } else if (e.key === 'Tab') setOtvoren(false);
+  };
+
+  return (
+    <div ref={okvir} className='relative flex flex-col gap-1' onKeyDown={tipka}>
+      <span id={`${id}-oznaka`} className='text-xs text-neutral-600'>
+        {oznaka}
+      </span>
+      <button
+        type='button'
+        role='combobox'
+        aria-haspopup='listbox'
+        aria-expanded={otvoren}
+        aria-controls={`${id}-popis`}
+        aria-labelledby={`${id}-oznaka`}
+        aria-activedescendant={otvoren ? `${id}-${aktivan}` : undefined}
+        onClick={() => (otvoren ? setOtvoren(false) : otvori())}
+        className={`inline-flex items-center justify-between gap-3 min-w-[10.5rem] rounded-full border bg-white pl-4 pr-3 py-2 text-sm font-medium text-neutral-900 tabular-nums transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#274223]/30 ${
+          otvoren ? 'border-[#274223]' : 'border-neutral-300 hover:border-neutral-400'
+        }`}
+      >
+        {hrDatum(datum)}
+        <ChevronDown
+          className={`w-4 h-4 text-neutral-500 transition-transform ${otvoren ? 'rotate-180' : ''}`}
+        />
+      </button>
+      {otvoren && (
+        <ul
+          ref={popis}
+          id={`${id}-popis`}
+          role='listbox'
+          aria-labelledby={`${id}-oznaka`}
+          className='absolute left-0 top-full mt-1.5 z-30 min-w-full max-h-64 overflow-auto rounded-2xl border border-neutral-200 bg-white p-1 shadow-xl'
+        >
+          {datumi.map((d, i) => (
+            <li
+              key={d}
+              id={`${id}-${i}`}
+              role='option'
+              aria-selected={d === datum}
+              onMouseEnter={() => setAktivan(i)}
+              onClick={() => odaberi(d)}
+              className={`flex items-center justify-between gap-3 rounded-xl px-3 py-2 text-sm tabular-nums cursor-pointer whitespace-nowrap ${
+                i === aktivan ? 'bg-[#274223]/10' : ''
+              } ${d === datum ? 'font-semibold text-[#274223]' : 'text-neutral-800'}`}
+            >
+              {hrDatum(d)}
+              {d === datum && <Check className='w-4 h-4' />}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 /** Tablica „CSV Cjenik robe” iz podnožja — čita istu datoteku koju nudi za preuzimanje (/cjenik.csv). */
@@ -121,20 +235,7 @@ export const CjenikModal: React.FC<CjenikModalProps> = ({ isOpen, onClose }) => 
         {/* Dnevni cjenik: datum na koji se cjenik odnosi + naziv datoteke za taj dan */}
         {datum && (
           <div className='px-4 sm:px-6 py-3 border-b border-neutral-200 bg-neutral-50 flex flex-wrap items-end gap-x-6 gap-y-2'>
-            <label className='flex flex-col gap-1 text-xs text-neutral-600'>
-              {t.priceList.date}
-              <select
-                value={datum}
-                onChange={(e) => setDatum(e.target.value)}
-                className='rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-900 tabular-nums'
-              >
-                {datumi.map((d) => (
-                  <option key={d} value={d}>
-                    {hrDatum(d)}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <DatumIzbornik oznaka={t.priceList.date} datumi={datumi} datum={datum} onOdabir={setDatum} />
             <p className='text-xs sm:text-sm text-neutral-600 pb-2 min-w-0 break-all'>
               {datoteka} · {t.priceList.forDate}{' '}
               <span className='font-semibold text-neutral-900'>{hrDatum(datum)}</span>
