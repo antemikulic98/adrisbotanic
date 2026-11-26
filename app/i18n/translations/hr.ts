@@ -11,7 +11,7 @@ export const hr = {
   // Header
   header: {
     phone: '+385 91 921 1069',
-    workHours: 'Radimo: Pon-Pet 8:00-20:00, Sub 9:00-14:00',
+    workHours: 'Radimo: Pon-Pet 8:00-15:00, Sub 8:00-12:30',
   },
 
   // Hero
@@ -281,6 +281,7 @@ export const hr = {
     termsOfUse: 'Uvjeti Korištenja',
     privacyPolicy: 'Politika Privatnosti',
     priceList: 'Cjenik (CSV)',
+    complaints: 'Pisani Prigovor',
     contactUs: 'Kontaktirajte Nas',
     copyright: 'Sva prava pridržana.',
     privacy: 'Privatnost',
@@ -467,7 +468,7 @@ export const hr = {
     readyDesc:
       'Posjeti nas ili nas kontaktiraj za besplatno savjetovanje. Radujemo se suradnji s tobom!',
     viewPlants: 'Pogledaj Biljke',
-    workHours: 'Radno vrijeme: Pon-Pet 8:00-20:00, Sub 9:00-14:00',
+    workHours: 'Radno vrijeme: Pon-Pet 8:00-15:00, Sub 8:00-12:30',
   },
 
   // Contact Page
@@ -478,13 +479,13 @@ export const hr = {
     subtitle:
       'Imaš pitanje o našim biljkama ili trebate savjet? Kontaktiraj nas bilo kojim putem - tu smo za tebe!',
     phone: 'Telefon',
-    phoneHours: 'Pon-Pet 8:00-20:00, Sub 9:00-14:00',
+    phoneHours: 'Pon-Pet 8:00-15:00, Sub 8:00-12:30',
     email: 'Email',
     emailResponse: 'Odgovaramo u roku 24h',
     location: 'Lokacija',
     workHours: 'Radno vrijeme',
-    monFri: 'Pon-Pet: 8:00 - 20:00',
-    sat: 'Subota: 9:00 - 14:00',
+    monFri: 'Pon-Pet: 8:00 - 15:00',
+    sat: 'Subota: 8:00 - 12:30',
     sun: 'Nedjelja: Zatvoreno',
     contactAction: 'Kontaktiraj →',
     sendMessage: 'Pošalji nam poruku',
@@ -527,8 +528,8 @@ export const hr = {
 
   // Mobile Menu
   mobileMenu: {
-    workHours: 'Pon-Pet: 8:00 - 20:00',
-    satHours: 'Sub: 9:00 - 14:00',
+    workHours: 'Pon-Pet: 8:00 - 15:00',
+    satHours: 'Sub: 8:00 - 12:30',
   },
 
   // Contact Modal

@@ -89,6 +89,14 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link
+                  href='/prigovori'
+                  className='text-sm hover:text-primary transition-colors'
+                >
+                  {t.footer.complaints}
+                </Link>
+              </li>
+              <li>
                 {/* Cjenik robe iz Briksyja: tablica + preuzimanje CSV-a (app/cjenik.csv/route.ts) */}
                 <button
                   type='button'

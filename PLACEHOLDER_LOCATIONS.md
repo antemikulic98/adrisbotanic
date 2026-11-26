@@ -75,7 +75,7 @@
 | Linija | Što Ažurirati    | Trenutni Placeholder                    |
 | ------ | ---------------- | --------------------------------------- |
 | 17     | Telefon          | "+385 XX XXX XXXX"                      |
-| 19     | Radno vrijeme    | "Pon-Pet 8:00-20:00, Sub 9:00-14:00"    |
+| 19     | Radno vrijeme    | "Pon-Pet 8:00-15:00, Sub 8:00-12:30"    |
 | 29-34  | Navigation links | Imena i linkovi (ako želiš promijeniti) |
 
 ---

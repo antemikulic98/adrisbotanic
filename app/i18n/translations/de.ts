@@ -11,7 +11,7 @@ export const de = {
   // Header
   header: {
     phone: '+385 91 921 1069',
-    workHours: 'Geöffnet: Mo-Fr 8:00-20:00, Sa 9:00-14:00',
+    workHours: 'Geöffnet: Mo-Fr 8:00-15:00, Sa 8:00-12:30',
   },
 
   // Hero
@@ -278,6 +278,7 @@ export const de = {
     termsOfUse: 'Nutzungsbedingungen',
     privacyPolicy: 'Datenschutz',
     priceList: 'Preisliste (CSV)',
+    complaints: 'Schriftliche Beschwerden',
     contactUs: 'Kontaktieren Sie uns',
     copyright: 'Alle Rechte vorbehalten.',
     privacy: 'Datenschutz',
@@ -447,7 +448,7 @@ export const de = {
     readyToStart: 'Wir sind bereit, Ihr Projekt zu starten!',
     readyDesc: 'Besuchen Sie uns oder kontaktieren Sie uns für eine kostenlose Beratung. Wir freuen uns auf die Zusammenarbeit mit Ihnen!',
     viewPlants: 'Pflanzen Ansehen',
-    workHours: 'Öffnungszeiten: Mo-Fr 8:00-20:00, Sa 9:00-14:00',
+    workHours: 'Öffnungszeiten: Mo-Fr 8:00-15:00, Sa 8:00-12:30',
   },
 
   // Contact Page
@@ -457,13 +458,13 @@ export const de = {
     titleHighlight: 'Gerne',
     subtitle: 'Haben Sie eine Frage zu unseren Pflanzen oder brauchen Sie Beratung? Kontaktieren Sie uns auf jedem Weg - wir sind für Sie da!',
     phone: 'Telefon',
-    phoneHours: 'Mo-Fr 8:00-20:00, Sa 9:00-14:00',
+    phoneHours: 'Mo-Fr 8:00-15:00, Sa 8:00-12:30',
     email: 'E-Mail',
     emailResponse: 'Wir antworten innerhalb von 24h',
     location: 'Standort',
     workHours: 'Öffnungszeiten',
-    monFri: 'Mo-Fr: 8:00 - 20:00',
-    sat: 'Samstag: 9:00 - 14:00',
+    monFri: 'Mo-Fr: 8:00 - 15:00',
+    sat: 'Samstag: 8:00 - 12:30',
     sun: 'Sonntag: Geschlossen',
     contactAction: 'Kontakt →',
     sendMessage: 'Senden Sie uns eine Nachricht',
@@ -505,8 +506,8 @@ export const de = {
 
   // Mobile Menu
   mobileMenu: {
-    workHours: 'Mo-Fr: 8:00 - 20:00',
-    satHours: 'Sa: 9:00 - 14:00',
+    workHours: 'Mo-Fr: 8:00 - 15:00',
+    satHours: 'Sa: 8:00 - 12:30',
   },
 
   // Contact Modal

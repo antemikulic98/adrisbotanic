@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Kontakt | Rasadnik Palmi i Maslina Split - Kaštel Štafilić',
   description:
-    'Posjetite rasadnik palmi i maslina kod Splita. Adresa: Cesta pape Ivana Pavla II. 380, Kaštel Štafilić. Tel: +385 91 921 1069. Pon-Pet 8-20h, Sub 9-14h. Besplatno savjetovanje za palme i masline!',
+    'Posjetite rasadnik palmi i maslina kod Splita. Adresa: Cesta pape Ivana Pavla II. 380, Kaštel Štafilić. Tel: +385 91 921 1069. Pon-Pet 8-15h, Sub 8-12:30h. Besplatno savjetovanje za palme i masline!',
   keywords: [
     'rasadnik split kontakt',
     'rasadnik palmi split',

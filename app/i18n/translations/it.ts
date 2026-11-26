@@ -11,7 +11,7 @@ export const it = {
   // Header
   header: {
     phone: '+385 91 921 1069',
-    workHours: 'Aperto: Lun-Ven 8:00-20:00, Sab 9:00-14:00',
+    workHours: 'Aperto: Lun-Ven 8:00-15:00, Sab 8:00-12:30',
   },
 
   // Hero
@@ -278,6 +278,7 @@ export const it = {
     termsOfUse: 'Termini di Utilizzo',
     privacyPolicy: 'Privacy Policy',
     priceList: 'Listino Prezzi (CSV)',
+    complaints: 'Reclami Scritti',
     contactUs: 'Contattaci',
     copyright: 'Tutti i diritti riservati.',
     privacy: 'Privacy',
@@ -447,7 +448,7 @@ export const it = {
     readyToStart: 'Siamo pronti a iniziare il tuo progetto!',
     readyDesc: 'Visitaci o contattaci per una consulenza gratuita. Non vediamo l\'ora di lavorare con te!',
     viewPlants: 'Visualizza Piante',
-    workHours: 'Orari: Lun-Ven 8:00-20:00, Sab 9:00-14:00',
+    workHours: 'Orari: Lun-Ven 8:00-15:00, Sab 8:00-12:30',
   },
 
   // Contact Page
@@ -457,13 +458,13 @@ export const it = {
     titleHighlight: 'Aiutarti',
     subtitle: 'Hai una domanda sulle nostre piante o hai bisogno di consigli? Contattaci in qualsiasi modo - siamo qui per te!',
     phone: 'Telefono',
-    phoneHours: 'Lun-Ven 8:00-20:00, Sab 9:00-14:00',
+    phoneHours: 'Lun-Ven 8:00-15:00, Sab 8:00-12:30',
     email: 'Email',
     emailResponse: 'Rispondiamo entro 24h',
     location: 'Posizione',
     workHours: 'Orari di apertura',
-    monFri: 'Lun-Ven: 8:00 - 20:00',
-    sat: 'Sabato: 9:00 - 14:00',
+    monFri: 'Lun-Ven: 8:00 - 15:00',
+    sat: 'Sabato: 8:00 - 12:30',
     sun: 'Domenica: Chiuso',
     contactAction: 'Contatta →',
     sendMessage: 'Inviaci un messaggio',
@@ -505,8 +506,8 @@ export const it = {
 
   // Mobile Menu
   mobileMenu: {
-    workHours: 'Lun-Ven: 8:00 - 20:00',
-    satHours: 'Sab: 9:00 - 14:00',
+    workHours: 'Lun-Ven: 8:00 - 15:00',
+    satHours: 'Sab: 8:00 - 12:30',
   },
 
   // Contact Modal

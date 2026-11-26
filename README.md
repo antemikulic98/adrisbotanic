@@ -203,7 +203,7 @@ Ažuriraj `categories` array u `app/components/home/Categories.tsx`:
 
 ```tsx
 <span>+385 XX XXX XXXX</span>  // ✏️ Tvoj broj
-<span>Radimo: Pon-Pet 8:00-20:00, Sub 9:00-14:00</span> // ✏️ Tvoje radno vrijeme
+<span>Radimo: Pon-Pet 8:00-15:00, Sub 8:00-12:30</span> // ✏️ Tvoje radno vrijeme
 ```
 
 #### Footer (`app/components/layout/Footer.tsx`)

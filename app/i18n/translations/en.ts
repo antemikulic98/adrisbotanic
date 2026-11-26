@@ -11,7 +11,7 @@ export const en = {
   // Header
   header: {
     phone: '+385 91 921 1069',
-    workHours: 'Open: Mon-Fri 8:00-20:00, Sat 9:00-14:00',
+    workHours: 'Open: Mon-Fri 8:00-15:00, Sat 8:00-12:30',
   },
 
   // Hero
@@ -278,6 +278,7 @@ export const en = {
     termsOfUse: 'Terms of Use',
     privacyPolicy: 'Privacy Policy',
     priceList: 'Price List (CSV)',
+    complaints: 'Written Complaints',
     contactUs: 'Contact Us',
     copyright: 'All rights reserved.',
     privacy: 'Privacy',
@@ -447,7 +448,7 @@ export const en = {
     readyToStart: 'We are ready to start your project!',
     readyDesc: 'Visit us or contact us for free consultation. We look forward to working with you!',
     viewPlants: 'View Plants',
-    workHours: 'Working hours: Mon-Fri 8:00-20:00, Sat 9:00-14:00',
+    workHours: 'Working hours: Mon-Fri 8:00-15:00, Sat 8:00-12:30',
   },
 
   // Contact Page
@@ -457,13 +458,13 @@ export const en = {
     titleHighlight: 'Help',
     subtitle: 'Have a question about our plants or need advice? Contact us any way - we are here for you!',
     phone: 'Phone',
-    phoneHours: 'Mon-Fri 8:00-20:00, Sat 9:00-14:00',
+    phoneHours: 'Mon-Fri 8:00-15:00, Sat 8:00-12:30',
     email: 'Email',
     emailResponse: 'We respond within 24h',
     location: 'Location',
     workHours: 'Working hours',
-    monFri: 'Mon-Fri: 8:00 - 20:00',
-    sat: 'Saturday: 9:00 - 14:00',
+    monFri: 'Mon-Fri: 8:00 - 15:00',
+    sat: 'Saturday: 8:00 - 12:30',
     sun: 'Sunday: Closed',
     contactAction: 'Contact →',
     sendMessage: 'Send us a message',
@@ -505,8 +506,8 @@ export const en = {
 
   // Mobile Menu
   mobileMenu: {
-    workHours: 'Mon-Fri: 8:00 - 20:00',
-    satHours: 'Sat: 9:00 - 14:00',
+    workHours: 'Mon-Fri: 8:00 - 15:00',
+    satHours: 'Sat: 8:00 - 12:30',
   },
 
   // Contact Modal

@@ -11,7 +11,7 @@ export const fr = {
   // Header
   header: {
     phone: '+385 91 921 1069',
-    workHours: 'Ouvert: Lun-Ven 8:00-20:00, Sam 9:00-14:00',
+    workHours: 'Ouvert: Lun-Ven 8:00-15:00, Sam 8:00-12:30',
   },
 
   // Hero
@@ -278,6 +278,7 @@ export const fr = {
     termsOfUse: 'Conditions d\'Utilisation',
     privacyPolicy: 'Politique de Confidentialité',
     priceList: 'Liste de Prix (CSV)',
+    complaints: 'Réclamations Écrites',
     contactUs: 'Contactez-nous',
     copyright: 'Tous droits réservés.',
     privacy: 'Confidentialité',
@@ -447,7 +448,7 @@ export const fr = {
     readyToStart: 'Nous sommes prêts à commencer votre projet!',
     readyDesc: 'Visitez-nous ou contactez-nous pour une consultation gratuite. Nous avons hâte de travailler avec vous!',
     viewPlants: 'Voir les Plantes',
-    workHours: 'Horaires: Lun-Ven 8:00-20:00, Sam 9:00-14:00',
+    workHours: 'Horaires: Lun-Ven 8:00-15:00, Sam 8:00-12:30',
   },
 
   // Contact Page
@@ -457,13 +458,13 @@ export const fr = {
     titleHighlight: 'Vous Aider',
     subtitle: 'Vous avez une question sur nos plantes ou besoin de conseils? Contactez-nous de n\'importe quelle façon - nous sommes là pour vous!',
     phone: 'Téléphone',
-    phoneHours: 'Lun-Ven 8:00-20:00, Sam 9:00-14:00',
+    phoneHours: 'Lun-Ven 8:00-15:00, Sam 8:00-12:30',
     email: 'Email',
     emailResponse: 'Nous répondons sous 24h',
     location: 'Emplacement',
     workHours: 'Horaires d\'ouverture',
-    monFri: 'Lun-Ven: 8:00 - 20:00',
-    sat: 'Samedi: 9:00 - 14:00',
+    monFri: 'Lun-Ven: 8:00 - 15:00',
+    sat: 'Samedi: 8:00 - 12:30',
     sun: 'Dimanche: Fermé',
     contactAction: 'Contacter →',
     sendMessage: 'Envoyez-nous un message',
@@ -505,8 +506,8 @@ export const fr = {
 
   // Mobile Menu
   mobileMenu: {
-    workHours: 'Lun-Ven: 8:00 - 20:00',
-    satHours: 'Sam: 9:00 - 14:00',
+    workHours: 'Lun-Ven: 8:00 - 15:00',
+    satHours: 'Sam: 8:00 - 12:30',
   },
 
   // Contact Modal
