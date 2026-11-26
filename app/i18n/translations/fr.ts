@@ -266,6 +266,27 @@ export const fr = {
     unavailable: 'La liste de prix est momentanément indisponible. Veuillez réessayer plus tard.',
   },
 
+  // Kolačići (banner + postavke privole)
+  cookies: {
+    title: 'Cookies',
+    text: 'Nous utilisons des cookies nécessaires au fonctionnement du site et, avec votre consentement, des cookies d’analyse et de marketing. Vous pouvez tout accepter, tout refuser ou choisir vous-même.',
+    privacyLink: 'Politique de confidentialité',
+    acceptAll: 'Tout accepter',
+    rejectAll: 'Tout refuser',
+    customize: 'Personnaliser',
+    settingsTitle: 'Paramètres des cookies',
+    settingsIntro: 'Choisissez les catégories de cookies que vous autorisez. Vous pouvez modifier votre choix à tout moment via le lien « Paramètres des Cookies » en bas de page.',
+    save: 'Enregistrer la sélection',
+    close: 'Fermer',
+    alwaysActive: 'Toujours actifs',
+    necessaryTitle: 'Nécessaires',
+    necessaryDesc: 'Indispensables au bon fonctionnement du site : ils mémorisent la langue choisie et votre choix de cookies. Ils ne peuvent pas être désactivés.',
+    analyticsTitle: 'Analytiques',
+    analyticsDesc: 'Nous aident à comprendre comment les visiteurs utilisent le site (Google Analytics) afin de l’améliorer. Les données sont agrégées.',
+    marketingTitle: 'Marketing',
+    marketingDesc: 'Utilisés pour mesurer la performance des annonces et afficher des annonces plus pertinentes sur d’autres sites (par ex. Google Ads).',
+  },
+
   footer: {
     description: 'Votre partenaire pour oliviers, palmiers et produits horticoles. Qualité et expertise sont notre tradition.',
     quickLinks: 'Liens Rapides',
@@ -279,6 +300,7 @@ export const fr = {
     privacyPolicy: 'Politique de Confidentialité',
     priceList: 'Liste de Prix (CSV)',
     complaints: 'Réclamations Écrites',
+    cookieSettings: 'Paramètres des Cookies',
     contactUs: 'Contactez-nous',
     copyright: 'Tous droits réservés.',
     privacy: 'Confidentialité',

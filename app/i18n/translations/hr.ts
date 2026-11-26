@@ -268,6 +268,27 @@ export const hr = {
     unavailable: 'Cjenik trenutno nije dostupan. Pokušajte ponovno kasnije.',
   },
 
+  // Kolačići (banner + postavke privole)
+  cookies: {
+    title: 'Kolačići',
+    text: 'Koristimo nužne kolačiće za rad stranice te, uz vašu privolu, analitičke i marketinške kolačiće. Možete prihvatiti sve, odbiti sve ili sami odabrati.',
+    privacyLink: 'Politika privatnosti',
+    acceptAll: 'Prihvati sve',
+    rejectAll: 'Odbij sve',
+    customize: 'Prilagodi postavke',
+    settingsTitle: 'Postavke kolačića',
+    settingsIntro: 'Odaberite koje kategorije kolačića dopuštate. Odabir možete promijeniti u bilo kojem trenutku putem poveznice „Postavke kolačića” u podnožju stranice.',
+    save: 'Spremi odabir',
+    close: 'Zatvori',
+    alwaysActive: 'Uvijek aktivni',
+    necessaryTitle: 'Nužni',
+    necessaryDesc: 'Potrebni su za ispravan rad stranice: pamte odabrani jezik i vaš odabir kolačića. Ne mogu se isključiti.',
+    analyticsTitle: 'Analitički',
+    analyticsDesc: 'Pomažu nam razumjeti kako posjetitelji koriste stranicu (Google Analytics) kako bismo je mogli poboljšati. Podaci su zbirni.',
+    marketingTitle: 'Marketinški',
+    marketingDesc: 'Koriste se za mjerenje učinka oglasa i prikaz relevantnijih oglasa na drugim stranicama (npr. Google oglasi).',
+  },
+
   footer: {
     description:
       'Vaš partner za masline, palme i hortikulturne proizvode. Kvaliteta i stručnost su naša tradicija.',
@@ -282,6 +303,7 @@ export const hr = {
     privacyPolicy: 'Politika Privatnosti',
     priceList: 'Cjenik (CSV)',
     complaints: 'Pisani Prigovor',
+    cookieSettings: 'Postavke Kolačića',
     contactUs: 'Kontaktirajte Nas',
     copyright: 'Sva prava pridržana.',
     privacy: 'Privatnost',

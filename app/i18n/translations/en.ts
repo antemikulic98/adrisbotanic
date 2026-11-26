@@ -266,6 +266,27 @@ export const en = {
     unavailable: 'The price list is currently unavailable. Please try again later.',
   },
 
+  // Kolačići (banner + postavke privole)
+  cookies: {
+    title: 'Cookies',
+    text: 'We use necessary cookies to run the site and, with your consent, analytics and marketing cookies. You can accept all, reject all, or choose yourself.',
+    privacyLink: 'Privacy policy',
+    acceptAll: 'Accept all',
+    rejectAll: 'Reject all',
+    customize: 'Customize settings',
+    settingsTitle: 'Cookie settings',
+    settingsIntro: 'Choose which cookie categories you allow. You can change your choice at any time via the “Cookie Settings” link in the footer.',
+    save: 'Save selection',
+    close: 'Close',
+    alwaysActive: 'Always active',
+    necessaryTitle: 'Necessary',
+    necessaryDesc: 'Required for the site to work properly: they remember the selected language and your cookie choice. They cannot be turned off.',
+    analyticsTitle: 'Analytics',
+    analyticsDesc: 'Help us understand how visitors use the site (Google Analytics) so we can improve it. The data is aggregated.',
+    marketingTitle: 'Marketing',
+    marketingDesc: 'Used to measure ad performance and show more relevant ads on other sites (e.g. Google Ads).',
+  },
+
   footer: {
     description: 'Your partner for olive trees, palms, and horticultural products. Quality and expertise are our tradition.',
     quickLinks: 'Quick Links',
@@ -279,6 +300,7 @@ export const en = {
     privacyPolicy: 'Privacy Policy',
     priceList: 'Price List (CSV)',
     complaints: 'Written Complaints',
+    cookieSettings: 'Cookie Settings',
     contactUs: 'Contact Us',
     copyright: 'All rights reserved.',
     privacy: 'Privacy',

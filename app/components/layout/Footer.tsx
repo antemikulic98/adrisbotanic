@@ -7,6 +7,7 @@ import { Logo } from './Logo';
 import { useState } from 'react';
 import { useTranslations } from '@/app/i18n';
 import { CjenikModal } from '../ui/CjenikModal';
+import { openCookieSettings } from '@/app/lib/consent';
 
 export const Footer: React.FC = () => {
   const t = useTranslations();
@@ -104,6 +105,15 @@ export const Footer: React.FC = () => {
                   className='text-sm hover:text-primary transition-colors cursor-pointer'
                 >
                   {t.footer.priceList}
+                </button>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  onClick={openCookieSettings}
+                  className='text-sm hover:text-primary transition-colors cursor-pointer'
+                >
+                  {t.footer.cookieSettings}
                 </button>
               </li>
             </ul>

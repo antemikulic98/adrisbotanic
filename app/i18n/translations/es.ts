@@ -266,6 +266,27 @@ export const es = {
     unavailable: 'La lista de precios no está disponible en este momento. Inténtelo de nuevo más tarde.',
   },
 
+  // Kolačići (banner + postavke privole)
+  cookies: {
+    title: 'Cookies',
+    text: 'Utilizamos cookies necesarias para el funcionamiento del sitio y, con su consentimiento, cookies analíticas y de marketing. Puede aceptarlas todas, rechazarlas todas o elegir usted mismo.',
+    privacyLink: 'Política de privacidad',
+    acceptAll: 'Aceptar todas',
+    rejectAll: 'Rechazar todas',
+    customize: 'Personalizar',
+    settingsTitle: 'Configuración de cookies',
+    settingsIntro: 'Elija qué categorías de cookies permite. Puede cambiar su elección en cualquier momento mediante el enlace “Configuración de Cookies” en el pie de página.',
+    save: 'Guardar selección',
+    close: 'Cerrar',
+    alwaysActive: 'Siempre activas',
+    necessaryTitle: 'Necesarias',
+    necessaryDesc: 'Necesarias para el correcto funcionamiento del sitio: recuerdan el idioma seleccionado y su elección de cookies. No se pueden desactivar.',
+    analyticsTitle: 'Analíticas',
+    analyticsDesc: 'Nos ayudan a entender cómo los visitantes utilizan el sitio (Google Analytics) para poder mejorarlo. Los datos son agregados.',
+    marketingTitle: 'Marketing',
+    marketingDesc: 'Se utilizan para medir el rendimiento de los anuncios y mostrar anuncios más relevantes en otros sitios (p. ej., Google Ads).',
+  },
+
   footer: {
     description: 'Tu socio para olivos, palmeras y productos de jardinería. Calidad y experiencia son nuestra tradición.',
     quickLinks: 'Enlaces Rápidos',
@@ -279,6 +300,7 @@ export const es = {
     privacyPolicy: 'Política de Privacidad',
     priceList: 'Lista de Precios (CSV)',
     complaints: 'Reclamaciones por Escrito',
+    cookieSettings: 'Configuración de Cookies',
     contactUs: 'Contáctenos',
     copyright: 'Todos los derechos reservados.',
     privacy: 'Privacidad',

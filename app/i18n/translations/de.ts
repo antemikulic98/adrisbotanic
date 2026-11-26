@@ -266,6 +266,27 @@ export const de = {
     unavailable: 'Die Preisliste ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.',
   },
 
+  // Kolačići (banner + postavke privole)
+  cookies: {
+    title: 'Cookies',
+    text: 'Wir verwenden notwendige Cookies für den Betrieb der Website sowie, mit Ihrer Einwilligung, Analyse- und Marketing-Cookies. Sie können alle akzeptieren, alle ablehnen oder selbst auswählen.',
+    privacyLink: 'Datenschutzerklärung',
+    acceptAll: 'Alle akzeptieren',
+    rejectAll: 'Alle ablehnen',
+    customize: 'Einstellungen anpassen',
+    settingsTitle: 'Cookie-Einstellungen',
+    settingsIntro: 'Wählen Sie, welche Cookie-Kategorien Sie zulassen. Sie können Ihre Auswahl jederzeit über den Link „Cookie-Einstellungen” in der Fußzeile ändern.',
+    save: 'Auswahl speichern',
+    close: 'Schließen',
+    alwaysActive: 'Immer aktiv',
+    necessaryTitle: 'Notwendig',
+    necessaryDesc: 'Erforderlich für die ordnungsgemäße Funktion der Website: Sie speichern die gewählte Sprache und Ihre Cookie-Auswahl. Sie können nicht deaktiviert werden.',
+    analyticsTitle: 'Analyse',
+    analyticsDesc: 'Helfen uns zu verstehen, wie Besucher die Website nutzen (Google Analytics), damit wir sie verbessern können. Die Daten sind aggregiert.',
+    marketingTitle: 'Marketing',
+    marketingDesc: 'Werden verwendet, um die Wirkung von Anzeigen zu messen und relevantere Anzeigen auf anderen Websites zu zeigen (z. B. Google Ads).',
+  },
+
   footer: {
     description: 'Ihr Partner für Olivenbäume, Palmen und Gartenprodukte. Qualität und Expertise sind unsere Tradition.',
     quickLinks: 'Schnelllinks',
@@ -279,6 +300,7 @@ export const de = {
     privacyPolicy: 'Datenschutz',
     priceList: 'Preisliste (CSV)',
     complaints: 'Schriftliche Beschwerden',
+    cookieSettings: 'Cookie-Einstellungen',
     contactUs: 'Kontaktieren Sie uns',
     copyright: 'Alle Rechte vorbehalten.',
     privacy: 'Datenschutz',

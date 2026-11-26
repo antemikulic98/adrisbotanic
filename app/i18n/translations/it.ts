@@ -266,6 +266,27 @@ export const it = {
     unavailable: 'Il listino prezzi non è al momento disponibile. Riprova più tardi.',
   },
 
+  // Kolačići (banner + postavke privole)
+  cookies: {
+    title: 'Cookie',
+    text: 'Utilizziamo cookie necessari per il funzionamento del sito e, con il tuo consenso, cookie analitici e di marketing. Puoi accettarli tutti, rifiutarli tutti o scegliere tu.',
+    privacyLink: 'Informativa sulla privacy',
+    acceptAll: 'Accetta tutti',
+    rejectAll: 'Rifiuta tutti',
+    customize: 'Personalizza',
+    settingsTitle: 'Impostazioni dei cookie',
+    settingsIntro: 'Scegli quali categorie di cookie consentire. Puoi modificare la tua scelta in qualsiasi momento tramite il link “Impostazioni Cookie” nel piè di pagina.',
+    save: 'Salva selezione',
+    close: 'Chiudi',
+    alwaysActive: 'Sempre attivi',
+    necessaryTitle: 'Necessari',
+    necessaryDesc: 'Necessari per il corretto funzionamento del sito: ricordano la lingua selezionata e la tua scelta sui cookie. Non possono essere disattivati.',
+    analyticsTitle: 'Analitici',
+    analyticsDesc: 'Ci aiutano a capire come i visitatori utilizzano il sito (Google Analytics) per poterlo migliorare. I dati sono aggregati.',
+    marketingTitle: 'Marketing',
+    marketingDesc: 'Utilizzati per misurare l’efficacia degli annunci e mostrare annunci più pertinenti su altri siti (ad es. Google Ads).',
+  },
+
   footer: {
     description: 'Il tuo partner per ulivi, palme e prodotti per il giardinaggio. Qualità ed esperienza sono la nostra tradizione.',
     quickLinks: 'Link Rapidi',
@@ -279,6 +300,7 @@ export const it = {
     privacyPolicy: 'Privacy Policy',
     priceList: 'Listino Prezzi (CSV)',
     complaints: 'Reclami Scritti',
+    cookieSettings: 'Impostazioni Cookie',
     contactUs: 'Contattaci',
     copyright: 'Tutti i diritti riservati.',
     privacy: 'Privacy',

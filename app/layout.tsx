@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { WhatsAppButton } from './components/ui/WhatsAppButton';
 import { SplashScreen } from './components/ui/SplashScreen';
+import { CookieConsent } from './components/ui/CookieConsent';
 import { LanguageProvider } from './i18n';
-
-const GTM_ID = 'GTM-TWJHWD5G';
-const GA_ID = 'G-S73QEY6Y0Q';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -319,12 +316,6 @@ export default function RootLayout({
   return (
     <html lang='hr' className={plusJakarta.variable}>
       <head>
-        {/* Preconnect to external domains for faster loading */}
-        <link rel='preconnect' href='https://www.googletagmanager.com' />
-        <link rel='preconnect' href='https://www.google-analytics.com' />
-        <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
-        <link rel='dns-prefetch' href='https://www.google-analytics.com' />
-        
         {/* Preload LCP image */}
         <link
           rel='preload'
@@ -333,37 +324,7 @@ export default function RootLayout({
           type='image/jpeg'
         />
 
-        {/* Google Tag Manager - lazy loaded for better performance */}
-        <Script
-          id='gtm-script'
-          strategy='lazyOnload'
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${GTM_ID}');
-            `,
-          }}
-        />
-        {/* Google Analytics (gtag.js) - lazy loaded */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy='lazyOnload'
-        />
-        <Script
-          id='ga-script'
-          strategy='lazyOnload'
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}');
-            `,
-          }}
-        />
+        {/* Google Tag Manager i Analytics učitavaju se tek nakon privole — vidi CookieConsent / app/lib/googleTags.ts */}
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -377,21 +338,13 @@ export default function RootLayout({
         <meta name='ICBM' content='43.5503, 16.3367' />
       </head>
       <body className={`flex flex-col min-h-screen ${plusJakarta.className}`}>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height='0'
-            width='0'
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
         <SplashScreen />
         <LanguageProvider>
           <Header />
           <main className='grow'>{children}</main>
           <Footer />
           <WhatsAppButton />
+          <CookieConsent />
         </LanguageProvider>
       </body>
     </html>
